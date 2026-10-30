@@ -662,6 +662,20 @@ public static class Query
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Query
+### Fields
+
+<a name='DiGi.GIS.Analytical.Query.ApartmentBlockStoreys'></a>
+
+## Query\.ApartmentBlockStoreys Field
+
+The number of storeys from which a multi\-family building is taken as an apartment block, a default: the TABULA Polish apartment blocks have 5 to 11 storeys, and no threshold is published\.
+
+```csharp
+public const ushort ApartmentBlockStoreys = 5;
+```
+
+#### Field Value
+[System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
 ### Methods
 
 <a name='DiGi.GIS.Analytical.Query.Building(thisDiGi.GIS.Classes.Building2D,System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.CityModel_)'></a>
@@ -745,6 +759,35 @@ A collection of reference strings used to identify the building models to retrie
 #### Returns
 [System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')  
 A dictionary mapping unique identifiers to [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel') objects, or null if the path is invalid or references are null\.
+
+<a name='DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool)'></a>
+
+## Query\.BuildingType\(this Building2D, bool\) Method
+
+Gets the TABULA residential building type of a BDOT10k building, the key of the construction library and of the opening size library \(DiGi\-Organization/DiGi\.GIS\.Analytical\#6\)\.
+
+A single-family building (specific function `single_family_building`) is [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.SingleFamily](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype.singlefamily 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.SingleFamily'), or [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.Terraced](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype.terraced 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.Terraced') when it has party walls (`Analytical.Building.Query.PartyWalls`, DiGi-Organization/DiGi.GIS.Analytical#4). A multi-family building (`multi_family_building`, which wins when both are given) is [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.ApartmentBlock](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype.apartmentblock 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.ApartmentBlock') from [ApartmentBlockStoreys](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.ApartmentBlockStoreys 'DiGi\.GIS\.Analytical\.Query\.ApartmentBlockStoreys') storeys and [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.MultiFamily](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype.multifamily 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.MultiFamily') below. Any other building is [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType\.Undefined').
+
+```csharp
+public static DiGi.Analytical.Building.Regulation.Enums.BuildingType BuildingType(this DiGi.GIS.Classes.Building2D? building2D, bool partyWalls=false);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The building\.
+
+<a name='DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool).partyWalls'></a>
+
+`partyWalls` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
+
+True when the building has party walls with a neighbour\.
+
+#### Returns
+[DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType')  
+The building type\.
 
 <a name='DiGi.GIS.Analytical.Query.Elevation(thisDiGi.Geometry.Spatial.Classes.Point3D)'></a>
 

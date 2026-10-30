@@ -36,6 +36,9 @@
     <Reference Include="DiGi.Analytical.Building.HVAC">
       <HintPath>..\..\DiGi.Analytical\bin\DiGi.Analytical.Building.HVAC.dll</HintPath>
     </Reference>
+    <Reference Include="DiGi.Analytical.Building.Regulation">
+      <HintPath>..\..\DiGi.Analytical\bin\DiGi.Analytical.Building.Regulation.dll</HintPath>
+    </Reference>
     <!-- DiGi.BDOT10k and DiGi.GML are not used directly. Calling the overloaded DiGi.GIS extension
          Reference() makes the compiler load the parameter types of every candidate, including the
          OT_ADJA_A/OT_ADMS_A/OT_BUBD_A and Geometry/Polygon/LinearRing ones it will reject (CS0012). -->
