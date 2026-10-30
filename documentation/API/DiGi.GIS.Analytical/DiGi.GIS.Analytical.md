@@ -579,6 +579,55 @@ public static class Modify
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Modify
 ### Methods
 
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string)'></a>
+
+## Modify\.AssignInternalConditions\(this BuildingModel, Building2D, OccupancyData, Nullable\<short\>, string\) Method
+
+Assigns the standard\-use internal condition of a BDOT10k building to every space of its model: the usage type from [UsageType\(this Building2D\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D) 'DiGi\.GIS\.Analytical\.Query\.UsageType\(this DiGi\.GIS\.Classes\.Building2D\)'), its usage profile and the internal condition built from it \(DiGi\-Organization/DiGi\.Analytical\#9\)\.
+
+<b>Fallback.</b> When the functions name no usage type, a residential or occupied building (`GIS.Query.IsResidential`, `GIS.Query.IsOccupied`) is treated as multi-family and any other as an office, and [DiGi\.Analytical\.Building\.HVAC\.Enums\.InternalConditionParameter\.UsageSource](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.internalconditionparameter.usagesource 'DiGi\.Analytical\.Building\.HVAC\.Enums\.InternalConditionParameter\.UsageSource') starts with `fallback` naming the rule, so every space has a condition and the guess stays visible.
+
+<b>Occupancy.</b> The persons are [DiGi\.GIS\.Classes\.OccupancyData\.Occupancy](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.occupancydata.occupancy 'DiGi\.GIS\.Classes\.OccupancyData\.Occupancy') and the floor area they share is [DiGi\.GIS\.Classes\.OccupancyData\.OccupancyArea](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.occupancydata.occupancyarea 'DiGi\.GIS\.Classes\.OccupancyData\.OccupancyArea'), else the footprint area times the storeys - the area the occupancy estimate is made for. Without persons the per-area values of the methodology apply unscaled.
+
+```csharp
+public static bool AssignInternalConditions(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.Building2D? building2D, DiGi.GIS.Classes.OccupancyData? occupancyData=null, System.Nullable<short> yearBuilt=null, string? occupancySource=null);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model of [building2D](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).building2D 'DiGi\.GIS\.Analytical\.Modify\.AssignInternalConditions\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OccupancyData, System\.Nullable\<short\>, string\)\.building2D')\.
+
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The BDOT10k building\.
+
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).occupancyData'></a>
+
+`occupancyData` [DiGi\.GIS\.Classes\.OccupancyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.occupancydata 'DiGi\.GIS\.Classes\.OccupancyData')
+
+The occupancy estimate of the building \(`occupancy_data_building_2d`\)\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).yearBuilt'></a>
+
+`yearBuilt` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The year the building was erected, which selects the infiltration; null when unknown\.
+
+<a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).occupancySource'></a>
+
+`occupancySource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+Where [occupancyData](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string).occupancyData 'DiGi\.GIS\.Analytical\.Modify\.AssignInternalConditions\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OccupancyData, System\.Nullable\<short\>, string\)\.occupancyData') comes from, recorded on the condition\. This value can be null\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+True when every space of the model was assigned; otherwise, false\.
+
 <a name='DiGi.GIS.Analytical.Modify.UpdateBuildingInformation(thisDiGi.Analytical.Building.Classes.BuildingModel)'></a>
 
 ## Modify\.UpdateBuildingInformation\(this BuildingModel\) Method
@@ -769,3 +818,38 @@ The building model to check\.
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the building model carries located coordinates and a defined UTC offset; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+<a name='DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D)'></a>
+
+## Query\.UsageType\(this Building2D\) Method
+
+Gets the usage type of the Polish energy\-certificate methodology \(Dz\.U\. 2015 poz\. 376, Annex 1, Tables 23\-27\) a BDOT10k building is used as, which selects its usage profile \(DiGi\-Organization/DiGi\.Analytical\#9\)\.
+
+<b>Specific functions first.</b> Each specific function that names a usage maps to one, and when several do, the first in the order MultiFamily, SingleFamily, CollectiveResidence, Healthcare, Education, Sport, Gastronomy, Retail, Office, Production, Storage wins - people living in a building outweigh what else it is used for:
+- SingleFamily: `single_family_building`; MultiFamily: `multi_family_building` (a building with both is multi-family), the same specific functions as `GIS.Query.IsResidential`.
+- CollectiveResidence: dormitories, boarding schools, social-care, children's and juvenile homes, homeless and tourist shelters, monasteries, retreat and parish houses, hotels, motels, workers' hotels, guesthouses, barracks, prisons and correctional facilities.
+- Healthcare: hospitals, healthcare facilities, hospices, emergency medical units, blood donation and sanitary-epidemiological stations, sobering-up stations.
+- Education: nurseries, kindergartens, primary and secondary schools, universities, other educational and care-educational facilities, research facilities, observatories.
+- Sport: sports halls, gyms, swimming pools, ice rinks, arenas, tennis courts, riding halls, bowling alleys, go-kart tracks, sports clubs.
+- Gastronomy: restaurants, inns, clubs and discos, wedding houses.
+- Retail: shopping centres, department stores, hypermarkets, market halls, commercial and service buildings, pharmacies, banks.
+- Office: ministries, voivodeship, marshal's, county, municipal and city offices, courts, prosecutors, other public administration, company headquarters, postal and diplomatic offices.
+- Production: production and livestock buildings, repair workshops, refineries, mills, greenhouses.
+- Storage: warehouses, cold stores, archives, silos, grain elevators.
+
+<b>Then the general function:</b> office → Office, commercial and service → Retail, education, science, culture and sport → Education, hospital and healthcare → Healthcare, agricultural production and industrial → Production, tanks, silos and storage → Storage. Residential buildings without a single- or multi-family specific function, transport and communication, other non-residential buildings and an unknown function give [DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.usagetype.undefined 'DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined'), which the caller resolves by a fallback ([AssignInternalConditions\(this BuildingModel, Building2D, OccupancyData, Nullable&lt;short&gt;, string\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string) 'DiGi\.GIS\.Analytical\.Modify\.AssignInternalConditions\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OccupancyData, System\.Nullable\<short\>, string\)')).
+
+```csharp
+public static DiGi.Analytical.Building.HVAC.Enums.UsageType UsageType(this DiGi.GIS.Classes.Building2D? building2D);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The building\.
+
+#### Returns
+[DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.usagetype 'DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType')  
+The usage type, or [DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.usagetype.undefined 'DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined') when the functions name none or [building2D](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D).building2D 'DiGi\.GIS\.Analytical\.Query\.UsageType\(this DiGi\.GIS\.Classes\.Building2D\)\.building2D') is null\.
