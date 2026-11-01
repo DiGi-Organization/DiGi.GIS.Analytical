@@ -1,5 +1,6 @@
 using DiGi.Analytical.Building.Regulation.Enums;
 using DiGi.Core.Classes;
+using DiGi.GIS.Analytical.Enums;
 using DiGi.GIS.Interfaces;
 using System.Collections.Generic;
 using System.Text.Json.Nodes;
@@ -44,6 +45,20 @@ namespace DiGi.GIS.Classes
                 StreetFacadeWeights = openingGenerationOptions.StreetFacadeWeights is null ? null : new Dictionary<BuildingType, double>(openingGenerationOptions.StreetFacadeWeights);
                 DoorMinimumWidth = openingGenerationOptions.DoorMinimumWidth;
                 DoorMinimumHeight = openingGenerationOptions.DoorMinimumHeight;
+                FireSeparationDistances = openingGenerationOptions.FireSeparationDistances is null ? null : new Dictionary<FireClass, double>(openingGenerationOptions.FireSeparationDistances);
+                FireSeparationDistancePMMid = openingGenerationOptions.FireSeparationDistancePMMid;
+                FireSeparationDistancePMHigh = openingGenerationOptions.FireSeparationDistancePMHigh;
+                FireSeparationHeatRelease = openingGenerationOptions.FireSeparationHeatRelease;
+                FireSeparationSpreadFactor_OneSide = openingGenerationOptions.FireSeparationSpreadFactor_OneSide;
+                FireSeparationSpreadFactor_BothSides = openingGenerationOptions.FireSeparationSpreadFactor_BothSides;
+                FireSeparationNoOpeningsFactor = openingGenerationOptions.FireSeparationNoOpeningsFactor;
+                FireSeparationHalfStripAngle = openingGenerationOptions.FireSeparationHalfStripAngle;
+                FireSeparationNoApplyAngle = openingGenerationOptions.FireSeparationNoApplyAngle;
+                ObstructionSectorAngle = openingGenerationOptions.ObstructionSectorAngle;
+                ObstructionMaxDistance = openingGenerationOptions.ObstructionMaxDistance;
+                ObstructionSlenderWidth = openingGenerationOptions.ObstructionSlenderWidth;
+                ObstructionSlenderDistance = openingGenerationOptions.ObstructionSlenderDistance;
+                ObstructionInnerCityFactor = openingGenerationOptions.ObstructionInnerCityFactor;
                 StaircaseSpacing = openingGenerationOptions.StaircaseSpacing;
                 DesignLag = openingGenerationOptions.DesignLag;
                 ConstructionFlavour = openingGenerationOptions.ConstructionFlavour;
@@ -100,6 +115,74 @@ namespace DiGi.GIS.Classes
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(DoorMinimumWidth))]
         public double DoorMinimumWidth { get; set; } = 0.9;
+
+        /// <summary>
+        /// Gets or sets the fire-separation distance per kind of building when the fuel-load density Q of both fire compartments is at most 1000 MJ/m2 [m]; a kind missing from the dictionary falls back to the largest value present, an empty dictionary switches § 271 off (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the required distance between two buildings is the larger of their row values, so ZL, IN and PM at Q &lt;= 1000 all give 8 m against each other and the ZL row already carries the 15 m and 20 m the PM rows of higher fuel loads demand. The kinds are <see cref="FireClass"/>.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationDistances))]
+        public Dictionary<FireClass, double>? FireSeparationDistances { get; set; } = new()
+        {
+            [FireClass.ZL] = 8,
+            [FireClass.IN] = 8,
+            [FireClass.PM] = 8,
+        };
+
+        /// <summary>
+        /// Gets or sets the fire-separation distance when a building of kind PM has a fuel-load density Q above 1000 and at most 4000 MJ/m2 [m] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationDistancePMMid))]
+        public double FireSeparationDistancePMMid { get; set; } = 15;
+
+        /// <summary>
+        /// Gets or sets the fire-separation distance when a building of kind PM has a fuel-load density Q above 4000 MJ/m2 [m] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationDistancePMHigh))]
+        public double FireSeparationDistancePMHigh { get; set; } = 20;
+
+        /// <summary>
+        /// Gets or sets the maximum fuel-load density Q of the fire compartment [MJ/m2], or null when unknown (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a building of kind PM takes its row of the table by Q, so with Q null a PM building stays at Q &lt;= 1000 MJ/m2. A building whose function does not say whether it is PM takes the row of a stated Q as well, since the table works by the larger requirement of the two buildings.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationHeatRelease))]
+        public double? FireSeparationHeatRelease { get; set; } = null;
+
+        /// <summary>
+        /// Gets or sets the factor applied to the § 271 distance when one of the two buildings - its external wall facing the neighbour or its roof covering - spreads fire [-] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: an increase of 50 %. Whether a building spreads fire comes from <see cref="BuildingModelParameter.FireSpreading"/>, as no construction data reaches the library.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationSpreadFactor_OneSide))]
+        public double FireSeparationSpreadFactor_OneSide { get; set; } = 1.5;
+
+        /// <summary>
+        /// Gets or sets the factor applied to the § 271 distance when both buildings - their external walls facing each other or their roof coverings - spread fire [-] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: an increase of 100 %.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationSpreadFactor_BothSides))]
+        public double FireSeparationSpreadFactor_BothSides { get; set; } = 2.0;
+
+        /// <summary>
+        /// Gets or sets the factor applied to the § 271 distance when the two facing walls carry no openings and neither building spreads fire [-] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 9 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a reduction of 25 %. The further conditions of that clause - buildings listed in § 213 (which include single-family, farm and individual-recreation buildings of up to three storeys), roofs with non-spreading coverings and no explosion-hazard room - are only partly reachable from the stock data: the roof condition rides on <see cref="BuildingModelParameter.FireSpreading"/>, while § 213 membership and explosion-hazard rooms are not modelled and the clause is taken to hold when the walls are opening-free. The walls are read as they are given, before the subject's own openings are placed.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationNoOpeningsFactor))]
+        public double FireSeparationNoOpeningsFactor { get; set; } = 0.75;
+
+        /// <summary>
+        /// Gets or sets the smallest angle between two external walls [deg] from which the strip of § 271 is taken at half the distance (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 11 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: for walls forming an angle of 60 deg or more but less than 120 deg the strip is reduced by 50 %. The angle is measured between the wall planes on the side of the gap between the two buildings, so parallel facing walls give 0 deg and take the full strip; since no fire-resistance data exists to evaluate the strip requirement of ust. 10 itself, the clause is applied to the distance here as specified by DiGi-Organization/DiGi.GIS.Analytical#9.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationHalfStripAngle))]
+        public double FireSeparationHalfStripAngle { get; set; } = 60;
+
+        /// <summary>
+        /// Gets or sets the angle between two external walls [deg] from which § 271 does not apply between them (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 271 ust. 12 pkt 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the requirement does not concern buildings whose external walls form an angle of at least 120 deg, measured as in <see cref="FireSeparationHalfStripAngle"/>.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FireSeparationNoApplyAngle))]
+        public double FireSeparationNoApplyAngle { get; set; } = 120;
 
         /// <summary>
         /// Gets or sets the share of floor area in rooms that need daylight, per building type [-]; a type missing from the dictionary takes 0.6. A decided default: single-family 0.60, multi-family 0.65, non-residential (<see cref="BuildingType.Undefined"/>) 0.50.
@@ -168,6 +251,41 @@ namespace DiGi.GIS.Classes
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(MinimumStoreyHeight))]
         public double MinimumStoreyHeight { get; set; } = 2.2;
+
+        /// <summary>
+        /// Gets or sets the angle of the horizontal daylight sector measured at the inner wall face on the window axis [deg] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 13 ust. 1 pkt 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: no obstructing part of the same building or other obstructing object may lie between the arms of a 60 degree angle closer than its height of shading.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(ObstructionSectorAngle))]
+        public double ObstructionSectorAngle { get; set; } = 60;
+
+        /// <summary>
+        /// Gets or sets the largest height of shading an obstructing object may demand [m]; above it the required distance stops growing (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 13 ust. 1 pkt 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: 35 m for obstructing objects taller than 35 m. This value also caps which neighbours are looked at, the § 271 distances never exceeding it once their factors are read with <see cref="FireSeparationSpreadFactor_BothSides"/>.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(ObstructionMaxDistance))]
+        public double ObstructionMaxDistance { get; set; } = 35;
+
+        /// <summary>
+        /// Gets or sets the largest obstructing width of an object measured parallel to the window plane at which § 13 ust. 3 gives it the fixed distance of <see cref="ObstructionSlenderDistance"/> instead of its height [m] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 13 ust. 3 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a mast, chimney, tower or other building object of obstructing width not greater than 3 m.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(ObstructionSlenderWidth))]
+        public double ObstructionSlenderWidth { get; set; } = 3;
+
+        /// <summary>
+        /// Gets or sets the distance at which a slender obstructing object of <see cref="ObstructionSlenderWidth"/> or less is permitted regardless of its height [m] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 13 ust. 3 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: not less than 10 m from the window, without limit on the object's height. A slender object shorter than this distance still answers to the height of shading, so its required distance is the smaller of the two.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(ObstructionSlenderDistance))]
+        public double ObstructionSlenderDistance { get; set; } = 10;
+
+        /// <summary>
+        /// Gets or sets the factor the § 13 distances are multiplied by in inner-city development, or null when the building stands outside it [-] (DiGi-Organization/DiGi.GIS.Analytical#9).
+        /// <para>§ 13 ust. 4 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the distances may be reduced by no more than half in zabudowa srodmiejska as defined in § 3 pkt 1, so 0.5 is the largest reduction. Whether the building stands in such development is decided by the caller, from the local plan; a null value applies no factor.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(ObstructionInnerCityFactor))]
+        public double? ObstructionInnerCityFactor { get; set; } = null;
 
         /// <summary>
         /// Gets or sets the smallest distance from a wall end to a window or door [m]. A decided default.

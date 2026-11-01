@@ -715,6 +715,141 @@ public double DoorMinimumWidth { get; set; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationDistancePMHigh'></a>
+
+## OpeningGenerationOptions\.FireSeparationDistancePMHigh Property
+
+Gets or sets the fire\-separation distance when a building of kind PM has a fuel\-load density Q above 4000 MJ/m2 \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01.
+
+```csharp
+public double FireSeparationDistancePMHigh { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationDistancePMMid'></a>
+
+## OpeningGenerationOptions\.FireSeparationDistancePMMid Property
+
+Gets or sets the fire\-separation distance when a building of kind PM has a fuel\-load density Q above 1000 and at most 4000 MJ/m2 \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01.
+
+```csharp
+public double FireSeparationDistancePMMid { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationDistances'></a>
+
+## OpeningGenerationOptions\.FireSeparationDistances Property
+
+Gets or sets the fire\-separation distance per kind of building when the fuel\-load density Q of both fire compartments is at most 1000 MJ/m2 \[m\]; a kind missing from the dictionary falls back to the largest value present, an empty dictionary switches § 271 off \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 1 table of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the required distance between two buildings is the larger of their row values, so ZL, IN and PM at Q <= 1000 all give 8 m against each other and the ZL row already carries the 15 m and 20 m the PM rows of higher fuel loads demand. The kinds are [FireClass](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.FireClass 'DiGi\.GIS\.Analytical\.Enums\.FireClass').
+
+```csharp
+public System.Collections.Generic.Dictionary<DiGi.GIS.Analytical.Enums.FireClass,double>? FireSeparationDistances { get; set; }
+```
+
+#### Property Value
+[System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[FireClass](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.FireClass 'DiGi\.GIS\.Analytical\.Enums\.FireClass')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationHalfStripAngle'></a>
+
+## OpeningGenerationOptions\.FireSeparationHalfStripAngle Property
+
+Gets or sets the smallest angle between two external walls \[deg\] from which the strip of § 271 is taken at half the distance \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 11 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: for walls forming an angle of 60 deg or more but less than 120 deg the strip is reduced by 50 %. The angle is measured between the wall planes on the side of the gap between the two buildings, so parallel facing walls give 0 deg and take the full strip; since no fire-resistance data exists to evaluate the strip requirement of ust. 10 itself, the clause is applied to the distance here as specified by DiGi-Organization/DiGi.GIS.Analytical#9.
+
+```csharp
+public double FireSeparationHalfStripAngle { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationHeatRelease'></a>
+
+## OpeningGenerationOptions\.FireSeparationHeatRelease Property
+
+Gets or sets the maximum fuel\-load density Q of the fire compartment \[MJ/m2\], or null when unknown \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a building of kind PM takes its row of the table by Q, so with Q null a PM building stays at Q <= 1000 MJ/m2. A building whose function does not say whether it is PM takes the row of a stated Q as well, since the table works by the larger requirement of the two buildings.
+
+```csharp
+public System.Nullable<double> FireSeparationHeatRelease { get; set; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationNoApplyAngle'></a>
+
+## OpeningGenerationOptions\.FireSeparationNoApplyAngle Property
+
+Gets or sets the angle between two external walls \[deg\] from which § 271 does not apply between them \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 12 pkt 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the requirement does not concern buildings whose external walls form an angle of at least 120 deg, measured as in [FireSeparationHalfStripAngle](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationHalfStripAngle 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.FireSeparationHalfStripAngle').
+
+```csharp
+public double FireSeparationNoApplyAngle { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationNoOpeningsFactor'></a>
+
+## OpeningGenerationOptions\.FireSeparationNoOpeningsFactor Property
+
+Gets or sets the factor applied to the § 271 distance when the two facing walls carry no openings and neither building spreads fire \[\-\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 9 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a reduction of 25 %. The further conditions of that clause - buildings listed in § 213 (which include single-family, farm and individual-recreation buildings of up to three storeys), roofs with non-spreading coverings and no explosion-hazard room - are only partly reachable from the stock data: the roof condition rides on [FireSpreading](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.BuildingModelParameter.FireSpreading 'DiGi\.GIS\.Analytical\.Enums\.BuildingModelParameter\.FireSpreading'), while § 213 membership and explosion-hazard rooms are not modelled and the clause is taken to hold when the walls are opening-free. The walls are read as they are given, before the subject's own openings are placed.
+
+```csharp
+public double FireSeparationNoOpeningsFactor { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationSpreadFactor_BothSides'></a>
+
+## OpeningGenerationOptions\.FireSeparationSpreadFactor\_BothSides Property
+
+Gets or sets the factor applied to the § 271 distance when both buildings \- their external walls facing each other or their roof coverings \- spread fire \[\-\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: an increase of 100 %.
+
+```csharp
+public double FireSeparationSpreadFactor_BothSides { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationSpreadFactor_OneSide'></a>
+
+## OpeningGenerationOptions\.FireSeparationSpreadFactor\_OneSide Property
+
+Gets or sets the factor applied to the § 271 distance when one of the two buildings \- its external wall facing the neighbour or its roof covering \- spreads fire \[\-\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 271 ust. 2 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: an increase of 50 %. Whether a building spreads fire comes from [FireSpreading](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.BuildingModelParameter.FireSpreading 'DiGi\.GIS\.Analytical\.Enums\.BuildingModelParameter\.FireSpreading'), as no construction data reaches the library.
+
+```csharp
+public double FireSeparationSpreadFactor_OneSide { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='DiGi.GIS.Classes.OpeningGenerationOptions.HabitableFloorFractions'></a>
 
 ## OpeningGenerationOptions\.HabitableFloorFractions Property
@@ -842,6 +977,81 @@ Gets or sets the storey band height below which a band is reported as a height m
 
 ```csharp
 public double MinimumStoreyHeight { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionInnerCityFactor'></a>
+
+## OpeningGenerationOptions\.ObstructionInnerCityFactor Property
+
+Gets or sets the factor the § 13 distances are multiplied by in inner\-city development, or null when the building stands outside it \[\-\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 13 ust. 4 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: the distances may be reduced by no more than half in zabudowa srodmiejska as defined in § 3 pkt 1, so 0.5 is the largest reduction. Whether the building stands in such development is decided by the caller, from the local plan; a null value applies no factor.
+
+```csharp
+public System.Nullable<double> ObstructionInnerCityFactor { get; set; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionMaxDistance'></a>
+
+## OpeningGenerationOptions\.ObstructionMaxDistance Property
+
+Gets or sets the largest height of shading an obstructing object may demand \[m\]; above it the required distance stops growing \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 13 ust. 1 pkt 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: 35 m for obstructing objects taller than 35 m. This value also caps which neighbours are looked at, the § 271 distances never exceeding it once their factors are read with [FireSeparationSpreadFactor\_BothSides](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationSpreadFactor_BothSides 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.FireSeparationSpreadFactor\_BothSides').
+
+```csharp
+public double ObstructionMaxDistance { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSectorAngle'></a>
+
+## OpeningGenerationOptions\.ObstructionSectorAngle Property
+
+Gets or sets the angle of the horizontal daylight sector measured at the inner wall face on the window axis \[deg\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 13 ust. 1 pkt 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: no obstructing part of the same building or other obstructing object may lie between the arms of a 60 degree angle closer than its height of shading.
+
+```csharp
+public double ObstructionSectorAngle { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderDistance'></a>
+
+## OpeningGenerationOptions\.ObstructionSlenderDistance Property
+
+Gets or sets the distance at which a slender obstructing object of [ObstructionSlenderWidth](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderWidth 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionSlenderWidth') or less is permitted regardless of its height \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 13 ust. 3 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: not less than 10 m from the window, without limit on the object's height. A slender object shorter than this distance still answers to the height of shading, so its required distance is the smaller of the two.
+
+```csharp
+public double ObstructionSlenderDistance { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderWidth'></a>
+
+## OpeningGenerationOptions\.ObstructionSlenderWidth Property
+
+Gets or sets the largest obstructing width of an object measured parallel to the window plane at which § 13 ust\. 3 gives it the fixed distance of [ObstructionSlenderDistance](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderDistance 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionSlenderDistance') instead of its height \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 13 ust. 3 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01: a mast, chimney, tower or other building object of obstructing width not greater than 3 m.
+
+```csharp
+public double ObstructionSlenderWidth { get; set; }
 ```
 
 #### Property Value
@@ -1491,3 +1701,182 @@ public int WindowCount { get; }
 
 #### Property Value
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult'></a>
+
+## WallOpeningResult Class
+
+Holds what `Query.WallOpeningResults` measured for one external wall of a building model: why it is restricted, if at all, and the distances behind that decision \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+Created by `Query.WallOpeningResults`, which does the measuring; the constructor only assigns and clones. A wall that passes both rules keeps [None](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.None 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.None') and still reports the distances that decided it; a distance with no applicable rule is null.
+
+```csharp
+public class WallOpeningResult : DiGi.Core.Classes.SerializableResult, DiGi.GIS.Interfaces.IGISSerializableObject, DiGi.GIS.Interfaces.IGISObject, DiGi.Core.Interfaces.IObject, DiGi.Core.Interfaces.ISerializableObject, DiGi.Core.Interfaces.ICloneableObject<DiGi.Core.Interfaces.ISerializableObject>, DiGi.Core.Interfaces.ICloneableObject
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [DiGi\.Core\.Classes\.Object](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.object 'DiGi\.Core\.Classes\.Object') → [DiGi\.Core\.Classes\.SerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableobject 'DiGi\.Core\.Classes\.SerializableObject') → [DiGi\.Core\.Classes\.SerializableResult](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableresult 'DiGi\.Core\.Classes\.SerializableResult') → WallOpeningResult
+
+Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
+### Constructors
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_)'></a>
+
+## WallOpeningResult\(GuidReference, WallOpeningRestriction, Nullable\<double\>, Nullable\<double\>, Nullable\<double\>, Nullable\<double\>\) Constructor
+
+Initializes a new instance of the [WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult') class\.
+
+The values are assigned and the wall reference cloned; the distances are taken as given. `Query.WallOpeningResults` computes them.
+
+```csharp
+public WallOpeningResult(DiGi.Core.Classes.GuidReference? wall, DiGi.GIS.Analytical.Enums.WallOpeningRestriction wallOpeningRestriction, System.Nullable<double> fireSeparationDistance, System.Nullable<double> fireSeparationRequired, System.Nullable<double> obstructionDistance, System.Nullable<double> obstructionRequired);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).wall'></a>
+
+`wall` [DiGi\.Core\.Classes\.GuidReference](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.guidreference 'DiGi\.Core\.Classes\.GuidReference')
+
+The reference of the external wall this result describes\. This value can be null\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).wallOpeningRestriction'></a>
+
+`wallOpeningRestriction` [WallOpeningRestriction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction')
+
+Why the wall may carry no openings: [None](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.None 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.None') when neither rule failed, otherwise the governing rule, [FireSeparation](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.FireSeparation 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.FireSeparation') winning over [Obstruction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.Obstruction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.Obstruction')\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).fireSeparationDistance'></a>
+
+`fireSeparationDistance` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The smallest measured horizontal distance to a facing wall of a neighbour \[m\], or null when no wall faced it or § 271 does not apply between them\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).fireSeparationRequired'></a>
+
+`fireSeparationRequired` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The distance § 271 required at that measurement \[m\] after the class table, fuel load, spread, no\-openings and wall\-angle factors, or null when no applicable rule was measured\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).obstructionDistance'></a>
+
+`obstructionDistance` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The smallest measured distance from a window axis inside the 60 degree sector of § 13 to the obstructing object \[m\], or null when no object lay in the sector\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.Core.Classes.GuidReference,DiGi.GIS.Analytical.Enums.WallOpeningRestriction,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_,System.Nullable_double_).obstructionRequired'></a>
+
+`obstructionRequired` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The distance § 13 required at that measurement \[m\], the height of shading capped at 35 m and reduced by the inner\-city factor, or null when no object lay in the sector\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.GIS.Classes.WallOpeningResult)'></a>
+
+## WallOpeningResult\(WallOpeningResult\) Constructor
+
+Initializes a new instance of the [WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult') class by copying another instance\.
+
+```csharp
+public WallOpeningResult(DiGi.GIS.Classes.WallOpeningResult? wallOpeningResult);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(DiGi.GIS.Classes.WallOpeningResult).wallOpeningResult'></a>
+
+`wallOpeningResult` [WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult')
+
+The result to copy\. This value can be null\.
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(System.Text.Json.Nodes.JsonObject)'></a>
+
+## WallOpeningResult\(JsonObject\) Constructor
+
+Initializes a new instance of the [WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult') class from a JSON object\.
+
+```csharp
+public WallOpeningResult(System.Text.Json.Nodes.JsonObject? jsonObject);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.WallOpeningResult(System.Text.Json.Nodes.JsonObject).jsonObject'></a>
+
+`jsonObject` [System\.Text\.Json\.Nodes\.JsonObject](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonobject 'System\.Text\.Json\.Nodes\.JsonObject')
+
+The JSON object containing the result data\. This value can be null\.
+### Properties
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.FireSeparationDistance'></a>
+
+## WallOpeningResult\.FireSeparationDistance Property
+
+Gets the smallest measured horizontal distance to a facing wall of a neighbour \[m\], or null when no wall faced it or § 271 does not apply between them\.
+
+```csharp
+public System.Nullable<double> FireSeparationDistance { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.FireSeparationRequired'></a>
+
+## WallOpeningResult\.FireSeparationRequired Property
+
+Gets the distance § 271 required at the reported measurement \[m\], or null when no applicable rule was measured\.
+
+```csharp
+public System.Nullable<double> FireSeparationRequired { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.ObstructionDistance'></a>
+
+## WallOpeningResult\.ObstructionDistance Property
+
+Gets the smallest measured distance from a window axis inside the 60 degree sector of § 13 to the obstructing object \[m\], or null when no object lay in the sector\.
+
+```csharp
+public System.Nullable<double> ObstructionDistance { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.ObstructionRequired'></a>
+
+## WallOpeningResult\.ObstructionRequired Property
+
+Gets the distance § 13 required at the reported measurement \[m\], or null when no object lay in the sector\.
+
+```csharp
+public System.Nullable<double> ObstructionRequired { get; }
+```
+
+#### Property Value
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.Restriction'></a>
+
+## WallOpeningResult\.Restriction Property
+
+Gets why the wall may carry no openings: [None](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.None 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.None') when neither rule failed, otherwise the governing rule\.
+
+```csharp
+public DiGi.GIS.Analytical.Enums.WallOpeningRestriction Restriction { get; }
+```
+
+#### Property Value
+[WallOpeningRestriction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction')
+
+<a name='DiGi.GIS.Classes.WallOpeningResult.Wall'></a>
+
+## WallOpeningResult\.Wall Property
+
+Gets a clone of the reference of the external wall this result describes, or null\.
+
+```csharp
+public DiGi.Core.Classes.GuidReference? Wall { get; }
+```
+
+#### Property Value
+[DiGi\.Core\.Classes\.GuidReference](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.guidreference 'DiGi\.Core\.Classes\.GuidReference')

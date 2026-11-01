@@ -32,6 +32,12 @@ Gets the reference identifier associated with the building model\.
 
 Gets the administrative area code associated with the building model\.
 
+<a name='DiGi.GIS.Analytical.Enums.BuildingModelParameter.FireSpreading'></a>
+
+`FireSpreading` 3
+
+Gets whether an external wall facing the neighbouring building, or the roof covering, spreads fire \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\. A building carrying this flag raises the § 271 distance by the one\-side or both\-sides factor of `OpeningGenerationOptions` and loses the § 271 ust\. 9 no\-openings reduction\. Not derivable from the stock data, so the flag is absent \- the wall and roof do not spread fire \- until a caller or the database sets it\.
+
 <a name='DiGi.GIS.Analytical.Enums.BuildingModelValidationCode'></a>
 
 ## BuildingModelValidationCode Enum
@@ -139,6 +145,35 @@ Area code\.
 `Source` 3
 
 Source information\.
+
+<a name='DiGi.GIS.Analytical.Enums.FireClass'></a>
+
+## FireClass Enum
+
+Specifies the kind of building for the fire\-separation distances of § 271 \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+```csharp
+public enum FireClass
+```
+### Fields
+
+<a name='DiGi.GIS.Analytical.Enums.FireClass.ZL'></a>
+
+`ZL` 0
+
+Residential, collective\-residence and public\-utility buildings, characterised by the human\-hazard category \(§ 209 ust\. 1 pkt 1 of the technical conditions of 2002, Dz\.U\. 2022 poz\. 1225, read in ISAP on 2026\-11\-01\)\.
+
+<a name='DiGi.GIS.Analytical.Enums.FireClass.IN'></a>
+
+`IN` 1
+
+Livestock buildings \(§ 209 ust\. 1 pkt 3 of the technical conditions of 2002, Dz\.U\. 2022 poz\. 1225, read in ISAP on 2026\-11\-01\)\.
+
+<a name='DiGi.GIS.Analytical.Enums.FireClass.PM'></a>
+
+`PM` 2
+
+Production and storage buildings \(§ 209 ust\. 1 pkt 2 of the technical conditions of 2002, Dz\.U\. 2022 poz\. 1225, read in ISAP on 2026\-11\-01\)\. The row of the § 271 table this class takes depends on the fuel\-load density Q of its fire compartment\.
 
 <a name='DiGi.GIS.Analytical.Enums.FrontWallRule'></a>
 
@@ -320,3 +355,15 @@ The wall is too short to hold the narrowest window between its corner margins\.
 `NotExternal` 3
 
 The wall is not part of the external envelope of the model\.
+
+<a name='DiGi.GIS.Analytical.Enums.WallOpeningRestriction.FireSeparation'></a>
+
+`FireSeparation` 4
+
+The distance to a facing neighbouring wall falls short of the fire\-separation requirement of § 271 \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\), so the wall carries no openings at all, doors included\.
+
+<a name='DiGi.GIS.Analytical.Enums.WallOpeningRestriction.Obstruction'></a>
+
+`Obstruction` 5
+
+An obstructing part of the same building or another object lies inside the 60 degree sector of § 13 closer than its height of shading \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\), so the wall carries no windows of rooms for people; entrance doors and the staircase window stay allowed\.

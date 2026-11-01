@@ -610,7 +610,7 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## Modify\.GenerateOpenings\_GeneratedBy Field
 
-The text [GeneratedBy](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter.GeneratedBy 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter\.GeneratedBy') carries on every opening [GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, ConstructionLibrary, OpeningSizeLibrary, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double) 'DiGi\.GIS\.Analytical\.Modify\.GenerateOpenings\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OpeningGenerationInput, DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary, DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary, double\)') places\.
+The text [GeneratedBy](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter.GeneratedBy 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter\.GeneratedBy') carries on every opening [GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, IEnumerable&lt;BuildingModel&gt;, ConstructionLibrary, OpeningSizeLibrary, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double) 'DiGi\.GIS\.Analytical\.Modify\.GenerateOpenings\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OpeningGenerationInput, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary, DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary, double\)') places\.
 
 ```csharp
 public const string GenerateOpenings_GeneratedBy = "DiGi.GIS.Analytical.Modify.GenerateOpenings";
@@ -669,9 +669,9 @@ Where [occupancyData](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.AssignIn
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True when every space of the model was assigned; otherwise, false\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double)'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double)'></a>
 
-## Modify\.GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, ConstructionLibrary, OpeningSizeLibrary, double\) Method
+## Modify\.GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, IEnumerable\<BuildingModel\>, ConstructionLibrary, OpeningSizeLibrary, double\) Method
 
 Places windows and doors on the external walls of a building model, following the Polish rules of the building's period \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2, phase A\)\.
 
@@ -687,44 +687,52 @@ Places windows and doors on the external walls of a building model, following th
 
 <b>Constructions.</b> Each distinct size gets one construction (`Regulation.Create.WindowConstruction` or `DoorConstruction`), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.
 
+<b>Neighbours.</b> When neighbours are given, every external wall is measured against them first, by [WallOpeningResults\(this BuildingModel, IEnumerable&lt;BuildingModel&gt;, OpeningGenerationOptions, Nullable&lt;BuildingGeneralFunction&gt;, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double) 'DiGi\.GIS\.Analytical\.Query\.WallOpeningResults\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.OpeningGenerationOptions, System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>, double\)'): a wall closer to a facing neighbour than § 271 allows gets no openings at all ([FireSeparation](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.FireSeparation 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.FireSeparation')), and a wall with an obstructing object inside the 60 degree sector of § 13 gets no windows of rooms for people, while its entrance door and staircase window stay allowed ([Obstruction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.Obstruction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.Obstruction')). Both reasons are reported in [WallOpeningRestrictions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationResult.WallOpeningRestrictions 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.WallOpeningRestrictions').
+
 Every opening carries [OpeningParameter](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter') values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.
 
 ```csharp
-public static DiGi.GIS.Classes.OpeningGenerationResult? GenerateOpenings(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.Building2D? building2D, DiGi.GIS.Classes.OpeningGenerationInput? openingGenerationInput, DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary? constructionLibrary=null, DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary? openingSizeLibrary=null, double tolerance=1E-06);
+public static DiGi.GIS.Classes.OpeningGenerationResult? GenerateOpenings(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.Building2D? building2D, DiGi.GIS.Classes.OpeningGenerationInput? openingGenerationInput, System.Collections.Generic.IEnumerable<DiGi.Analytical.Building.Classes.BuildingModel?>? buildingModels_Neighbour=null, DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary? constructionLibrary=null, DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary? openingSizeLibrary=null, double tolerance=1E-06);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).buildingModel'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).buildingModel'></a>
 
 `buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
 
 The building model to place the openings on\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).building2D'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).building2D'></a>
 
 `building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
 
 The 2D building of the model, giving its function and storey count\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingGenerationInput'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingGenerationInput'></a>
 
 `openingGenerationInput` [OpeningGenerationInput](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput 'DiGi\.GIS\.Classes\.OpeningGenerationInput')
 
 The year built, address point, climate zone, panel system and options\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).constructionLibrary'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).buildingModels_Neighbour'></a>
+
+`buildingModels_Neighbour` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The building models of the adjacent buildings, measured against before placement under § 271 and § 13; null skips the neighbour rules\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).constructionLibrary'></a>
 
 `constructionLibrary` [DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.classes.constructionlibrary 'DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary')
 
 The construction library, or null for `Regulation.Query.EmbeddedConstructionLibrary_PL()`\. A batch caller passes it to read it once\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingSizeLibrary'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingSizeLibrary'></a>
 
 `openingSizeLibrary` [DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.classes.openingsizelibrary 'DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary')
 
 The opening\-size library, or null for `Regulation.Create.OpeningSizeLibrary_PL()`\. A batch caller passes it to create it once\.
 
-<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).tolerance'></a>
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).tolerance'></a>
 
 `tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
@@ -918,6 +926,29 @@ The point returned by the terrain service\.
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The elevation of the point, or zero when it carries none\.
 
+<a name='DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_)'></a>
+
+## Query\.FireClass\(this Nullable\<BuildingGeneralFunction\>\) Method
+
+Gets the kind of building of § 271 for the general function of a 2D building \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+§ 209 ust. 1 of the technical conditions of 2002 (Dz.U. 2022 poz. 1225), read in ISAP on 2026-11-01, divides buildings into ZL (residential, collective-residence and public-utility), PM (production and storage) and IN (livestock): residential, office, commercial, education/science/culture/sports, hospital/healthcare, transport, other non-residential and unknown functions take ZL, agricultural production for agriculture and industrial, tanks/silos/storage take PM. The kind decides the row of the § 271 table together with the fuel-load density Q of `OpeningGenerationOptions.FireSeparationHeatRelease`; with Q unknown the ZL, IN and PM rows of Q <= 1000 MJ/m2 all give the same distance.
+
+```csharp
+public static System.Nullable<DiGi.GIS.Analytical.Enums.FireClass> FireClass(this System.Nullable<DiGi.GIS.Enums.BuildingGeneralFunction> buildingGeneralFunction);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_).buildingGeneralFunction'></a>
+
+`buildingGeneralFunction` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.BuildingGeneralFunction](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.buildinggeneralfunction 'DiGi\.GIS\.Enums\.BuildingGeneralFunction')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The general function of the building, or null when unknown\.
+
+#### Returns
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[FireClass](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.FireClass 'DiGi\.GIS\.Analytical\.Enums\.FireClass')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')  
+The kind of building, or null when the function is null\.
+
 <a name='DiGi.GIS.Analytical.Query.Horizontal(thisDiGi.Geometry.Spatial.Classes.Vector3D,double)'></a>
 
 ## Query\.Horizontal\(this Vector3D, double\) Method
@@ -1053,3 +1084,101 @@ The building\.
 #### Returns
 [DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.usagetype 'DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType')  
 The usage type, or [DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.hvac.enums.usagetype.undefined 'DiGi\.Analytical\.Building\.HVAC\.Enums\.UsageType\.Undefined') when the functions name none or [building2D](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D).building2D 'DiGi\.GIS\.Analytical\.Query\.UsageType\(this DiGi\.GIS\.Classes\.Building2D\)\.building2D') is null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double)'></a>
+
+## Query\.WallOpeningResults\(this BuildingModel, IEnumerable\<BuildingModel\>, OpeningGenerationOptions, Nullable\<BuildingGeneralFunction\>, double\) Method
+
+Gets, for every external wall of a building model, why it may carry no openings under the neighbour rules of the opening generation, and the distances measured behind that decision: § 271 fire separation and § 13 daylight obstruction \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+<b>§ 271 fire separation.</b> Each external wall that is not a party wall (a fire-separation wall is excluded by ust. 1) is compared with every wall of a neighbour model within reach. A pair counts when the walls mutually face each other, judged at their midpoints, and the angle between the wall planes on the side of the gap is read from their outward normals: parallel facing walls give 0 deg and the full distance, 60 deg to less than 120 deg halves it (ust. 11), at 120 deg and above the rule does not apply (ust. 12 pkt 2). The required distance is the larger value of the § 271 table for the two [FireClass\(this Nullable&lt;BuildingGeneralFunction&gt;\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_) 'DiGi\.GIS\.Analytical\.Query\.FireClass\(this System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>\)') kinds, taken through the local `FireSeparationBase` and multiplied by the spread factors of ust. 2, the no-openings factor of ust. 9 when both facing walls carry openings-free walls and neither building spreads fire, and the half-strip factor. The wall fails when the measured distance falls short, and it then gets no openings at all. Not modelled, as the stock data carries none of it: the E-class surface precondition of ust. 1, explosion-hazard rooms (ust. 3), the E-class coverage factors of ust. 4-5 and the sprinkler reductions of ust. 6-7; see also [FireSeparationNoOpeningsFactor](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationNoOpeningsFactor 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.FireSeparationNoOpeningsFactor') for what of ust. 9 is reached.
+
+<b>§ 13 daylight obstruction.</b> On each window axis - both ends of the usable wall length, its midpoint, and the axis of each neighbour's point nearest the wall - a horizontal sector of [ObstructionSectorAngle](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSectorAngle 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionSectorAngle') opens from the wall line, bisected by the outward normal. Every part of a neighbour's solid, and every other part of the same building, that falls inside the sector must be at least its height of shading away: the obstructing top minus the lowest window sill, taken as the ground elevation plus [SillHeight](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.SillHeight 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.SillHeight'), capped at [ObstructionMaxDistance](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionMaxDistance 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionMaxDistance'); a slender object of [ObstructionSlenderWidth](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderWidth 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionSlenderWidth') or less measured parallel to the wall instead answers to [ObstructionSlenderDistance](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionSlenderDistance 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionSlenderDistance') (§ 13 ust. 3), and [ObstructionInnerCityFactor](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions.ObstructionInnerCityFactor 'DiGi\.GIS\.Classes\.OpeningGenerationOptions\.ObstructionInnerCityFactor') reduces the result. The wall fails when any axis violates the requirement, and it then gets no windows of rooms for people, doors and the staircase window staying allowed. Distances are measured from the wall plane: a wall with thickness moves the inner face of the statute inward, which only widens the measured distance, so the stricter value is taken here.
+
+Neighbours with the identifier of the model are skipped, so the model may be passed in its own neighbour list, and only those whose bounding box comes within `max(, the largest § 271 distance times the both-sides factor)` are measured. The models themselves are not changed. The overload taking 2D buildings derives each neighbour's height from its storey count at [Default](DiGi.GIS.Analytical.Constants.md#DiGi.GIS.Analytical.Constants.StoreyHeight.Default 'DiGi\.GIS\.Analytical\.Constants\.StoreyHeight\.Default'), and its kind from its function; a model-only neighbour has no function, so with a fuel load stated it takes the row that load describes.
+
+```csharp
+public static System.Collections.Generic.List<DiGi.GIS.Classes.WallOpeningResult>? WallOpeningResults(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, System.Collections.Generic.IEnumerable<DiGi.Analytical.Building.Classes.BuildingModel?>? buildingModels_Neighbour, DiGi.GIS.Classes.OpeningGenerationOptions? options, System.Nullable<DiGi.GIS.Enums.BuildingGeneralFunction> buildingGeneralFunction=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model examined\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).buildingModels_Neighbour'></a>
+
+`buildingModels_Neighbour` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The building models of the adjacent buildings, which get no results themselves\. A model with the identifier of the examined one is skipped\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).options'></a>
+
+`options` [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')
+
+The rules to apply, or null for the defaults of [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).buildingGeneralFunction'></a>
+
+`buildingGeneralFunction` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.BuildingGeneralFunction](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.buildinggeneralfunction 'DiGi\.GIS\.Enums\.BuildingGeneralFunction')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The general function of the examined building, giving its [FireClass\(this Nullable&lt;BuildingGeneralFunction&gt;\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_) 'DiGi\.GIS\.Analytical\.Query\.FireClass\(this System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>\)'), or null when unknown\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
+One result per external wall that is not a party wall, in envelope order; an empty list when the model has none; or null when the model is null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double)'></a>
+
+## Query\.WallOpeningResults\(this BuildingModel, IEnumerable\<Building2D\>, OpeningGenerationOptions, Nullable\<BuildingGeneralFunction\>, double\) Method
+
+Gets the same per\-wall neighbour results when only the 2D buildings of the neighbours are known \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\)\.
+
+Each neighbour is extruded from its footprint at the ground elevation of the examined model to [Default](DiGi.GIS.Analytical.Constants.md#DiGi.GIS.Analytical.Constants.StoreyHeight.Default 'DiGi\.GIS\.Analytical\.Constants\.StoreyHeight\.Default') times its [DiGi\.GIS\.Classes\.Building2D\.Storeys](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d.storeys 'DiGi\.GIS\.Classes\.Building2D\.Storeys') storeys, so its height comes from the 2D building, and its [FireClass\(this Nullable&lt;BuildingGeneralFunction&gt;\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_) 'DiGi\.GIS\.Analytical\.Query\.FireClass\(this System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>\)') from its general function. The results are those of [WallOpeningResults\(this BuildingModel, IEnumerable&lt;BuildingModel&gt;, OpeningGenerationOptions, Nullable&lt;BuildingGeneralFunction&gt;, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double) 'DiGi\.GIS\.Analytical\.Query\.WallOpeningResults\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.OpeningGenerationOptions, System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>, double\)').
+
+```csharp
+public static System.Collections.Generic.List<DiGi.GIS.Classes.WallOpeningResult>? WallOpeningResults(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, System.Collections.Generic.IEnumerable<DiGi.GIS.Classes.Building2D?>? building2Ds_Neighbour, DiGi.GIS.Classes.OpeningGenerationOptions? options, System.Nullable<DiGi.GIS.Enums.BuildingGeneralFunction> buildingGeneralFunction=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model examined\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).building2Ds_Neighbour'></a>
+
+`building2Ds_Neighbour` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The 2D buildings of the adjacent buildings, extruded for the measurement\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).options'></a>
+
+`options` [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')
+
+The rules to apply, or null for the defaults of [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).buildingGeneralFunction'></a>
+
+`buildingGeneralFunction` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.BuildingGeneralFunction](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.buildinggeneralfunction 'DiGi\.GIS\.Enums\.BuildingGeneralFunction')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+The general function of the examined building, giving its [FireClass\(this Nullable&lt;BuildingGeneralFunction&gt;\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_) 'DiGi\.GIS\.Analytical\.Query\.FireClass\(this System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>\)'), or null when unknown\.
+
+<a name='DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[WallOpeningResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.WallOpeningResult 'DiGi\.GIS\.Classes\.WallOpeningResult')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
+One result per external wall that is not a party wall, in envelope order; an empty list when the model has none; or null when the model is null\.

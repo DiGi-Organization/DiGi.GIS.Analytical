@@ -33,16 +33,18 @@ namespace DiGi.GIS.Analytical
         /// <para><b>Walls.</b> A wall carrying <see cref="ComponentParameter.PartyWall"/> (split beforehand by <c>DiGi.Analytical.Building.Modify.SplitPartyWalls</c>) or too short for the narrowest window gets nothing, and the result records why.</para>
         /// <para><b>Doors.</b> The front wall is the external ground-storey wall nearest the address point, else the longest unrestricted one. A single-family or terraced building gets one entrance door centred on it; any other building one staircase entrance door per staircase spacing, each with a staircase window above it on every upper storey, outside the daylight target. A door below the § 62 clear size is reported, not resized.</para>
         /// <para><b>Constructions.</b> Each distinct size gets one construction (<c>Regulation.Create.WindowConstruction</c> or <c>DoorConstruction</c>), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.</para>
+        /// <para><b>Neighbours.</b> When neighbours are given, every external wall is measured against them first, by <see cref="Query.WallOpeningResults(BuildingModel, IEnumerable{BuildingModel?}?, OpeningGenerationOptions, BuildingGeneralFunction?, double)"/>: a wall closer to a facing neighbour than § 271 allows gets no openings at all (<see cref="WallOpeningRestriction.FireSeparation"/>), and a wall with an obstructing object inside the 60 degree sector of § 13 gets no windows of rooms for people, while its entrance door and staircase window stay allowed (<see cref="WallOpeningRestriction.Obstruction"/>). Both reasons are reported in <see cref="OpeningGenerationResult.WallOpeningRestrictions"/>.</para>
         /// <para>Every opening carries <see cref="OpeningParameter"/> values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.</para>
         /// </summary>
         /// <param name="buildingModel">The building model to place the openings on.</param>
         /// <param name="building2D">The 2D building of the model, giving its function and storey count. This value can be null.</param>
         /// <param name="openingGenerationInput">The year built, address point, climate zone, panel system and options. This value can be null.</param>
+        /// <param name="buildingModels_Neighbour">The building models of the adjacent buildings, measured against before placement under § 271 and § 13; null skips the neighbour rules. This value can be null.</param>
         /// <param name="constructionLibrary">The construction library, or null for <c>Regulation.Query.EmbeddedConstructionLibrary_PL()</c>. A batch caller passes it to read it once.</param>
         /// <param name="openingSizeLibrary">The opening-size library, or null for <c>Regulation.Create.OpeningSizeLibrary_PL()</c>. A batch caller passes it to create it once.</param>
         /// <param name="tolerance">The distance tolerance.</param>
         /// <returns>What was placed and what could not be, or null when the model is null or no opening-size set matches the building.</returns>
-        public static OpeningGenerationResult? GenerateOpenings(this BuildingModel? buildingModel, Building2D? building2D, OpeningGenerationInput? openingGenerationInput, ConstructionLibrary? constructionLibrary = null, OpeningSizeLibrary? openingSizeLibrary = null, double tolerance = Core.Constants.Tolerance.Distance)
+        public static OpeningGenerationResult? GenerateOpenings(this BuildingModel? buildingModel, Building2D? building2D, OpeningGenerationInput? openingGenerationInput, IEnumerable<BuildingModel?>? buildingModels_Neighbour = null, ConstructionLibrary? constructionLibrary = null, OpeningSizeLibrary? openingSizeLibrary = null, double tolerance = Core.Constants.Tolerance.Distance)
         {
             if (buildingModel is null)
             {
@@ -69,6 +71,31 @@ namespace DiGi.GIS.Analytical
             walls.Sort((x, y) => x.Guid.CompareTo(y.Guid));
 
             bool partyWalls = walls.Exists(IsPartyWall);
+
+            // The neighbour rules, measured before anything is placed: § 271 fire separation and § 13 daylight obstruction.
+            Dictionary<Guid, WallOpeningResult> dictionary_WallOpeningResult = [];
+            if (buildingModels_Neighbour is not null)
+            {
+                List<BuildingModel> buildingModels_Neighbour_Temp = [];
+                foreach (BuildingModel? buildingModel_Neighbour in buildingModels_Neighbour)
+                {
+                    if (buildingModel_Neighbour is not null)
+                    {
+                        buildingModels_Neighbour_Temp.Add(buildingModel_Neighbour);
+                    }
+                }
+
+                if (buildingModels_Neighbour_Temp.Count > 0 && buildingModel.WallOpeningResults(buildingModels_Neighbour_Temp, openingGenerationOptions, building2D?.BuildingGeneralFunction, tolerance) is List<WallOpeningResult> wallOpeningResults)
+                {
+                    foreach (WallOpeningResult wallOpeningResult in wallOpeningResults)
+                    {
+                        if (wallOpeningResult.Wall?.Guid is Guid guid)
+                        {
+                            dictionary_WallOpeningResult[guid] = wallOpeningResult;
+                        }
+                    }
+                }
+            }
             BuildingType buildingType = building2D.BuildingType(partyWalls);
             BuildingType buildingType_Lookup = buildingType == BuildingType.Undefined ? BuildingType.MultiFamily : buildingType;
             bool singleFamily = buildingType_Lookup is BuildingType.SingleFamily or BuildingType.Terraced;
@@ -163,7 +190,7 @@ namespace DiGi.GIS.Analytical
             }
 
             Vector3D vector3D_Up = new(0, 0, 1);
-            SortedDictionary<(long, long, long, long, long), (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted)> Walls)> segments = [];
+            SortedDictionary<(long, long, long, long, long), (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted, bool WindowsRestricted)> Walls)> segments = [];
 
             static long Round(double value, double precision)
             {
@@ -202,44 +229,60 @@ namespace DiGi.GIS.Analytical
 
                 offset /= point3Ds.Count;
 
-                bool restricted;
+                WallOpeningRestriction wallOpeningRestriction;
                 if (IsPartyWall(wall))
                 {
-                    wallOpeningRestrictions[wall.Guid] = WallOpeningRestriction.PartyWall;
-                    restricted = true;
+                    wallOpeningRestriction = WallOpeningRestriction.PartyWall;
                 }
                 else if (double.IsNaN(width_Narrowest) || end - start - (2 * openingGenerationOptions.CornerMargin) < width_Narrowest)
                 {
-                    wallOpeningRestrictions[wall.Guid] = WallOpeningRestriction.TooShort;
-                    restricted = true;
+                    wallOpeningRestriction = WallOpeningRestriction.TooShort;
                 }
                 else
                 {
-                    wallOpeningRestrictions[wall.Guid] = WallOpeningRestriction.None;
-                    restricted = false;
+                    wallOpeningRestriction = WallOpeningRestriction.None;
                 }
 
+                // The neighbour rules override the phase A reason: fire separation blocks every opening, an
+                // obstruction only the windows of rooms for people, and a structural reason already stands.
+                if (dictionary_WallOpeningResult.TryGetValue(wall.Guid, out WallOpeningResult? wallOpeningResult))
+                {
+                    if (wallOpeningResult.Restriction == WallOpeningRestriction.FireSeparation)
+                    {
+                        wallOpeningRestriction = WallOpeningRestriction.FireSeparation;
+                    }
+                    else if (wallOpeningResult.Restriction == WallOpeningRestriction.Obstruction && wallOpeningRestriction == WallOpeningRestriction.None)
+                    {
+                        wallOpeningRestriction = WallOpeningRestriction.Obstruction;
+                    }
+                }
+
+                wallOpeningRestrictions[wall.Guid] = wallOpeningRestriction;
+
+                bool restricted = wallOpeningRestriction is WallOpeningRestriction.PartyWall or WallOpeningRestriction.TooShort or WallOpeningRestriction.FireSeparation;
+                bool windowsRestricted = wallOpeningRestriction == WallOpeningRestriction.Obstruction;
+
                 (long, long, long, long, long) key = (Round(vector3D_Direction.X, 0.001), Round(vector3D_Direction.Y, 0.001), Round(offset, 0.01), Round(start, 0.01), Round(end, 0.01));
-                if (!segments.TryGetValue(key, out (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted)> Walls) segment))
+                if (!segments.TryGetValue(key, out (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted, bool WindowsRestricted)> Walls) segment))
                 {
                     segment = (vector3D_Direction, vector3D_Horizontal, offset, start, end, []);
                     segments[key] = segment;
                 }
 
-                segment.Walls.Add((wall, bottom, top, restricted));
+                segment.Walls.Add((wall, bottom, top, restricted, windowsRestricted));
             }
 
-            List<(Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted)> Walls)> segments_Ordered = [.. segments.Values];
+            List<(Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted, bool WindowsRestricted)> Walls)> segments_Ordered = [.. segments.Values];
 
             // The wall of a segment in a band: the one covering more than half of the band.
-            (IWall Wall, bool Restricted)? SegmentWall(int index_Segment, Range<double> band)
+            (IWall Wall, bool Restricted, bool WindowsRestricted)? SegmentWall(int index_Segment, Range<double> band)
             {
-                foreach ((IWall Wall, double Bottom, double Top, bool Restricted) tuple in segments_Ordered[index_Segment].Walls)
+                foreach ((IWall Wall, double Bottom, double Top, bool Restricted, bool WindowsRestricted) tuple in segments_Ordered[index_Segment].Walls)
                 {
                     double overlap = Math.Min(tuple.Top, band.Max) - Math.Max(tuple.Bottom, band.Min);
                     if (overlap > 0.5 * (band.Max - band.Min))
                     {
-                        return (tuple.Wall, tuple.Restricted);
+                        return (tuple.Wall, tuple.Restricted, tuple.WindowsRestricted);
                     }
                 }
 
@@ -248,7 +291,7 @@ namespace DiGi.GIS.Analytical
 
             Point3D Point(int index_Segment, double s, double z)
             {
-                (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted)> Walls) segment = segments_Ordered[index_Segment];
+                (Vector3D Direction, Vector3D Normal, double Offset, double Start, double End, List<(IWall Wall, double Bottom, double Top, bool Restricted, bool WindowsRestricted)> Walls) segment = segments_Ordered[index_Segment];
                 return new Point3D((segment.Direction.X * s) + (segment.Normal.X * segment.Offset), (segment.Direction.Y * s) + (segment.Normal.Y * segment.Offset), z);
             }
 
@@ -363,7 +406,7 @@ namespace DiGi.GIS.Analytical
                 double best = double.NaN;
                 for (int i = 0; i < segments_Ordered.Count; i++)
                 {
-                    if (SegmentWall(i, band_Ground) is not (IWall, bool) tuple_Wall || tuple_Wall.Restricted)
+                    if (SegmentWall(i, band_Ground) is not (IWall, bool, bool) tuple_Wall || tuple_Wall.Restricted)
                     {
                         continue;
                     }
@@ -402,7 +445,7 @@ namespace DiGi.GIS.Analytical
             List<(double Start, double End)> intervals_Reserved = [];
             List<double> centres_Door = [];
             double head_Door = double.NaN;
-            if (index_Front != -1 && band_Ground is not null && SegmentWall(index_Front, band_Ground) is (IWall, bool) tuple_Front)
+            if (index_Front != -1 && band_Ground is not null && SegmentWall(index_Front, band_Ground) is (IWall, bool, bool) tuple_Front)
             {
                 OpeningKind openingKind_Door = singleFamily ? OpeningKind.EntranceDoor : OpeningKind.StaircaseEntranceDoor;
                 OpeningSize? openingSize_Door = openingSizeSet.GetOpeningSize(openingKind_Door, singleFamily ? RoomUse.Other : RoomUse.Staircase);
@@ -671,7 +714,7 @@ namespace DiGi.GIS.Analytical
                 List<double> weights = [];
                 for (int i = 0; i < segments_Ordered.Count; i++)
                 {
-                    if (SegmentWall(i, band) is not (IWall, bool) tuple_Wall || tuple_Wall.Restricted)
+                    if (SegmentWall(i, band) is not (IWall, bool, bool) tuple_Wall || tuple_Wall.Restricted || tuple_Wall.WindowsRestricted)
                     {
                         continue;
                     }
@@ -782,7 +825,7 @@ namespace DiGi.GIS.Analytical
                 for (int i = 0; i < indexes_Allowed.Count; i++)
                 {
                     int index_Segment = indexes_Allowed[i];
-                    if (SegmentWall(index_Segment, band) is not (IWall, bool) tuple_Wall)
+                    if (SegmentWall(index_Segment, band) is not (IWall, bool, bool) tuple_Wall)
                     {
                         continue;
                     }
@@ -836,7 +879,7 @@ namespace DiGi.GIS.Analytical
                 }
 
                 // Staircase windows above the staircase doors, outside the daylight target.
-                if (index_Band > 0 && !singleFamily && index_Front != -1 && SegmentWall(index_Front, band) is (IWall, bool) tuple_Staircase && !tuple_Staircase.Restricted && openingSizeSet.GetOpeningSize(OpeningKind.StaircaseWindow, RoomUse.Staircase) is OpeningSize openingSize_Staircase)
+                if (index_Band > 0 && !singleFamily && index_Front != -1 && SegmentWall(index_Front, band) is (IWall, bool, bool) tuple_Staircase && !tuple_Staircase.Restricted && openingSizeSet.GetOpeningSize(OpeningKind.StaircaseWindow, RoomUse.Staircase) is OpeningSize openingSize_Staircase)
                 {
                     double sill = Math.Max(openingSize_Staircase.SillHeight ?? openingGenerationOptions.SillHeight, sill_Minimum);
                     if (sill + openingSize_Staircase.Height <= limit_Head + tolerance)
@@ -861,7 +904,7 @@ namespace DiGi.GIS.Analytical
             }
 
             Guid? guid_Front = null;
-            if (index_Front != -1 && band_Ground is not null && SegmentWall(index_Front, band_Ground) is (IWall, bool) tuple_Front_Wall)
+            if (index_Front != -1 && band_Ground is not null && SegmentWall(index_Front, band_Ground) is (IWall, bool, bool) tuple_Front_Wall)
             {
                 guid_Front = tuple_Front_Wall.Wall.Guid;
             }
