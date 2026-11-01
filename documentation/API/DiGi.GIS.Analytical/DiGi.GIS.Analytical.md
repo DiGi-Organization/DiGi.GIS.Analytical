@@ -679,7 +679,7 @@ Places windows and doors on the external walls of a building model, following th
 
 <b>Storeys.</b> Openings are placed per storey band ([StoreyBands\(this BuildingModel, ushort, double, StoreySource, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double) 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)')), never assuming that one space is one storey, so an unsplit 3D model and a building with no storey count get windows on every storey. Every band uses the same positions along a wall where its allowed walls are the same, so windows stack.
 
-<b>Windows.</b> The target of a band is the daylight ratio times the habitable floor fraction times the footprint area, as glazed area in the clear of the frames. It is split over the living-room, kitchen and bathroom sizes by the room mix of the building type (a use the set lists as windowless gives its share to the living room) and interleaved by largest remainder. Where the regime has a maximum glazed area A0max and the window U-value reaches its threshold, the windows are cut to it. The windows are distributed over the allowed walls in proportion to their usable length, the front wall weighted by the street façade weight; spaced evenly, keeping the corner margin and the minimum pier, and snapped to the façade module of a large-panel set where it fits. The sill is the size's own, raised on upper storeys to the option sill (or the high sill above 25 m) and to keep the interstorey strip above the openings below; a window whose head would not clear the band top less the head clearance falls back to the tallest narrower size that fits. What does not fit is the band's shortfall, reported, not an error.
+<b>Windows.</b> The target of a band is the daylight ratio times the habitable floor fraction times the footprint area, as glazed area in the clear of the frames. It is split over the living-room, kitchen and bathroom sizes by the room mix of the building type (a use the set lists as windowless gives its share to the living room) and interleaved by largest remainder. Where the regime has a maximum glazed area A0max and the window U-value reaches its threshold, the windows are cut to it. The windows are distributed over the allowed walls in proportion to their usable length, the front wall and every road-frontage wall weighted by the street façade weight; spaced evenly, keeping the corner margin and the minimum pier, and snapped to the façade module of a large-panel set where it fits. The sill is the size's own, raised on upper storeys to the option sill (or the high sill above 25 m) and to keep the interstorey strip above the openings below; a window whose head would not clear the band top less the head clearance falls back to the tallest narrower size that fits. What does not fit is the band's shortfall, reported, not an error.
 
 <b>Walls.</b> A wall carrying [DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.enums.componentparameter.partywall 'DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall') (split beforehand by `DiGi.Analytical.Building.Modify.SplitPartyWalls`) or too short for the narrowest window gets nothing, and the result records why.
 
@@ -688,6 +688,8 @@ Places windows and doors on the external walls of a building model, following th
 <b>Constructions.</b> Each distinct size gets one construction (`Regulation.Create.WindowConstruction` or `DoorConstruction`), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.
 
 <b>Neighbours.</b> When neighbours are given, every external wall is measured against them first, by [WallOpeningResults\(this BuildingModel, IEnumerable&lt;BuildingModel&gt;, OpeningGenerationOptions, Nullable&lt;BuildingGeneralFunction&gt;, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.WallOpeningResults(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.OpeningGenerationOptions,System.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_,double) 'DiGi\.GIS\.Analytical\.Query\.WallOpeningResults\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.OpeningGenerationOptions, System\.Nullable\<DiGi\.GIS\.Enums\.BuildingGeneralFunction\>, double\)'): a wall closer to a facing neighbour than § 271 allows gets no openings at all ([FireSeparation](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.FireSeparation 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.FireSeparation')), and a wall with an obstructing object inside the 60 degree sector of § 13 gets no windows of rooms for people, while its entrance door and staircase window stay allowed ([Obstruction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.Obstruction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.Obstruction')). Both reasons are reported in [WallOpeningRestrictions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationResult.WallOpeningRestrictions 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.WallOpeningRestrictions').
+
+<b>Roads.</b> When roads are given, they add context, never a choice of placement (DiGi-Organization/DiGi.GIS.Analytical#10, phase C): a wall whose facing strip reaches a road polyline is reported as [RoadFrontage](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction.RoadFrontage 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction\.RoadFrontage') under § 12 ust. 10 - the plot-boundary distances do not apply where the neighbouring land is a road - the street façade weight is applied to every road-frontage wall, so a corner building carries it on both frontages while the entrance stays on the address-point wall, and walls of the subject and its neighbours aligned along the same road at a similar setback are reported as a frontage line in [FrontageLines](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationResult.FrontageLines 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.FrontageLines'). With no roads, the run is identical to a run without the input.
 
 Every opening carries [OpeningParameter](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter') values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.
 
@@ -712,7 +714,7 @@ The 2D building of the model, giving its function and storey count\. This value 
 
 `openingGenerationInput` [OpeningGenerationInput](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput 'DiGi\.GIS\.Classes\.OpeningGenerationInput')
 
-The year built, address point, climate zone, panel system and options\. This value can be null\.
+The year built, address point, climate zone, panel system, options and roads\. This value can be null\.
 
 <a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).buildingModels_Neighbour'></a>
 
@@ -949,6 +951,53 @@ The general function of the building, or null when unknown\.
 [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[FireClass](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.FireClass 'DiGi\.GIS\.Analytical\.Enums\.FireClass')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')  
 The kind of building, or null when the function is null\.
 
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double)'></a>
+
+## Query\.FrontageLines\(this BuildingModel, IEnumerable\<BuildingModel\>, IEnumerable\<Polyline2D\>, OpeningGenerationOptions, double\) Method
+
+Finds the frontage lines \(pierzeja\) of a building model: its road\-frontage walls that align with the walls of the neighbouring models along the same road at a similar setback \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+Two fronts belong to one line when they front the same road, both ends of the later wall lie on the line of the earlier one within the tolerance, and their setbacks from that road differ by no more than `OpeningGenerationOptions.FrontageLineSetbackTolerance`. A line qualifies when `OpeningGenerationOptions.FrontageLineMinimumFronts` distinct buildings stand in it, and it is then reported on the subject model's walls only. Reported only: a frontage line does not change placement.
+
+```csharp
+public static System.Collections.Generic.Dictionary<System.Guid,string>? FrontageLines(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, System.Collections.Generic.IEnumerable<DiGi.Analytical.Building.Classes.BuildingModel?>? buildingModels_Neighbour, System.Collections.Generic.IEnumerable<DiGi.Geometry.Planar.Classes.Polyline2D>? polyline2Ds_Road, DiGi.GIS.Classes.OpeningGenerationOptions? options=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model whose walls are reported\.
+
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).buildingModels_Neighbour'></a>
+
+`buildingModels_Neighbour` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The neighbouring building models whose walls take part in the alignment; a model repeating the subject's own identifier is skipped\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).polyline2Ds_Road'></a>
+
+`polyline2Ds_Road` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Geometry\.Planar\.Classes\.Polyline2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polyline2d 'DiGi\.Geometry\.Planar\.Classes\.Polyline2D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The road polylines, in the order the caller gives them\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).options'></a>
+
+`options` [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')
+
+The rules to apply, or null for the defaults\.
+
+<a name='DiGi.GIS.Analytical.Query.FrontageLines(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance; also the allowed deviation from the line of the earlier front\.
+
+#### Returns
+[System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')  
+The frontage\-line key of each reported wall of the subject model, keyed by the wall identifier; null when the model is null, there is no road context, or no line qualifies\.
+
 <a name='DiGi.GIS.Analytical.Query.Horizontal(thisDiGi.Geometry.Spatial.Classes.Vector3D,double)'></a>
 
 ## Query\.Horizontal\(this Vector3D, double\) Method
@@ -998,6 +1047,47 @@ The building model to check\.
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the building model carries located coordinates and a defined UTC offset; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+<a name='DiGi.GIS.Analytical.Query.RoadFrontages(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double)'></a>
+
+## Query\.RoadFrontages\(this BuildingModel, IEnumerable\<Polyline2D\>, OpeningGenerationOptions, double\) Method
+
+Finds the walls of a building model that front a road: the external walls whose facing strip of `OpeningGenerationOptions.RoadFrontageDistance` a road polyline reaches \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+The strip stands in for the neighbouring plot of § 12 ust. 10 of the technical conditions of 2002 (Dz.U. 2002 nr 75 poz. 690), in the wording added by Dz.U. 2023 poz. 2442: the distances of ust. 1-9 are not required when the neighbouring plot is a road plot or a publicly accessible square. A road polyline counts only when it comes within the distance of the wall face on the outward side and between the wall's ends, so a road behind the building or past its corner does not mark the wall. The models are not changed.
+
+```csharp
+public static System.Collections.Generic.Dictionary<System.Guid,DiGi.GIS.Classes.RoadFrontage>? RoadFrontages(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, System.Collections.Generic.IEnumerable<DiGi.Geometry.Planar.Classes.Polyline2D>? polyline2Ds_Road, DiGi.GIS.Classes.OpeningGenerationOptions? options=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.RoadFrontages(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model whose walls are probed\.
+
+<a name='DiGi.GIS.Analytical.Query.RoadFrontages(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).polyline2Ds_Road'></a>
+
+`polyline2Ds_Road` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Geometry\.Planar\.Classes\.Polyline2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polyline2d 'DiGi\.Geometry\.Planar\.Classes\.Polyline2D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The road polylines, in the order the caller gives them; the index is kept on the result\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Query.RoadFrontages(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).options'></a>
+
+`options` [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')
+
+The rules to apply, or null for the defaults\.
+
+<a name='DiGi.GIS.Analytical.Query.RoadFrontages(thisDiGi.Analytical.Building.Classes.BuildingModel,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_,DiGi.GIS.Classes.OpeningGenerationOptions,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[RoadFrontage](DiGi.GIS.Classes.md#DiGi.GIS.Classes.RoadFrontage 'DiGi\.GIS\.Classes\.RoadFrontage')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')  
+The road frontage of every external wall that reaches a road, keyed by the wall identifier, walls ordered by their identifier; null when the model is null or there is no road context\.
 
 <a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double)'></a>
 

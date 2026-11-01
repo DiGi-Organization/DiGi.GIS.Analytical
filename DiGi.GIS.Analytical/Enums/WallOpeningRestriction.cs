@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace DiGi.GIS.Analytical.Enums
 {
     /// <summary>
-    /// Specifies why a wall received no openings from <c>Modify.GenerateOpenings</c> (DiGi-Organization/DiGi.GIS.Analytical#2).
+    /// Specifies what <c>Modify.GenerateOpenings</c> reports for a wall: why it may carry no openings, or that it fronts a road (DiGi-Organization/DiGi.GIS.Analytical#2).
     /// </summary>
     [Description("Wall opening restriction")]
     public enum WallOpeningRestriction
@@ -37,5 +37,10 @@ namespace DiGi.GIS.Analytical.Enums
         /// An obstructing part of the same building or another object lies inside the 60 degree sector of § 13 closer than its height of shading (DiGi-Organization/DiGi.GIS.Analytical#9), so the wall carries no windows of rooms for people; entrance doors and the staircase window stay allowed.
         /// </summary>
         [Description("Obstruction")] Obstruction,
+
+        /// <summary>
+        /// The wall fronts a road: a road polyline reaches the strip of <c>OpeningGenerationOptions.RoadFrontageDistance</c> facing it, so under § 12 ust. 10 of the technical conditions of 2002 the plot-boundary distances of ust. 1-9 are not required of it (DiGi-Organization/DiGi.GIS.Analytical#10). Informational - the wall may carry openings, and the value is reported only when no other restriction stands.
+        /// </summary>
+        [Description("Road frontage")] RoadFrontage,
     }
 }

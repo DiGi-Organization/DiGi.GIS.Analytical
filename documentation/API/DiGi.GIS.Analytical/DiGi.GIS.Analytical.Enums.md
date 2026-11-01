@@ -325,7 +325,7 @@ No height could be read, so the whole wall is one band\.
 
 ## WallOpeningRestriction Enum
 
-Specifies why a wall received no openings from `Modify.GenerateOpenings` \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
+Specifies what `Modify.GenerateOpenings` reports for a wall: why it may carry no openings, or that it fronts a road \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
 
 ```csharp
 public enum WallOpeningRestriction
@@ -367,3 +367,9 @@ The distance to a facing neighbouring wall falls short of the fire\-separation r
 `Obstruction` 5
 
 An obstructing part of the same building or another object lies inside the 60 degree sector of § 13 closer than its height of shading \(DiGi\-Organization/DiGi\.GIS\.Analytical\#9\), so the wall carries no windows of rooms for people; entrance doors and the staircase window stay allowed\.
+
+<a name='DiGi.GIS.Analytical.Enums.WallOpeningRestriction.RoadFrontage'></a>
+
+`RoadFrontage` 6
+
+The wall fronts a road: a road polyline reaches the strip of `OpeningGenerationOptions.RoadFrontageDistance` facing it, so under § 12 ust\. 10 of the technical conditions of 2002 the plot\-boundary distances of ust\. 1\-9 are not required of it \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\. Informational \- the wall may carry openings, and the value is reported only when no other restriction stands\.

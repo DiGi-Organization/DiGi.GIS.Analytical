@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 namespace DiGi.GIS.Classes
 {
     /// <summary>
-    /// Holds what <c>Modify.GenerateOpenings</c> did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the front wall and the doors (DiGi-Organization/DiGi.GIS.Analytical#2).
+    /// Holds what <c>Modify.GenerateOpenings</c> did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the frontage lines it found, the front wall and the doors (DiGi-Organization/DiGi.GIS.Analytical#2).
     /// <para>A shortfall against the daylight target is a finding, not an error: in a dense historic block the rules can make 1:8 impossible.</para>
     /// </summary>
     public class OpeningGenerationResult : SerializableObject, IGISSerializableObject
@@ -36,6 +36,9 @@ namespace DiGi.GIS.Classes
 
         [JsonInclude, JsonPropertyName(nameof(DroppedOpeningCount))]
         private readonly int droppedOpeningCount;
+
+        [JsonInclude, JsonPropertyName(nameof(FrontageLines))]
+        private readonly Dictionary<string, string>? frontageLines;
 
         [JsonInclude, JsonPropertyName(nameof(FrontWall))]
         private readonly Guid? frontWall;
@@ -87,6 +90,7 @@ namespace DiGi.GIS.Classes
         /// <param name="doorCount">The number of doors placed.</param>
         /// <param name="doorsBelowMinimumCount">The number of doors placed whose clear size is below the minimum of § 62; they are reported, not resized.</param>
         /// <param name="droppedOpeningCount">The number of windows and doors not placed because their outline did not lie inside the host wall.</param>
+        /// <param name="frontageLines">The frontage-line key of each wall reported as part of a frontage line (pierzeja), keyed by its identifier, or null when none was reported (DiGi-Organization/DiGi.GIS.Analytical#10).</param>
         public OpeningGenerationResult(
             string? reference,
             BuildingRegulation buildingRegulation,
@@ -104,7 +108,8 @@ namespace DiGi.GIS.Classes
             Dictionary<Guid, WallOpeningRestriction>? wallOpeningRestrictions,
             int doorCount,
             int doorsBelowMinimumCount,
-            int droppedOpeningCount)
+            int droppedOpeningCount,
+            Dictionary<Guid, string>? frontageLines = null)
         {
             this.reference = reference;
             this.buildingRegulation = buildingRegulation;
@@ -131,6 +136,15 @@ namespace DiGi.GIS.Classes
             this.doorCount = doorCount;
             this.doorsBelowMinimumCount = doorsBelowMinimumCount;
             this.droppedOpeningCount = droppedOpeningCount;
+            if (frontageLines is not null)
+            {
+                // Keyed by the identifier's text: a Guid dictionary key does not deserialize.
+                this.frontageLines = [];
+                foreach (KeyValuePair<Guid, string> keyValuePair in frontageLines)
+                {
+                    this.frontageLines[keyValuePair.Key.ToString("D")] = keyValuePair.Value;
+                }
+            }
         }
 
         /// <summary>
@@ -156,6 +170,7 @@ namespace DiGi.GIS.Classes
                 frontWallRule = openingGenerationResult.frontWallRule;
                 storeys = openingGenerationResult.storeys?.ConvertAll(x => new OpeningGenerationStorey(x));
                 wallOpeningRestrictions = openingGenerationResult.wallOpeningRestrictions is null ? null : new Dictionary<string, WallOpeningRestriction>(openingGenerationResult.wallOpeningRestrictions);
+                frontageLines = openingGenerationResult.frontageLines is null ? null : new Dictionary<string, string>(openingGenerationResult.frontageLines);
                 doorCount = openingGenerationResult.doorCount;
                 doorsBelowMinimumCount = openingGenerationResult.doorsBelowMinimumCount;
                 droppedOpeningCount = openingGenerationResult.droppedOpeningCount;
@@ -252,6 +267,32 @@ namespace DiGi.GIS.Classes
             get
             {
                 return droppedOpeningCount;
+            }
+        }
+
+        /// <summary>
+        /// Gets the frontage-line key of each wall reported as part of a frontage line (pierzeja), keyed by its identifier, or null when none was reported (DiGi-Organization/DiGi.GIS.Analytical#10).
+        /// </summary>
+        [JsonIgnore]
+        public Dictionary<Guid, string>? FrontageLines
+        {
+            get
+            {
+                if (frontageLines is null)
+                {
+                    return null;
+                }
+
+                Dictionary<Guid, string> result = [];
+                foreach (KeyValuePair<string, string> keyValuePair in frontageLines)
+                {
+                    if (Guid.TryParse(keyValuePair.Key, out Guid guid))
+                    {
+                        result[guid] = keyValuePair.Value;
+                    }
+                }
+
+                return result;
             }
         }
 

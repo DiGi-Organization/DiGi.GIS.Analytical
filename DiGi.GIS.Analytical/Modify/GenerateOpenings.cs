@@ -29,16 +29,17 @@ namespace DiGi.GIS.Analytical
         /// Places windows and doors on the external walls of a building model, following the Polish rules of the building's period (DiGi-Organization/DiGi.GIS.Analytical#2, phase A).
         /// <para><b>Keys.</b> The regime is <c>Regulation.Query.BuildingRegulation(yearBuilt, DesignLag)</c>. The building type is <see cref="Query.BuildingType(Building2D, bool)"/>, terraced when any wall carries <see cref="ComponentParameter.PartyWall"/>; a non-residential building takes the multi-family sets. The sizes come from the opening-size set of the year built, type and panel system, and the thermal values from the construction set of the chosen flavour, a role it lacks falling back to TypicalAsBuilt. With no year built, the latest sets are used.</para>
         /// <para><b>Storeys.</b> Openings are placed per storey band (<see cref="Query.StoreyBands"/>), never assuming that one space is one storey, so an unsplit 3D model and a building with no storey count get windows on every storey. Every band uses the same positions along a wall where its allowed walls are the same, so windows stack.</para>
-        /// <para><b>Windows.</b> The target of a band is the daylight ratio times the habitable floor fraction times the footprint area, as glazed area in the clear of the frames. It is split over the living-room, kitchen and bathroom sizes by the room mix of the building type (a use the set lists as windowless gives its share to the living room) and interleaved by largest remainder. Where the regime has a maximum glazed area A0max and the window U-value reaches its threshold, the windows are cut to it. The windows are distributed over the allowed walls in proportion to their usable length, the front wall weighted by the street façade weight; spaced evenly, keeping the corner margin and the minimum pier, and snapped to the façade module of a large-panel set where it fits. The sill is the size's own, raised on upper storeys to the option sill (or the high sill above 25 m) and to keep the interstorey strip above the openings below; a window whose head would not clear the band top less the head clearance falls back to the tallest narrower size that fits. What does not fit is the band's shortfall, reported, not an error.</para>
+        /// <para><b>Windows.</b> The target of a band is the daylight ratio times the habitable floor fraction times the footprint area, as glazed area in the clear of the frames. It is split over the living-room, kitchen and bathroom sizes by the room mix of the building type (a use the set lists as windowless gives its share to the living room) and interleaved by largest remainder. Where the regime has a maximum glazed area A0max and the window U-value reaches its threshold, the windows are cut to it. The windows are distributed over the allowed walls in proportion to their usable length, the front wall and every road-frontage wall weighted by the street façade weight; spaced evenly, keeping the corner margin and the minimum pier, and snapped to the façade module of a large-panel set where it fits. The sill is the size's own, raised on upper storeys to the option sill (or the high sill above 25 m) and to keep the interstorey strip above the openings below; a window whose head would not clear the band top less the head clearance falls back to the tallest narrower size that fits. What does not fit is the band's shortfall, reported, not an error.</para>
         /// <para><b>Walls.</b> A wall carrying <see cref="ComponentParameter.PartyWall"/> (split beforehand by <c>DiGi.Analytical.Building.Modify.SplitPartyWalls</c>) or too short for the narrowest window gets nothing, and the result records why.</para>
         /// <para><b>Doors.</b> The front wall is the external ground-storey wall nearest the address point, else the longest unrestricted one. A single-family or terraced building gets one entrance door centred on it; any other building one staircase entrance door per staircase spacing, each with a staircase window above it on every upper storey, outside the daylight target. A door below the § 62 clear size is reported, not resized.</para>
         /// <para><b>Constructions.</b> Each distinct size gets one construction (<c>Regulation.Create.WindowConstruction</c> or <c>DoorConstruction</c>), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.</para>
         /// <para><b>Neighbours.</b> When neighbours are given, every external wall is measured against them first, by <see cref="Query.WallOpeningResults(BuildingModel, IEnumerable{BuildingModel?}?, OpeningGenerationOptions, BuildingGeneralFunction?, double)"/>: a wall closer to a facing neighbour than § 271 allows gets no openings at all (<see cref="WallOpeningRestriction.FireSeparation"/>), and a wall with an obstructing object inside the 60 degree sector of § 13 gets no windows of rooms for people, while its entrance door and staircase window stay allowed (<see cref="WallOpeningRestriction.Obstruction"/>). Both reasons are reported in <see cref="OpeningGenerationResult.WallOpeningRestrictions"/>.</para>
+        /// <para><b>Roads.</b> When roads are given, they add context, never a choice of placement (DiGi-Organization/DiGi.GIS.Analytical#10, phase C): a wall whose facing strip reaches a road polyline is reported as <see cref="WallOpeningRestriction.RoadFrontage"/> under § 12 ust. 10 - the plot-boundary distances do not apply where the neighbouring land is a road - the street façade weight is applied to every road-frontage wall, so a corner building carries it on both frontages while the entrance stays on the address-point wall, and walls of the subject and its neighbours aligned along the same road at a similar setback are reported as a frontage line in <see cref="OpeningGenerationResult.FrontageLines"/>. With no roads, the run is identical to a run without the input.</para>
         /// <para>Every opening carries <see cref="OpeningParameter"/> values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.</para>
         /// </summary>
         /// <param name="buildingModel">The building model to place the openings on.</param>
         /// <param name="building2D">The 2D building of the model, giving its function and storey count. This value can be null.</param>
-        /// <param name="openingGenerationInput">The year built, address point, climate zone, panel system and options. This value can be null.</param>
+        /// <param name="openingGenerationInput">The year built, address point, climate zone, panel system, options and roads. This value can be null.</param>
         /// <param name="buildingModels_Neighbour">The building models of the adjacent buildings, measured against before placement under § 271 and § 13; null skips the neighbour rules. This value can be null.</param>
         /// <param name="constructionLibrary">The construction library, or null for <c>Regulation.Query.EmbeddedConstructionLibrary_PL()</c>. A batch caller passes it to read it once.</param>
         /// <param name="openingSizeLibrary">The opening-size library, or null for <c>Regulation.Create.OpeningSizeLibrary_PL()</c>. A batch caller passes it to create it once.</param>
@@ -173,6 +174,11 @@ namespace DiGi.GIS.Analytical
                 }
             }
 
+            // The road context of phase C: § 12 ust. 10 road frontage, the street-façade weight of road walls and frontage lines (DiGi-Organization/DiGi.GIS.Analytical#10).
+            List<Polyline2D>? polyline2Ds_Road = openingGenerationInput?.Roads;
+            Dictionary<Guid, RoadFrontage>? roadFrontages = polyline2Ds_Road is not null && polyline2Ds_Road.Count > 0 ? buildingModel.RoadFrontages(polyline2Ds_Road, openingGenerationOptions, tolerance) : null;
+            Dictionary<Guid, string>? frontageLines = roadFrontages is not null && roadFrontages.Count > 0 ? buildingModel.FrontageLines(buildingModels_Neighbour, polyline2Ds_Road, openingGenerationOptions, tolerance) : null;
+
             // Facade segments: the external walls grouped by the horizontal line they stand on, so the walls of one edge in every storey share their window positions.
             Dictionary<Guid, WallOpeningRestriction> wallOpeningRestrictions = [];
 
@@ -255,6 +261,12 @@ namespace DiGi.GIS.Analytical
                     {
                         wallOpeningRestriction = WallOpeningRestriction.Obstruction;
                     }
+                }
+
+                // Phase C reports § 12 ust. 10 road frontage only when nothing else stands: it restricts nothing.
+                if (wallOpeningRestriction == WallOpeningRestriction.None && roadFrontages?.ContainsKey(wall.Guid) == true)
+                {
+                    wallOpeningRestriction = WallOpeningRestriction.RoadFrontage;
                 }
 
                 wallOpeningRestrictions[wall.Guid] = wallOpeningRestriction;
@@ -733,7 +745,8 @@ namespace DiGi.GIS.Analytical
 
                     indexes_Allowed.Add(i);
                     intervals_Allowed.Add(intervals);
-                    weights.Add(length * (i == index_Front ? frontWeight : 1.0));
+                    bool roadFrontage = roadFrontages?.ContainsKey(tuple_Wall.Wall.Guid) == true;
+                    weights.Add(length * (i == index_Front || roadFrontage ? frontWeight : 1.0));
                 }
 
                 // Quotas by largest remainder, then the sequence handed out in order.
@@ -926,7 +939,8 @@ namespace DiGi.GIS.Analytical
                 wallOpeningRestrictions,
                 doorCount,
                 doorsBelowMinimumCount,
-                droppedOpeningCount);
+                droppedOpeningCount,
+                frontageLines);
         }
     }
 }

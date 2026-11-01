@@ -3,6 +3,7 @@ using DiGi.Core.Classes;
 using DiGi.Geometry.Planar.Classes;
 using DiGi.GIS.Enums;
 using DiGi.GIS.Interfaces;
+using System.Collections.Generic;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
@@ -25,6 +26,9 @@ namespace DiGi.GIS.Classes
         [JsonInclude, JsonPropertyName(nameof(PanelSystem))]
         private readonly string? panelSystem;
 
+        [JsonInclude, JsonPropertyName(nameof(Roads))]
+        private readonly List<Polyline2D>? roads;
+
         [JsonInclude, JsonPropertyName(nameof(YearBuilt))]
         private readonly short? yearBuilt;
 
@@ -40,7 +44,8 @@ namespace DiGi.GIS.Classes
         /// <param name="climateZone">The climatic zone of the building; <see cref="ClimateZone.Undefined"/> takes the zone I-III window limits.</param>
         /// <param name="panelSystem">The large-panel system of a 1967-1985 apartment block ("W-70", "OWT-67", ...), or null for the default W-70.</param>
         /// <param name="openingGenerationOptions">The rules to apply, or null for those of the building's regime.</param>
-        public OpeningGenerationInput(short? yearBuilt, YearBuiltSource? yearBuiltSource, Point2D? addressPoint, ClimateZone climateZone, string? panelSystem, OpeningGenerationOptions? openingGenerationOptions)
+        /// <param name="roads">The road polylines near the building (BDOT10k OT_SKJZ_L, OT_SKDR_L, OT_SKRP_L), or null for no road context; a wall whose facing strip up to <c>OpeningGenerationOptions.RoadFrontageDistance</c> reaches one is reported as road frontage (DiGi-Organization/DiGi.GIS.Analytical#10).</param>
+        public OpeningGenerationInput(short? yearBuilt, YearBuiltSource? yearBuiltSource, Point2D? addressPoint, ClimateZone climateZone, string? panelSystem, OpeningGenerationOptions? openingGenerationOptions, IEnumerable<Polyline2D>? roads = null)
         {
             this.yearBuilt = yearBuilt;
             this.yearBuiltSource = yearBuiltSource;
@@ -48,6 +53,19 @@ namespace DiGi.GIS.Classes
             this.climateZone = climateZone;
             this.panelSystem = panelSystem;
             this.openingGenerationOptions = Core.Query.Clone(openingGenerationOptions);
+            if (roads is not null)
+            {
+                List<Polyline2D> polyline2Ds = [];
+                foreach (Polyline2D polyline in roads)
+                {
+                    if (Core.Query.Clone(polyline) is Polyline2D polyline_Temp)
+                    {
+                        polyline2Ds.Add(polyline_Temp);
+                    }
+                }
+
+                this.roads = polyline2Ds;
+            }
         }
 
         /// <summary>
@@ -65,6 +83,17 @@ namespace DiGi.GIS.Classes
                 climateZone = openingGenerationInput.climateZone;
                 panelSystem = openingGenerationInput.panelSystem;
                 openingGenerationOptions = Core.Query.Clone(openingGenerationInput.openingGenerationOptions);
+                if (openingGenerationInput.roads is not null)
+                {
+                    roads = [];
+                    foreach (Polyline2D polyline in openingGenerationInput.roads)
+                    {
+                        if (Core.Query.Clone(polyline) is Polyline2D polyline_Temp)
+                        {
+                            roads.Add(polyline_Temp);
+                        }
+                    }
+                }
             }
         }
 
@@ -122,6 +151,32 @@ namespace DiGi.GIS.Classes
             get
             {
                 return panelSystem;
+            }
+        }
+
+        /// <summary>
+        /// Gets CLONES of the road polylines near the building, or null when no road context was given (DiGi-Organization/DiGi.GIS.Analytical#10).
+        /// </summary>
+        [JsonIgnore]
+        public List<Polyline2D>? Roads
+        {
+            get
+            {
+                if (roads is null)
+                {
+                    return null;
+                }
+
+                List<Polyline2D> result = [];
+                foreach (Polyline2D polyline in roads)
+                {
+                    if (Core.Query.Clone(polyline) is Polyline2D polyline_Temp)
+                    {
+                        result.Add(polyline_Temp);
+                    }
+                }
+
+                return result;
             }
         }
 

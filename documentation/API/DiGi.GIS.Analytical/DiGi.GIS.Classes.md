@@ -430,52 +430,58 @@ public OpeningGenerationInput(DiGi.GIS.Classes.OpeningGenerationInput? openingGe
 
 The input to copy\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions)'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_)'></a>
 
-## OpeningGenerationInput\(Nullable\<short\>, Nullable\<YearBuiltSource\>, Point2D, ClimateZone, string, OpeningGenerationOptions\) Constructor
+## OpeningGenerationInput\(Nullable\<short\>, Nullable\<YearBuiltSource\>, Point2D, ClimateZone, string, OpeningGenerationOptions, IEnumerable\<Polyline2D\>\) Constructor
 
 Initializes a new instance of the [OpeningGenerationInput](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput 'DiGi\.GIS\.Classes\.OpeningGenerationInput') class\.
 
 ```csharp
-public OpeningGenerationInput(System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, DiGi.Geometry.Planar.Classes.Point2D? addressPoint, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, string? panelSystem, DiGi.GIS.Classes.OpeningGenerationOptions? openingGenerationOptions);
+public OpeningGenerationInput(System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, DiGi.Geometry.Planar.Classes.Point2D? addressPoint, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, string? panelSystem, DiGi.GIS.Classes.OpeningGenerationOptions? openingGenerationOptions, System.Collections.Generic.IEnumerable<DiGi.Geometry.Planar.Classes.Polyline2D>? roads=null);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).yearBuilt'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).yearBuilt'></a>
 
 `yearBuilt` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The year the building was completed, or null when unknown\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).yearBuiltSource'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).yearBuiltSource'></a>
 
 `yearBuiltSource` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.YearBuiltSource](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.yearbuiltsource 'DiGi\.GIS\.Enums\.YearBuiltSource')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
-Where [yearBuilt](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).yearBuilt 'DiGi\.GIS\.Classes\.OpeningGenerationInput\.OpeningGenerationInput\(System\.Nullable\<short\>, System\.Nullable\<DiGi\.GIS\.Enums\.YearBuiltSource\>, DiGi\.Geometry\.Planar\.Classes\.Point2D, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, string, DiGi\.GIS\.Classes\.OpeningGenerationOptions\)\.yearBuilt') comes from, or null when no year is known\.
+Where [yearBuilt](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).yearBuilt 'DiGi\.GIS\.Classes\.OpeningGenerationInput\.OpeningGenerationInput\(System\.Nullable\<short\>, System\.Nullable\<DiGi\.GIS\.Enums\.YearBuiltSource\>, DiGi\.Geometry\.Planar\.Classes\.Point2D, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, string, DiGi\.GIS\.Classes\.OpeningGenerationOptions, System\.Collections\.Generic\.IEnumerable\<DiGi\.Geometry\.Planar\.Classes\.Polyline2D\>\)\.yearBuilt') comes from, or null when no year is known\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).addressPoint'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).addressPoint'></a>
 
 `addressPoint` [DiGi\.Geometry\.Planar\.Classes\.Point2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.point2d 'DiGi\.Geometry\.Planar\.Classes\.Point2D')
 
 The location of the building's address point in the coordinate system of the model, or null; the entrance goes on the external wall nearest it\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).climateZone'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).climateZone'></a>
 
 `climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
 
 The climatic zone of the building; [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined') takes the zone I\-III window limits\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).panelSystem'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).panelSystem'></a>
 
 `panelSystem` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The large\-panel system of a 1967\-1985 apartment block \("W\-70", "OWT\-67", \.\.\.\), or null for the default W\-70\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions).openingGenerationOptions'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).openingGenerationOptions'></a>
 
 `openingGenerationOptions` [OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')
 
 The rules to apply, or null for those of the building's regime\.
+
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).roads'></a>
+
+`roads` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Geometry\.Planar\.Classes\.Polyline2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polyline2d 'DiGi\.Geometry\.Planar\.Classes\.Polyline2D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The road polylines near the building \(BDOT10k OT\_SKJZ\_L, OT\_SKDR\_L, OT\_SKRP\_L\), or null for no road context; a wall whose facing strip up to `OpeningGenerationOptions.RoadFrontageDistance` reaches one is reported as road frontage \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
 
 <a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Text.Json.Nodes.JsonObject)'></a>
 
@@ -546,6 +552,19 @@ public string? PanelSystem { get; }
 
 #### Property Value
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationInput.Roads'></a>
+
+## OpeningGenerationInput\.Roads Property
+
+Gets CLONES of the road polylines near the building, or null when no road context was given \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+```csharp
+public System.Collections.Generic.List<DiGi.Geometry.Planar.Classes.Polyline2D>? Roads { get; }
+```
+
+#### Property Value
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[DiGi\.Geometry\.Planar\.Classes\.Polyline2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polyline2d 'DiGi\.Geometry\.Planar\.Classes\.Polyline2D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')
 
 <a name='DiGi.GIS.Classes.OpeningGenerationInput.YearBuilt'></a>
 
@@ -850,6 +869,36 @@ public double FireSeparationSpreadFactor_OneSide { get; set; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FrontageLineMinimumFronts'></a>
+
+## OpeningGenerationOptions\.FrontageLineMinimumFronts Property
+
+Gets or sets the number of building fronts that must align along one road before their walls are reported as a frontage line \(pierzeja\); the walls of the storeys of one building count as its single front \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+A decided default: three fronts - the subject building plus at least two aligned neighbours. Reported only; a frontage line does not change placement.
+
+```csharp
+public int FrontageLineMinimumFronts { get; set; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FrontageLineSetbackTolerance'></a>
+
+## OpeningGenerationOptions\.FrontageLineSetbackTolerance Property
+
+Gets or sets the largest difference in the setback of two aligned fronts from the same road at which they are still reported as one frontage line \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+A decided default.
+
+```csharp
+public double FrontageLineSetbackTolerance { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='DiGi.GIS.Classes.OpeningGenerationOptions.HabitableFloorFractions'></a>
 
 ## OpeningGenerationOptions\.HabitableFloorFractions Property
@@ -1057,6 +1106,21 @@ public double ObstructionSlenderWidth { get; set; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.RoadFrontageDistance'></a>
+
+## OpeningGenerationOptions\.RoadFrontageDistance Property
+
+Gets or sets the depth of the strip facing a wall within which a road polyline marks the wall as road frontage \[m\] \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+§ 12 ust. 1 pkt 1 and ust. 10 of the technical conditions of 2002 (Dz.U. 2002 nr 75 poz. 690, t.j. Dz.U. 2022 poz. 1225), ust. 10 in the wording added by the amendment of 27 October 2023 (Dz.U. 2023 poz. 2442), read on 2026-11-01 in the Dziennik Ustaw text (ISAP directs machine access to eli.gov.pl): the distances of ust. 1-9 are not required when the neighbouring plot is a road plot or a publicly accessible square, and 4 m is the distance of ust. 1 pkt 1 for a wall turned towards that boundary with windows or doors. The road polyline standing in for the neighbouring plot is a proxy: no parcel data reaches the generator.
+
+```csharp
+public double RoadFrontageDistance { get; set; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
 <a name='DiGi.GIS.Classes.OpeningGenerationOptions.RoomMixes'></a>
 
 ## OpeningGenerationOptions\.RoomMixes Property
@@ -1113,7 +1177,7 @@ public System.Collections.Generic.Dictionary<DiGi.Analytical.Building.Regulation
 
 ## OpeningGenerationResult Class
 
-Holds what `Modify.GenerateOpenings` did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the front wall and the doors \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
+Holds what `Modify.GenerateOpenings` did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the frontage lines it found, the front wall and the doors \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
 
 A shortfall against the daylight target is a finding, not an error: in a dense historic block the rules can make 1:8 impossible.
 
@@ -1143,118 +1207,124 @@ public OpeningGenerationResult(DiGi.GIS.Classes.OpeningGenerationResult? opening
 
 The instance to copy\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int)'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_)'></a>
 
-## OpeningGenerationResult\(string, BuildingRegulation, Nullable\<short\>, Nullable\<YearBuiltSource\>, ConstructionFlavour, BuildingType, string, string, StoreySource, double, Nullable\<Guid\>, FrontWallRule, List\<OpeningGenerationStorey\>, Dictionary\<Guid,WallOpeningRestriction\>, int, int, int\) Constructor
+## OpeningGenerationResult\(string, BuildingRegulation, Nullable\<short\>, Nullable\<YearBuiltSource\>, ConstructionFlavour, BuildingType, string, string, StoreySource, double, Nullable\<Guid\>, FrontWallRule, List\<OpeningGenerationStorey\>, Dictionary\<Guid,WallOpeningRestriction\>, int, int, int, Dictionary\<Guid,string\>\) Constructor
 
 Initializes a new instance of the [OpeningGenerationResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationResult 'DiGi\.GIS\.Classes\.OpeningGenerationResult') class\.
 
 ```csharp
-public OpeningGenerationResult(string? reference, DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation buildingRegulation, System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour constructionFlavour, DiGi.Analytical.Building.Regulation.Enums.BuildingType buildingType, string? openingSizeSetSource, string? constructionSetSource, DiGi.GIS.Analytical.Enums.StoreySource storeySource, double maximumGlazedArea, System.Nullable<System.Guid> frontWall, DiGi.GIS.Analytical.Enums.FrontWallRule frontWallRule, System.Collections.Generic.List<DiGi.GIS.Classes.OpeningGenerationStorey>? storeys, System.Collections.Generic.Dictionary<System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction>? wallOpeningRestrictions, int doorCount, int doorsBelowMinimumCount, int droppedOpeningCount);
+public OpeningGenerationResult(string? reference, DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation buildingRegulation, System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour constructionFlavour, DiGi.Analytical.Building.Regulation.Enums.BuildingType buildingType, string? openingSizeSetSource, string? constructionSetSource, DiGi.GIS.Analytical.Enums.StoreySource storeySource, double maximumGlazedArea, System.Nullable<System.Guid> frontWall, DiGi.GIS.Analytical.Enums.FrontWallRule frontWallRule, System.Collections.Generic.List<DiGi.GIS.Classes.OpeningGenerationStorey>? storeys, System.Collections.Generic.Dictionary<System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction>? wallOpeningRestrictions, int doorCount, int doorsBelowMinimumCount, int droppedOpeningCount, System.Collections.Generic.Dictionary<System.Guid,string>? frontageLines=null);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).reference'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).reference'></a>
 
 `reference` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The reference of the 2D building the model belongs to\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).buildingRegulation'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).buildingRegulation'></a>
 
 `buildingRegulation` [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingregulation 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation')
 
 The building regulation regime the openings were generated under\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).yearBuilt'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).yearBuilt'></a>
 
 `yearBuilt` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The year built the regime was selected from, or null when unknown\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).yearBuiltSource'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).yearBuiltSource'></a>
 
 `yearBuiltSource` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.YearBuiltSource](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.yearbuiltsource 'DiGi\.GIS\.Enums\.YearBuiltSource')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 Where the year built comes from, or null when no year is known\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).constructionFlavour'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).constructionFlavour'></a>
 
 `constructionFlavour` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ConstructionFlavour](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.constructionflavour 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ConstructionFlavour')
 
 The construction flavour the thermal values were copied from\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).buildingType'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).buildingType'></a>
 
 `buildingType` [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType')
 
 The building type the sizes and constructions were looked up for\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).openingSizeSetSource'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).openingSizeSetSource'></a>
 
 `openingSizeSetSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source text of the opening\-size set used\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).constructionSetSource'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).constructionSetSource'></a>
 
 `constructionSetSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source text of the construction set used\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).storeySource'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).storeySource'></a>
 
 `storeySource` [StoreySource](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource 'DiGi\.GIS\.Analytical\.Enums\.StoreySource')
 
 Where the storey bands come from\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).maximumGlazedArea'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).maximumGlazedArea'></a>
 
 `maximumGlazedArea` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
 The maximum glazed area A0max of the building by modular window dimensions \[m2\], or not a number when the regime or the window U\-value sets no such limit\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).frontWall'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).frontWall'></a>
 
 `frontWall` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The identifier of the ground\-storey wall chosen as the front, which holds the entrance doors, or null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).frontWallRule'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).frontWallRule'></a>
 
 `frontWallRule` [FrontWallRule](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.FrontWallRule 'DiGi\.GIS\.Analytical\.Enums\.FrontWallRule')
 
 The rule that chose the front wall\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).storeys'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).storeys'></a>
 
 `storeys` [System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[OpeningGenerationStorey](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationStorey 'DiGi\.GIS\.Classes\.OpeningGenerationStorey')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')
 
 What was achieved per storey band, from the ground band up\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).wallOpeningRestrictions'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).wallOpeningRestrictions'></a>
 
 `wallOpeningRestrictions` [System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[WallOpeningRestriction](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.WallOpeningRestriction 'DiGi\.GIS\.Analytical\.Enums\.WallOpeningRestriction')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')
 
 The restriction of each wall of the model, keyed by its identifier\. This value can be null\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).doorCount'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).doorCount'></a>
 
 `doorCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of doors placed\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).doorsBelowMinimumCount'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).doorsBelowMinimumCount'></a>
 
 `doorsBelowMinimumCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of doors placed whose clear size is below the minimum of § 62; they are reported, not resized\.
 
-<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int).droppedOpeningCount'></a>
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).droppedOpeningCount'></a>
 
 `droppedOpeningCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of windows and doors not placed because their outline did not lie inside the host wall\.
+
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(string,DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,DiGi.Analytical.Building.Regulation.Enums.BuildingType,string,string,DiGi.GIS.Analytical.Enums.StoreySource,double,System.Nullable_System.Guid_,DiGi.GIS.Analytical.Enums.FrontWallRule,System.Collections.Generic.List_DiGi.GIS.Classes.OpeningGenerationStorey_,System.Collections.Generic.Dictionary_System.Guid,DiGi.GIS.Analytical.Enums.WallOpeningRestriction_,int,int,int,System.Collections.Generic.Dictionary_System.Guid,string_).frontageLines'></a>
+
+`frontageLines` [System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')
+
+The frontage\-line key of each wall reported as part of a frontage line \(pierzeja\), keyed by its identifier, or null when none was reported \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
 
 <a name='DiGi.GIS.Classes.OpeningGenerationResult.OpeningGenerationResult(System.Text.Json.Nodes.JsonObject)'></a>
 
@@ -1364,6 +1434,19 @@ public int DroppedOpeningCount { get; }
 
 #### Property Value
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Classes.OpeningGenerationResult.FrontageLines'></a>
+
+## OpeningGenerationResult\.FrontageLines Property
+
+Gets the frontage\-line key of each wall reported as part of a frontage line \(pierzeja\), keyed by its identifier, or null when none was reported \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+```csharp
+public System.Collections.Generic.Dictionary<System.Guid,string>? FrontageLines { get; }
+```
+
+#### Property Value
+[System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.Guid](https://learn.microsoft.com/en-us/dotnet/api/system.guid 'System\.Guid')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')
 
 <a name='DiGi.GIS.Classes.OpeningGenerationResult.FrontWall'></a>
 
@@ -1701,6 +1784,107 @@ public int WindowCount { get; }
 
 #### Property Value
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Classes.RoadFrontage'></a>
+
+## RoadFrontage Class
+
+What `Query.RoadFrontages` measured for one wall that fronts a road \(DiGi\-Organization/DiGi\.GIS\.Analytical\#10\)\.
+
+```csharp
+public class RoadFrontage
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → RoadFrontage
+### Constructors
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadFrontage(int,double,DiGi.Geometry.Planar.Classes.Segment2D,DiGi.Geometry.Planar.Classes.Vector2D)'></a>
+
+## RoadFrontage\(int, double, Segment2D, Vector2D\) Constructor
+
+Initializes a new instance of the [RoadFrontage](DiGi.GIS.Classes.md#DiGi.GIS.Classes.RoadFrontage 'DiGi\.GIS\.Classes\.RoadFrontage') class\.
+
+```csharp
+public RoadFrontage(int roadIndex, double setback, DiGi.Geometry.Planar.Classes.Segment2D? segment2D, DiGi.Geometry.Planar.Classes.Vector2D? normal);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadFrontage(int,double,DiGi.Geometry.Planar.Classes.Segment2D,DiGi.Geometry.Planar.Classes.Vector2D).roadIndex'></a>
+
+`roadIndex` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The index of the road polyline in the list as given\.
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadFrontage(int,double,DiGi.Geometry.Planar.Classes.Segment2D,DiGi.Geometry.Planar.Classes.Vector2D).setback'></a>
+
+`setback` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The shortest distance from the wall face to that road \[m\]\.
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadFrontage(int,double,DiGi.Geometry.Planar.Classes.Segment2D,DiGi.Geometry.Planar.Classes.Vector2D).segment2D'></a>
+
+`segment2D` [DiGi\.Geometry\.Planar\.Classes\.Segment2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.segment2d 'DiGi\.Geometry\.Planar\.Classes\.Segment2D')
+
+The footprint line of the wall\. This value can be null\.
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadFrontage(int,double,DiGi.Geometry.Planar.Classes.Segment2D,DiGi.Geometry.Planar.Classes.Vector2D).normal'></a>
+
+`normal` [DiGi\.Geometry\.Planar\.Classes\.Vector2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.vector2d 'DiGi\.Geometry\.Planar\.Classes\.Vector2D')
+
+The outward unit normal of the wall face\. This value can be null\.
+### Properties
+
+<a name='DiGi.GIS.Classes.RoadFrontage.Normal'></a>
+
+## RoadFrontage\.Normal Property
+
+Gets a CLONE of the outward unit normal of the wall face\.
+
+```csharp
+public DiGi.Geometry.Planar.Classes.Vector2D? Normal { get; }
+```
+
+#### Property Value
+[DiGi\.Geometry\.Planar\.Classes\.Vector2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.vector2d 'DiGi\.Geometry\.Planar\.Classes\.Vector2D')
+
+<a name='DiGi.GIS.Classes.RoadFrontage.RoadIndex'></a>
+
+## RoadFrontage\.RoadIndex Property
+
+Gets the index of the road polyline in the list as given\.
+
+```csharp
+public int RoadIndex { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Classes.RoadFrontage.Segment2D'></a>
+
+## RoadFrontage\.Segment2D Property
+
+Gets a CLONE of the footprint line of the wall\.
+
+```csharp
+public DiGi.Geometry.Planar.Classes.Segment2D? Segment2D { get; }
+```
+
+#### Property Value
+[DiGi\.Geometry\.Planar\.Classes\.Segment2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.segment2d 'DiGi\.Geometry\.Planar\.Classes\.Segment2D')
+
+<a name='DiGi.GIS.Classes.RoadFrontage.Setback'></a>
+
+## RoadFrontage\.Setback Property
+
+Gets the shortest distance from the wall face to that road \[m\]\.
+
+```csharp
+public double Setback { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
 <a name='DiGi.GIS.Classes.WallOpeningResult'></a>
 

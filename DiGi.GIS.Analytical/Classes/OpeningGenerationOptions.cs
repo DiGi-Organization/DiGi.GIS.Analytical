@@ -54,6 +54,9 @@ namespace DiGi.GIS.Classes
                 FireSeparationNoOpeningsFactor = openingGenerationOptions.FireSeparationNoOpeningsFactor;
                 FireSeparationHalfStripAngle = openingGenerationOptions.FireSeparationHalfStripAngle;
                 FireSeparationNoApplyAngle = openingGenerationOptions.FireSeparationNoApplyAngle;
+                FrontageLineMinimumFronts = openingGenerationOptions.FrontageLineMinimumFronts;
+                FrontageLineSetbackTolerance = openingGenerationOptions.FrontageLineSetbackTolerance;
+                RoadFrontageDistance = openingGenerationOptions.RoadFrontageDistance;
                 ObstructionSectorAngle = openingGenerationOptions.ObstructionSectorAngle;
                 ObstructionMaxDistance = openingGenerationOptions.ObstructionMaxDistance;
                 ObstructionSlenderWidth = openingGenerationOptions.ObstructionSlenderWidth;
@@ -185,6 +188,20 @@ namespace DiGi.GIS.Classes
         public double FireSeparationNoApplyAngle { get; set; } = 120;
 
         /// <summary>
+        /// Gets or sets the number of building fronts that must align along one road before their walls are reported as a frontage line (pierzeja); the walls of the storeys of one building count as its single front (DiGi-Organization/DiGi.GIS.Analytical#10).
+        /// <para>A decided default: three fronts - the subject building plus at least two aligned neighbours. Reported only; a frontage line does not change placement.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FrontageLineMinimumFronts))]
+        public int FrontageLineMinimumFronts { get; set; } = 3;
+
+        /// <summary>
+        /// Gets or sets the largest difference in the setback of two aligned fronts from the same road at which they are still reported as one frontage line [m] (DiGi-Organization/DiGi.GIS.Analytical#10).
+        /// <para>A decided default.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FrontageLineSetbackTolerance))]
+        public double FrontageLineSetbackTolerance { get; set; } = 1.0;
+
+        /// <summary>
         /// Gets or sets the share of floor area in rooms that need daylight, per building type [-]; a type missing from the dictionary takes 0.6. A decided default: single-family 0.60, multi-family 0.65, non-residential (<see cref="BuildingType.Undefined"/>) 0.50.
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(HabitableFloorFractions))]
@@ -292,6 +309,13 @@ namespace DiGi.GIS.Classes
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(CornerMargin))]
         public double CornerMargin { get; set; } = 0.5;
+
+        /// <summary>
+        /// Gets or sets the depth of the strip facing a wall within which a road polyline marks the wall as road frontage [m] (DiGi-Organization/DiGi.GIS.Analytical#10).
+        /// <para>§ 12 ust. 1 pkt 1 and ust. 10 of the technical conditions of 2002 (Dz.U. 2002 nr 75 poz. 690, t.j. Dz.U. 2022 poz. 1225), ust. 10 in the wording added by the amendment of 27 October 2023 (Dz.U. 2023 poz. 2442), read on 2026-11-01 in the Dziennik Ustaw text (ISAP directs machine access to eli.gov.pl): the distances of ust. 1-9 are not required when the neighbouring plot is a road plot or a publicly accessible square, and 4 m is the distance of ust. 1 pkt 1 for a wall turned towards that boundary with windows or doors. The road polyline standing in for the neighbouring plot is a proxy: no parcel data reaches the generator.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(RoadFrontageDistance))]
+        public double RoadFrontageDistance { get; set; } = 4.0;
 
         /// <summary>
         /// Gets or sets the shares of a storey's glazing target by room use, per building type [-]; a type missing from the dictionary takes the multi-family shares. A decided default (the model has one space per storey and no rooms): single-family living 0.60, kitchen 0.25, bathroom 0.15; multi-family living 0.65, kitchen 0.25, bathroom 0.10.
