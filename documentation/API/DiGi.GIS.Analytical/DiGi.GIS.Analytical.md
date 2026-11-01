@@ -568,6 +568,33 @@ The distance tolerance for geometric calculations\.
 [DiGi\.Analytical\.Building\.Interfaces\.IComponent](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.interfaces.icomponent 'DiGi\.Analytical\.Building\.Interfaces\.IComponent')  
 A building component \([DiGi\.Analytical\.Building\.Interfaces\.IComponent](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.interfaces.icomponent 'DiGi\.Analytical\.Building\.Interfaces\.IComponent')\) such as a wall, floor, or roof; otherwise, `null` if the face's normal cannot be determined\.
 
+<a name='DiGi.GIS.Analytical.Create.OpeningGenerationOptions(DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation)'></a>
+
+## Create\.OpeningGenerationOptions\(BuildingRegulation\) Method
+
+Creates the rules `Modify.GenerateOpenings` applies to a building designed under the specified regime \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
+
+Every value read in the Dz.U. text (ISAP, 2026-11-01) cites its paragraph in the documentation of its option:
+- <b>Daylight ratio:</b> 1:10 before 1961 (the 1928 regulation, also taken for buildings before 1928); 1:8 from the 1994 conditions on (§ 57); a decided 1:8 for the 1961 and 1980 regimes, whose texts give no ratio.
+- <b>Maximum glazed area A0max:</b> single-family buildings only, for windows of U ≥ 2.0, under the original conditions of 2002; residential buildings, U ≥ 1.5, from 2009; U ≥ 0.9 from 2014. None from the 2017 stage on: the annex was replaced from 1 January 2018 without it, a year into that stage.
+- <b>Sills, interstorey strip, entrance door:</b> the same values for every regime (§ 301, § 223, § 62), read for 2002 and, for the sill, 1994 and 1980; assumed before that.
+- <b>Street façade weight</b> (a decided default): 1.5 for multi-family buildings and apartment blocks before 1961, the frontage blocks; 1.3 for single-family and terraced buildings from the 1994 regime on; 1.0 otherwise, including the 1961-1993 panel blocks.
+
+```csharp
+public static DiGi.GIS.Classes.OpeningGenerationOptions OpeningGenerationOptions(DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation buildingRegulation);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Create.OpeningGenerationOptions(DiGi.Analytical.Building.Regulation.Enums.BuildingRegulation).buildingRegulation'></a>
+
+`buildingRegulation` [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingregulation 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation')
+
+The regime the building was designed under; [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingregulation.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingRegulation\.Undefined') takes the values of the current regime\.
+
+#### Returns
+[OpeningGenerationOptions](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationOptions 'DiGi\.GIS\.Classes\.OpeningGenerationOptions')  
+The options of the regime\.
+
 <a name='DiGi.GIS.Analytical.Modify'></a>
 
 ## Modify Class
@@ -577,6 +604,20 @@ public static class Modify
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Modify
+### Fields
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings_GeneratedBy'></a>
+
+## Modify\.GenerateOpenings\_GeneratedBy Field
+
+The text [GeneratedBy](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter.GeneratedBy 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter\.GeneratedBy') carries on every opening [GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, ConstructionLibrary, OpeningSizeLibrary, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double) 'DiGi\.GIS\.Analytical\.Modify\.GenerateOpenings\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.OpeningGenerationInput, DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary, DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary, double\)') places\.
+
+```csharp
+public const string GenerateOpenings_GeneratedBy = "DiGi.GIS.Analytical.Modify.GenerateOpenings";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 ### Methods
 
 <a name='DiGi.GIS.Analytical.Modify.AssignInternalConditions(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OccupancyData,System.Nullable_short_,string)'></a>
@@ -627,6 +668,71 @@ Where [occupancyData](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Modify.AssignIn
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True when every space of the model was assigned; otherwise, false\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double)'></a>
+
+## Modify\.GenerateOpenings\(this BuildingModel, Building2D, OpeningGenerationInput, ConstructionLibrary, OpeningSizeLibrary, double\) Method
+
+Places windows and doors on the external walls of a building model, following the Polish rules of the building's period \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2, phase A\)\.
+
+<b>Keys.</b> The regime is `Regulation.Query.BuildingRegulation(yearBuilt, DesignLag)`. The building type is [BuildingType\(this Building2D, bool\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool) 'DiGi\.GIS\.Analytical\.Query\.BuildingType\(this DiGi\.GIS\.Classes\.Building2D, bool\)'), terraced when any wall carries [DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.enums.componentparameter.partywall 'DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall'); a non-residential building takes the multi-family sets. The sizes come from the opening-size set of the year built, type and panel system, and the thermal values from the construction set of the chosen flavour, a role it lacks falling back to TypicalAsBuilt. With no year built, the latest sets are used.
+
+<b>Storeys.</b> Openings are placed per storey band ([StoreyBands\(this BuildingModel, ushort, double, StoreySource, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double) 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)')), never assuming that one space is one storey, so an unsplit 3D model and a building with no storey count get windows on every storey. Every band uses the same positions along a wall where its allowed walls are the same, so windows stack.
+
+<b>Windows.</b> The target of a band is the daylight ratio times the habitable floor fraction times the footprint area, as glazed area in the clear of the frames. It is split over the living-room, kitchen and bathroom sizes by the room mix of the building type (a use the set lists as windowless gives its share to the living room) and interleaved by largest remainder. Where the regime has a maximum glazed area A0max and the window U-value reaches its threshold, the windows are cut to it. The windows are distributed over the allowed walls in proportion to their usable length, the front wall weighted by the street façade weight; spaced evenly, keeping the corner margin and the minimum pier, and snapped to the façade module of a large-panel set where it fits. The sill is the size's own, raised on upper storeys to the option sill (or the high sill above 25 m) and to keep the interstorey strip above the openings below; a window whose head would not clear the band top less the head clearance falls back to the tallest narrower size that fits. What does not fit is the band's shortfall, reported, not an error.
+
+<b>Walls.</b> A wall carrying [DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.enums.componentparameter.partywall 'DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall') (split beforehand by `DiGi.Analytical.Building.Modify.SplitPartyWalls`) or too short for the narrowest window gets nothing, and the result records why.
+
+<b>Doors.</b> The front wall is the external ground-storey wall nearest the address point, else the longest unrestricted one. A single-family or terraced building gets one entrance door centred on it; any other building one staircase entrance door per staircase spacing, each with a staircase window above it on every upper storey, outside the daylight target. A door below the § 62 clear size is reported, not resized.
+
+<b>Constructions.</b> Each distinct size gets one construction (`Regulation.Create.WindowConstruction` or `DoorConstruction`), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.
+
+Every opening carries [OpeningParameter](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.OpeningParameter 'DiGi\.GIS\.Analytical\.Enums\.OpeningParameter') values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.
+
+```csharp
+public static DiGi.GIS.Classes.OpeningGenerationResult? GenerateOpenings(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.Building2D? building2D, DiGi.GIS.Classes.OpeningGenerationInput? openingGenerationInput, DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary? constructionLibrary=null, DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary? openingSizeLibrary=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model to place the openings on\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The 2D building of the model, giving its function and storey count\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingGenerationInput'></a>
+
+`openingGenerationInput` [OpeningGenerationInput](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationInput 'DiGi\.GIS\.Classes\.OpeningGenerationInput')
+
+The year built, address point, climate zone, panel system and options\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).constructionLibrary'></a>
+
+`constructionLibrary` [DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.classes.constructionlibrary 'DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary')
+
+The construction library, or null for `Regulation.Query.EmbeddedConstructionLibrary_PL()`\. A batch caller passes it to read it once\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).openingSizeLibrary'></a>
+
+`openingSizeLibrary` [DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.classes.openingsizelibrary 'DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary')
+
+The opening\-size library, or null for `Regulation.Create.OpeningSizeLibrary_PL()`\. A batch caller passes it to create it once\.
+
+<a name='DiGi.GIS.Analytical.Modify.GenerateOpenings(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.OpeningGenerationInput,DiGi.Analytical.Building.Regulation.Classes.ConstructionLibrary,DiGi.Analytical.Building.Regulation.Classes.OpeningSizeLibrary,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[OpeningGenerationResult](DiGi.GIS.Classes.md#DiGi.GIS.Classes.OpeningGenerationResult 'DiGi\.GIS\.Classes\.OpeningGenerationResult')  
+What was placed and what could not be, or null when the model is null or no opening\-size set matches the building\.
 
 <a name='DiGi.GIS.Analytical.Modify.UpdateBuildingInformation(thisDiGi.Analytical.Building.Classes.BuildingModel)'></a>
 
@@ -861,6 +967,57 @@ The building model to check\.
 #### Returns
 [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') when the building model carries located coordinates and a defined UTC offset; otherwise, [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double)'></a>
+
+## Query\.StoreyBands\(this BuildingModel, ushort, double, StoreySource, double\) Method
+
+Derives the storey bands of a building model, the elevation range of each storey from the ground up, without assuming that one space is one storey \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2\)\.
+
+The bands come from the first source that gives them, reported in [storeySource](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeySource 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)\.storeySource'):
+- [Spaces](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource.Spaces 'DiGi\.GIS\.Analytical\.Enums\.StoreySource\.Spaces'): two or more spaces with walls; each band is the elevation range of the walls of one space.
+- [Building2D](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource.Building2D 'DiGi\.GIS\.Analytical\.Enums\.StoreySource\.Building2D'): one space, which the 3D path leaves unsplit when its derived storey height is too low, and [storeys](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeys 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)\.storeys') > 0; the wall height is divided into that many equal bands.
+- [Estimated](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource.Estimated 'DiGi\.GIS\.Analytical\.Enums\.StoreySource\.Estimated'): one space and no storey count; the count is the wall height over [storeyHeight](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeyHeight 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)\.storeyHeight'), rounded, at least 1.
+- [Single](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource.Single 'DiGi\.GIS\.Analytical\.Enums\.StoreySource\.Single'): no storey count and no storey height; one band, the whole wall.
+
+```csharp
+public static System.Collections.Generic.List<DiGi.Core.Classes.Range<double>>? StoreyBands(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, ushort storeys, double storeyHeight, out DiGi.GIS.Analytical.Enums.StoreySource storeySource, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model\.
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeys'></a>
+
+`storeys` [System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
+
+The storey count of the 2D building, or 0 when unknown\.
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeyHeight'></a>
+
+`storeyHeight` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The typical storey height of the building's stock \[m\], used to estimate the count; not a number when unknown\.
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).storeySource'></a>
+
+`storeySource` [StoreySource](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource 'DiGi\.GIS\.Analytical\.Enums\.StoreySource')
+
+Where the bands come from; [Undefined](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.StoreySource.Undefined 'DiGi\.GIS\.Analytical\.Enums\.StoreySource\.Undefined') when the model has no walls\.
+
+<a name='DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[DiGi\.Core\.Classes\.Range&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.range-1 'DiGi\.Core\.Classes\.Range\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.range-1 'DiGi\.Core\.Classes\.Range\`1')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
+The bands from the ground up, or null when the model is null or has no walls\.
 
 <a name='DiGi.GIS.Analytical.Query.UsageType(thisDiGi.GIS.Classes.Building2D)'></a>
 
