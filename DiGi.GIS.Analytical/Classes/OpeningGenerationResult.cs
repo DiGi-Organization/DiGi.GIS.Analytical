@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 namespace DiGi.GIS.Classes
 {
     /// <summary>
-    /// Holds what <c>Modify.GenerateOpenings</c> did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the frontage lines it found, the front wall and the doors (DiGi-Organization/DiGi.GIS.Analytical#2).
+    /// Holds what <c>Modify.GenerateOpenings</c> did to one building model and what it could not do: the keys it looked the sizes and constructions up by, the storey bands, the restriction of each wall, the frontage lines it found, the front wall, the doors and the envelope roles the library had no construction for (DiGi-Organization/DiGi.GIS.Analytical#2, DiGi-Organization/DiGi.GIS.Analytical#11).
     /// <para>A shortfall against the daylight target is a finding, not an error: in a dense historic block the rules can make 1:8 impossible.</para>
     /// </summary>
     public class OpeningGenerationResult : SerializableObject, IGISSerializableObject
@@ -48,6 +48,9 @@ namespace DiGi.GIS.Classes
 
         [JsonInclude, JsonPropertyName(nameof(MaximumGlazedArea))]
         private readonly double maximumGlazedArea;
+
+        [JsonInclude, JsonPropertyName(nameof(MissingConstructionRoles))]
+        private readonly Dictionary<string, ConstructionRole>? missingConstructionRoles;
 
         [JsonInclude, JsonPropertyName(nameof(OpeningSizeSetSource))]
         private readonly string? openingSizeSetSource;
@@ -91,6 +94,7 @@ namespace DiGi.GIS.Classes
         /// <param name="doorsBelowMinimumCount">The number of doors placed whose clear size is below the minimum of § 62; they are reported, not resized.</param>
         /// <param name="droppedOpeningCount">The number of windows and doors not placed because their outline did not lie inside the host wall.</param>
         /// <param name="frontageLines">The frontage-line key of each wall reported as part of a frontage line (pierzeja), keyed by its identifier, or null when none was reported (DiGi-Organization/DiGi.GIS.Analytical#10).</param>
+        /// <param name="missingConstructionRoles">The envelope components whose role has no construction in the construction set, keyed by the component's identifier with the role, or null when the envelope step did not run (DiGi-Organization/DiGi.GIS.Analytical#11).</param>
         public OpeningGenerationResult(
             string? reference,
             BuildingRegulation buildingRegulation,
@@ -109,7 +113,8 @@ namespace DiGi.GIS.Classes
             int doorCount,
             int doorsBelowMinimumCount,
             int droppedOpeningCount,
-            Dictionary<Guid, string>? frontageLines = null)
+            Dictionary<Guid, string>? frontageLines = null,
+            Dictionary<Guid, ConstructionRole>? missingConstructionRoles = null)
         {
             this.reference = reference;
             this.buildingRegulation = buildingRegulation;
@@ -145,6 +150,15 @@ namespace DiGi.GIS.Classes
                     this.frontageLines[keyValuePair.Key.ToString("D")] = keyValuePair.Value;
                 }
             }
+            if (missingConstructionRoles is not null)
+            {
+                // Keyed by the identifier's text: a Guid dictionary key does not deserialize.
+                this.missingConstructionRoles = [];
+                foreach (KeyValuePair<Guid, ConstructionRole> keyValuePair in missingConstructionRoles)
+                {
+                    this.missingConstructionRoles[keyValuePair.Key.ToString("D")] = keyValuePair.Value;
+                }
+            }
         }
 
         /// <summary>
@@ -171,6 +185,7 @@ namespace DiGi.GIS.Classes
                 storeys = openingGenerationResult.storeys?.ConvertAll(x => new OpeningGenerationStorey(x));
                 wallOpeningRestrictions = openingGenerationResult.wallOpeningRestrictions is null ? null : new Dictionary<string, WallOpeningRestriction>(openingGenerationResult.wallOpeningRestrictions);
                 frontageLines = openingGenerationResult.frontageLines is null ? null : new Dictionary<string, string>(openingGenerationResult.frontageLines);
+                missingConstructionRoles = openingGenerationResult.missingConstructionRoles is null ? null : new Dictionary<string, ConstructionRole>(openingGenerationResult.missingConstructionRoles);
                 doorCount = openingGenerationResult.doorCount;
                 doorsBelowMinimumCount = openingGenerationResult.doorsBelowMinimumCount;
                 droppedOpeningCount = openingGenerationResult.droppedOpeningCount;
@@ -329,6 +344,33 @@ namespace DiGi.GIS.Classes
             get
             {
                 return maximumGlazedArea;
+            }
+        }
+
+        /// <summary>
+        /// Gets a copy of the envelope components whose role has no construction in the construction set, keyed by the component's identifier with the role, or null when the envelope step did not run (DiGi-Organization/DiGi.GIS.Analytical#11).
+        /// <para>A component listed here keeps whatever construction it had: a missing role changes nothing (DiGi-Organization/DiGi.GIS.Analytical#11).</para>
+        /// </summary>
+        [JsonIgnore]
+        public Dictionary<Guid, ConstructionRole>? MissingConstructionRoles
+        {
+            get
+            {
+                if (missingConstructionRoles is null)
+                {
+                    return null;
+                }
+
+                Dictionary<Guid, ConstructionRole> result = [];
+                foreach (KeyValuePair<string, ConstructionRole> keyValuePair in missingConstructionRoles)
+                {
+                    if (Guid.TryParse(keyValuePair.Key, out Guid guid))
+                    {
+                        result[guid] = keyValuePair.Value;
+                    }
+                }
+
+                return result;
             }
         }
 

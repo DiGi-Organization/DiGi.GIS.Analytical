@@ -33,6 +33,7 @@ namespace DiGi.GIS.Analytical
         /// <para><b>Walls.</b> A wall carrying <see cref="ComponentParameter.PartyWall"/> (split beforehand by <c>DiGi.Analytical.Building.Modify.SplitPartyWalls</c>) or too short for the narrowest window gets nothing, and the result records why.</para>
         /// <para><b>Doors.</b> The front wall is the external ground-storey wall nearest the address point, else the longest unrestricted one. A single-family or terraced building gets one entrance door centred on it; any other building one staircase entrance door per staircase spacing, each with a staircase window above it on every upper storey, outside the daylight target. A door below the § 62 clear size is reported, not resized.</para>
         /// <para><b>Constructions.</b> Each distinct size gets one construction (<c>Regulation.Create.WindowConstruction</c> or <c>DoorConstruction</c>), named after its kind and size, carrying the declared U-value, g and τv of the library construction of its role. Identifiers are derived from stable keys, so the same model and input give the same openings.</para>
+        /// <para><b>Envelope constructions.</b> The same construction set also gives the envelope its constructions (DiGi-Organization/DiGi.GIS.Analytical#11, phase D): a wall carrying <see cref="ComponentParameter.PartyWall"/> takes PartyWall, a wall of the external shell ExternalWall and any other wall InternalWall, a roof FlatRoof below a tilt of 5 degrees of its shell face against the world up axis and otherwise Roof, the lowest floor GroundFloor - or FloorOverUnheated when the run's floor boundary is <c>Cellar</c> - and every other floor IntermediateFloor. Each distinct construction is imported once with <c>BuildingModel.Update(ConstructionRelationCluster, IConstruction)</c> before it is assigned; a role the library has no construction for leaves the component untouched and is reported in <see cref="OpeningGenerationResult.MissingConstructionRoles"/>. The step is skipped when <see cref="OpeningGenerationOptions.AssignEnvelopeConstructions"/> is false.</para>
         /// <para><b>Neighbours.</b> When neighbours are given, every external wall is measured against them first, by <see cref="Query.WallOpeningResults(BuildingModel, IEnumerable{BuildingModel?}?, OpeningGenerationOptions, BuildingGeneralFunction?, double)"/>: a wall closer to a facing neighbour than § 271 allows gets no openings at all (<see cref="WallOpeningRestriction.FireSeparation"/>), and a wall with an obstructing object inside the 60 degree sector of § 13 gets no windows of rooms for people, while its entrance door and staircase window stay allowed (<see cref="WallOpeningRestriction.Obstruction"/>). Both reasons are reported in <see cref="OpeningGenerationResult.WallOpeningRestrictions"/>.</para>
         /// <para><b>Roads.</b> When roads are given, they add context, never a choice of placement (DiGi-Organization/DiGi.GIS.Analytical#10, phase C): a wall whose facing strip reaches a road polyline is reported as <see cref="WallOpeningRestriction.RoadFrontage"/> under § 12 ust. 10 - the plot-boundary distances do not apply where the neighbouring land is a road - the street façade weight is applied to every road-frontage wall, so a corner building carries it on both frontages while the entrance stays on the address-point wall, and walls of the subject and its neighbours aligned along the same road at a similar setback are reported as a frontage line in <see cref="OpeningGenerationResult.FrontageLines"/>. With no roads, the run is identical to a run without the input.</para>
         /// <para>Every opening carries <see cref="OpeningParameter"/> values. The rules, defaults, constraints and limits are documented on the wiki page Opening Generation.</para>
@@ -193,6 +194,14 @@ namespace DiGi.GIS.Analytical
                         faces[guidReference.Guid] = face;
                     }
                 }
+            }
+
+            // Phase D: the envelope takes the constructions of the same set as the openings, and a role the library
+            // has no construction for leaves its component untouched and is reported (DiGi-Organization/DiGi.GIS.Analytical#11).
+            Dictionary<Guid, ConstructionRole>? missingConstructionRoles = null;
+            if (constructionLibrary is not null && openingGenerationOptions.AssignEnvelopeConstructions && (constructionSet is not null || constructionSet_TypicalAsBuilt is not null))
+            {
+                missingConstructionRoles = AssignEnvelopeConstructions(buildingModel, constructionLibrary, constructionSet, constructionSet_TypicalAsBuilt, walls, faces);
             }
 
             Vector3D vector3D_Up = new(0, 0, 1);
@@ -940,7 +949,8 @@ namespace DiGi.GIS.Analytical
                 doorCount,
                 doorsBelowMinimumCount,
                 droppedOpeningCount,
-                frontageLines);
+                frontageLines,
+                missingConstructionRoles);
         }
     }
 }

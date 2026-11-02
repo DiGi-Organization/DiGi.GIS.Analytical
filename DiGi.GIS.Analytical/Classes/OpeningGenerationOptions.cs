@@ -1,3 +1,4 @@
+using DiGi.Analytical.Building.Enums;
 using DiGi.Analytical.Building.Regulation.Enums;
 using DiGi.Core.Classes;
 using DiGi.GIS.Analytical.Enums;
@@ -64,6 +65,7 @@ namespace DiGi.GIS.Classes
                 ObstructionInnerCityFactor = openingGenerationOptions.ObstructionInnerCityFactor;
                 StaircaseSpacing = openingGenerationOptions.StaircaseSpacing;
                 DesignLag = openingGenerationOptions.DesignLag;
+                AssignEnvelopeConstructions = openingGenerationOptions.AssignEnvelopeConstructions;
                 ConstructionFlavour = openingGenerationOptions.ConstructionFlavour;
                 MinimumStoreyHeight = openingGenerationOptions.MinimumStoreyHeight;
                 MaximumStoreyHeightFactor = openingGenerationOptions.MaximumStoreyHeightFactor;
@@ -87,6 +89,13 @@ namespace DiGi.GIS.Classes
             : base(jsonObject)
         {
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the envelope components of the model take the constructions of the same construction set as the openings (DiGi-Organization/DiGi.GIS.Analytical#11).
+        /// <para>When true, a wall carrying <see cref="ComponentParameter.PartyWall"/> takes <c>PartyWall</c>, a wall of the external shell takes <c>ExternalWall</c> and any other wall <c>InternalWall</c>; a roof takes <c>FlatRoof</c> below a tilt of 5 degrees of its shell face against the world up axis, otherwise <c>Roof</c>; the lowest floor takes <c>FloorOverUnheated</c> when the construction set's <c>TypologyData.FloorBoundary</c> is <c>Cellar</c>, otherwise <c>GroundFloor</c>, and every other floor <c>IntermediateFloor</c>. A role the library has no construction for leaves the component untouched and is reported in <see cref="OpeningGenerationResult.MissingConstructionRoles"/>. When false, no component construction is touched.</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(AssignEnvelopeConstructions))]
+        public bool AssignEnvelopeConstructions { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the construction flavour the thermal values of window and door constructions are copied from: <see cref="ConstructionFlavour.TypicalAsBuilt"/> (TABULA, looked up by year built) for stock modelling, or <see cref="ConstructionFlavour.Regulation"/> (U(max) of the stage, looked up by design date). A role the chosen flavour lacks falls back to TypicalAsBuilt.
