@@ -41,8 +41,8 @@ namespace DiGi.GIS.Analytical
                 return null;
             }
 
-            // The roads flattened into segments, each carrying the index of its polyline.
-            List<(int RoadIndex, double X1, double Y1, double X2, double Y2)> segments_Road = [];
+            // The roads flattened into segments, each carrying the index of its polyline, built once for every wall.
+            List<(int RoadIndex, Segment2D Segment2D)> segments_Road = [];
             for (int i = 0; i < polyline2Ds.Count; i++)
             {
                 List<Segment2D>? segment2Ds = polyline2Ds[i].GetSegments();
@@ -53,9 +53,9 @@ namespace DiGi.GIS.Analytical
 
                 foreach (Segment2D segment2D in segment2Ds)
                 {
-                    if (segment2D.Start is Point2D point2D_Start_Road && segment2D.End is Point2D point2D_End_Road)
+                    if (segment2D.Start is not null && segment2D.End is not null)
                     {
-                        segments_Road.Add((i, point2D_Start_Road.X, point2D_Start_Road.Y, point2D_End_Road.X, point2D_End_Road.Y));
+                        segments_Road.Add((i, segment2D));
                     }
                 }
             }
@@ -63,105 +63,6 @@ namespace DiGi.GIS.Analytical
             if (segments_Road.Count == 0)
             {
                 return null;
-            }
-
-            // TODO [ParallelSegmentDistance]: remove this local helper and call Geometry.Planar.Query.Distance(segment2D, polyline2D, out point2D_Wall, out point2D_Road, tolerance) once DiGi-Organization/DiGi.Geometry#11 ships a segment distance that returns the closest points for parallel segments instead of NaN.
-            static void ClosestPoints(
-                double startX_1,
-                double startY_1,
-                double endX_1,
-                double endY_1,
-                double startX_2,
-                double startY_2,
-                double endX_2,
-                double endY_2,
-                out double closestX_1,
-                out double closestY_1,
-                out double closestX_2,
-                out double closestY_2)
-            {
-                static void ClosestOnSegment(double pointX, double pointY, double startX, double startY, double endX, double endY, out double closestX, out double closestY)
-                {
-                    double vectorX = endX - startX;
-                    double vectorY = endY - startY;
-                    double lengthSquared = (vectorX * vectorX) + (vectorY * vectorY);
-                    double parameter = lengthSquared <= 0 ? 0 : ((((pointX - startX) * vectorX) + ((pointY - startY) * vectorY)) / lengthSquared);
-                    if (parameter < 0)
-                    {
-                        parameter = 0;
-                    }
-                    else if (parameter > 1)
-                    {
-                        parameter = 1;
-                    }
-
-                    closestX = startX + (parameter * vectorX);
-                    closestY = startY + (parameter * vectorY);
-                }
-
-                double vectorX_1 = endX_1 - startX_1;
-                double vectorY_1 = endY_1 - startY_1;
-                double vectorX_2 = endX_2 - startX_2;
-                double vectorY_2 = endY_2 - startY_2;
-
-                double cross_1 = (vectorX_1 * (startY_2 - startY_1)) - (vectorY_1 * (startX_2 - startX_1));
-                double cross_2 = (vectorX_1 * (endY_2 - startY_1)) - (vectorY_1 * (endX_2 - startX_1));
-                double cross_3 = (vectorX_2 * (startY_1 - startY_2)) - (vectorY_2 * (startX_1 - startX_2));
-                double cross_4 = (vectorX_2 * (endY_1 - startY_2)) - (vectorY_2 * (endX_1 - startX_2));
-
-                if (((cross_1 > 0 && cross_2 < 0) || (cross_1 < 0 && cross_2 > 0)) && ((cross_3 > 0 && cross_4 < 0) || (cross_3 < 0 && cross_4 > 0)))
-                {
-                    // The segments cross: the intersection is the closest pair.
-                    double denominator = (vectorX_1 * vectorY_2) - (vectorY_1 * vectorX_2);
-                    double parameter = (((startX_2 - startX_1) * vectorY_2) - ((startY_2 - startY_1) * vectorX_2)) / denominator;
-                    closestX_1 = startX_1 + (parameter * vectorX_1);
-                    closestY_1 = startY_1 + (parameter * vectorY_1);
-                    closestX_2 = closestX_1;
-                    closestY_2 = closestY_1;
-                    return;
-                }
-
-                // No crossing: the closest pair of two segments has at least one endpoint in it,
-                // so the four endpoint-to-segment projections cover the parallel case as well.
-                double bestSquared = double.MaxValue;
-                double bestX_1 = startX_1;
-                double bestY_1 = startY_1;
-                double bestX_2 = startX_1;
-                double bestY_2 = startY_1;
-
-                void Consider(bool pointOnFirst, double pointX, double pointY, double startX, double startY, double endX, double endY)
-                {
-                    ClosestOnSegment(pointX, pointY, startX, startY, endX, endY, out double closestX, out double closestY);
-                    double distanceSquared = ((closestX - pointX) * (closestX - pointX)) + ((closestY - pointY) * (closestY - pointY));
-                    if (distanceSquared < bestSquared)
-                    {
-                        bestSquared = distanceSquared;
-                        if (pointOnFirst)
-                        {
-                            bestX_1 = pointX;
-                            bestY_1 = pointY;
-                            bestX_2 = closestX;
-                            bestY_2 = closestY;
-                        }
-                        else
-                        {
-                            bestX_1 = closestX;
-                            bestY_1 = closestY;
-                            bestX_2 = pointX;
-                            bestY_2 = pointY;
-                        }
-                    }
-                }
-
-                Consider(true, startX_1, startY_1, startX_2, startY_2, endX_2, endY_2);
-                Consider(true, endX_1, endY_1, startX_2, startY_2, endX_2, endY_2);
-                Consider(false, startX_2, startY_2, startX_1, startY_1, endX_1, endY_1);
-                Consider(false, endX_2, endY_2, startX_1, startY_1, endX_1, endY_1);
-
-                closestX_1 = bestX_1;
-                closestY_1 = bestY_1;
-                closestX_2 = bestX_2;
-                closestY_2 = bestY_2;
             }
 
             double distance = (options ?? new OpeningGenerationOptions()).RoadFrontageDistance;
@@ -234,22 +135,20 @@ namespace DiGi.GIS.Analytical
                 double setback = double.NaN;
                 for (int i = 0; i < segments_Road.Count; i++)
                 {
-                    (int RoadIndex, double X1, double Y1, double X2, double Y2) segment_Road = segments_Road[i];
-                    ClosestPoints(point2D_Start.X, point2D_Start.Y, point2D_End.X, point2D_End.Y, segment_Road.X1, segment_Road.Y1, segment_Road.X2, segment_Road.Y2, out double wallX, out double wallY, out double roadX, out double roadY);
-
-                    double distance_Road = Math.Sqrt(((roadX - wallX) * (roadX - wallX)) + ((roadY - wallY) * (roadY - wallY)));
-                    if (double.IsNaN(distance_Road) || distance_Road > distance + tolerance)
+                    (int RoadIndex, Segment2D Segment2D) segment_Road = segments_Road[i];
+                    double distance_Road = Geometry.Planar.Query.Distance(segment2D, segment_Road.Segment2D, out Point2D? point2D_Wall, out Point2D? point2D_Road, tolerance);
+                    if (double.IsNaN(distance_Road) || point2D_Wall is null || point2D_Road is null || distance_Road > distance + tolerance)
                     {
                         continue;
                     }
 
                     // The road must reach the strip: on the outward side of the wall face, between the wall's ends.
-                    if ((((roadX - wallX) * normalX) + ((roadY - wallY) * normalY)) < -tolerance)
+                    if ((((point2D_Road.X - point2D_Wall.X) * normalX) + ((point2D_Road.Y - point2D_Wall.Y) * normalY)) < -tolerance)
                     {
                         continue;
                     }
 
-                    double parameter = (((roadX - point2D_Start.X) * directionX) + ((roadY - point2D_Start.Y) * directionY));
+                    double parameter = (((point2D_Road.X - point2D_Start.X) * directionX) + ((point2D_Road.Y - point2D_Start.Y) * directionY));
                     if (parameter < -tolerance || parameter > length + tolerance)
                     {
                         continue;
