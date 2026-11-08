@@ -11,6 +11,7 @@ using DiGi.GIS.Analytical.Enums;
 using DiGi.GIS.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,12 +42,12 @@ namespace DiGi.GIS.Analytical
             }
 
             string fileName = Path.GetFileNameWithoutExtension(path);
-            if (fileName.EndsWith("_GML"))
+            if (fileName.EndsWith("_GML", StringComparison.CurrentCulture))
             {
                 fileName = fileName.Substring(0, fileName.Length - 4);
             }
 
-            string[] paths_CityGML = Directory.GetFiles(directory_CityGML, string.Format("{0}.zip", fileName), SearchOption.AllDirectories);
+            string[] paths_CityGML = Directory.GetFiles(directory_CityGML, string.Format(CultureInfo.CurrentCulture, "{0}.zip", fileName), SearchOption.AllDirectories);
 
             List<List<CityModel>?>? cityModelsList = [.. Enumerable.Repeat<List<CityModel>?>(null, paths_CityGML.Length)];
 
@@ -311,7 +312,7 @@ namespace DiGi.GIS.Analytical
 
             for (int i = building2Ds_Unidentified.Count - 1; i >= 0; i--)
             {
-                IPolygonalFace2D? polygonalFace2D = building2Ds_Unidentified[i].PolygonalFace2D;
+                PolygonalFace2D? polygonalFace2D = building2Ds_Unidentified[i].PolygonalFace2D;
                 List<Point2D>? point2Ds = polygonalFace2D?.ExternalEdge?.GetPoints();
                 if (point2Ds == null || point2Ds.Count == 0)
                 {

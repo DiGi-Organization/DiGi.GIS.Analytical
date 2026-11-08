@@ -59,7 +59,7 @@ namespace DiGi.GIS.Analytical
             }
 
             IEnumerable<ISurface>? surfaces = building.Surfaces;
-            if (surfaces == null || surfaces.Count() == 0)
+            if (surfaces == null || !surfaces.Any())
             {
                 return null;
             }
@@ -127,7 +127,7 @@ namespace DiGi.GIS.Analytical
         public static BuildingModel? BuildingModel(this Polyhedron? polyhedron, double tolerance = Core.Constants.Tolerance.Distance)
         {
             IEnumerable<IPolygonalFace3D>? polygonalFace3Ds = polyhedron?.PolygonalFaces;
-            if (polygonalFace3Ds == null || polygonalFace3Ds.Count() == 0)
+            if (polygonalFace3Ds == null || !polygonalFace3Ds.Any())
             {
                 return null;
             }
