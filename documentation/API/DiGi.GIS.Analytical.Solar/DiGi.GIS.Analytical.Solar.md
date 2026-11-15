@@ -270,6 +270,35 @@ public static class Query
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Query
 ### Methods
 
+<a name='DiGi.GIS.Analytical.Solar.Query.CasterTriangleCount(thisDiGi.Solar.Classes.ShadingModel,double)'></a>
+
+## Query\.CasterTriangleCount\(this ShadingModel, double\) Method
+
+Counts the triangles of the shading\-only elements of a shading model \- the neighbours and the analysed building's own non\-receiving components \- which every receiver is solved against\.
+
+The elements are triangulated exactly as [DiGi\.Solar\.Classes\.ShadingSolver\.Solve](https://learn.microsoft.com/en-us/dotnet/api/digi.solar.classes.shadingsolver.solve 'DiGi\.Solar\.Classes\.ShadingSolver\.Solve') triangulates its casters, so the count is the quantity the caster ceilings of a solve were measured on (DiGi-Organization/DiGi.Solar#7): `SolarCasterTriangleCountMax` and `SolarJobCasterTriangleCountMax` of DiGi.GIS.WebAPI.UI, and the ceiling of a batch solve (DiGi-Organization/DiGi.GIS.PostgreSQL#136). The receivers' own triangles are not counted.
+
+```csharp
+public static int CasterTriangleCount(this DiGi.Solar.Classes.ShadingModel? shadingModel, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Solar.Query.CasterTriangleCount(thisDiGi.Solar.Classes.ShadingModel,double).shadingModel'></a>
+
+`shadingModel` [DiGi\.Solar\.Classes\.ShadingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.solar.classes.shadingmodel 'DiGi\.Solar\.Classes\.ShadingModel')
+
+The shading model\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.CasterTriangleCount(thisDiGi.Solar.Classes.ShadingModel,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance used by the triangulation\.
+
+#### Returns
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
+The number of triangles, or 0 when the model is null or has no shading\-only element\.
+
 <a name='DiGi.GIS.Analytical.Solar.Query.SolarBuildingModelId(thisDiGi.Analytical.Building.Classes.BuildingModel)'></a>
 
 ## Query\.SolarBuildingModelId\(this BuildingModel\) Method
@@ -294,6 +323,35 @@ The building model\.
 #### Returns
 [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')  
 The positive id, or null when [buildingModel](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Query.SolarBuildingModelId(thisDiGi.Analytical.Building.Classes.BuildingModel).buildingModel 'DiGi\.GIS\.Analytical\.Solar\.Query\.SolarBuildingModelId\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel\)\.buildingModel') is null or its Guid is empty\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.SolarNeighbourCircle(thisDiGi.Analytical.Building.Classes.BuildingModel,double)'></a>
+
+## Query\.SolarNeighbourCircle\(this BuildingModel, double\) Method
+
+Gets the circle a solar radiation solve takes a building's neighbours from: centred on the centre of the building's bounding box, reaching [radius](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Query.SolarNeighbourCircle(thisDiGi.Analytical.Building.Classes.BuildingModel,double).radius 'DiGi\.GIS\.Analytical\.Solar\.Query\.SolarNeighbourCircle\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, double\)\.radius') beyond its farthest corner\.
+
+Every building whose footprint bounding box lies within or intersects the circle casts shade (`gis/buildingmodel/itemsbycircle`). The centre is also the point the weather station is chosen for. The viewer (`SolarController`) and a batch solve (DiGi-Organization/DiGi.GIS.PostgreSQL#136) both take the circle from here, so a stored result does not depend on which of them solved it.
+
+```csharp
+public static DiGi.Geometry.Planar.Classes.Circle2D? SolarNeighbourCircle(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, double radius);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Solar.Query.SolarNeighbourCircle(thisDiGi.Analytical.Building.Classes.BuildingModel,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.SolarNeighbourCircle(thisDiGi.Analytical.Building.Classes.BuildingModel,double).radius'></a>
+
+`radius` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The neighbour radius, in m, measured from the farthest corner of the bounding box\.
+
+#### Returns
+[DiGi\.Geometry\.Planar\.Classes\.Circle2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.circle2d 'DiGi\.Geometry\.Planar\.Classes\.Circle2D')  
+The circle, or null when the model is null, has no bounding box or its centre is not finite\.
 
 <a name='DiGi.GIS.Analytical.Solar.Query.SolarRadiusKey(double)'></a>
 
