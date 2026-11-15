@@ -8,6 +8,7 @@
 
 The repository contains the following core components and assemblies:
 * **[DiGi.GIS.Analytical](DiGi.GIS.Analytical)** (Path: `DiGi.GIS.Analytical\DiGi.GIS.Analytical`)
+* **[DiGi.GIS.Analytical.Solar](DiGi.GIS.Analytical.Solar)** (Path: `DiGi.GIS.Analytical\DiGi.GIS.Analytical.Solar`) — the annual solar radiation solve of a building's walls and roofs over an EPW year, in the stored form of `building_solar_radiation`; hosts re-declare the `SolarCalculator` package of DiGi.Solar.
 
 ---
 
