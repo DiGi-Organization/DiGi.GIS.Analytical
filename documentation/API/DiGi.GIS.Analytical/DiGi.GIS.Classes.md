@@ -398,6 +398,246 @@ public System.Collections.Generic.List<DiGi.GIS.Analytical.Enums.BuildingModelVa
 #### Property Value
 [System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[BuildingModelValidationCode](DiGi.GIS.Analytical.Enums.md#DiGi.GIS.Analytical.Enums.BuildingModelValidationCode 'DiGi\.GIS\.Analytical\.Enums\.BuildingModelValidationCode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')
 
+<a name='DiGi.GIS.Classes.ClimateZoneArea'></a>
+
+## ClimateZoneArea Class
+
+One area of a climate zone map: a polygonal face in EPSG:2180 and the PN\-82/B\-02403 climate zone it lies in \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+A zone may consist of several areas. Zone V, for example, covers the north-east and the Tatra mountains.
+
+```csharp
+public class ClimateZoneArea : DiGi.Core.Classes.SerializableObject, DiGi.GIS.Interfaces.IGISSerializableObject, DiGi.GIS.Interfaces.IGISObject, DiGi.Core.Interfaces.IObject, DiGi.Core.Interfaces.ISerializableObject, DiGi.Core.Interfaces.ICloneableObject<DiGi.Core.Interfaces.ISerializableObject>, DiGi.Core.Interfaces.ICloneableObject
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [DiGi\.Core\.Classes\.Object](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.object 'DiGi\.Core\.Classes\.Object') → [DiGi\.Core\.Classes\.SerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableobject 'DiGi\.Core\.Classes\.SerializableObject') → ClimateZoneArea
+
+Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
+### Constructors
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(DiGi.Analytical.Building.Regulation.Enums.ClimateZone,DiGi.Geometry.Planar.Classes.PolygonalFace2D)'></a>
+
+## ClimateZoneArea\(ClimateZone, PolygonalFace2D\) Constructor
+
+Initializes a new instance of the [ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea') class\.
+
+```csharp
+public ClimateZoneArea(DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, DiGi.Geometry.Planar.Classes.PolygonalFace2D? polygonalFace2D);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(DiGi.Analytical.Building.Regulation.Enums.ClimateZone,DiGi.Geometry.Planar.Classes.PolygonalFace2D).climateZone'></a>
+
+`climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
+
+The climate zone of the area\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(DiGi.Analytical.Building.Regulation.Enums.ClimateZone,DiGi.Geometry.Planar.Classes.PolygonalFace2D).polygonalFace2D'></a>
+
+`polygonalFace2D` [DiGi\.Geometry\.Planar\.Classes\.PolygonalFace2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polygonalface2d 'DiGi\.Geometry\.Planar\.Classes\.PolygonalFace2D')
+
+The outline of the area in EPSG:2180\. It is cloned\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(DiGi.GIS.Classes.ClimateZoneArea)'></a>
+
+## ClimateZoneArea\(ClimateZoneArea\) Constructor
+
+Initializes a new instance of the [ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea') class by copying another instance\.
+
+```csharp
+public ClimateZoneArea(DiGi.GIS.Classes.ClimateZoneArea? climateZoneArea);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(DiGi.GIS.Classes.ClimateZoneArea).climateZoneArea'></a>
+
+`climateZoneArea` [ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea')
+
+The area to copy\. This value can be null\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(System.Text.Json.Nodes.JsonObject)'></a>
+
+## ClimateZoneArea\(JsonObject\) Constructor
+
+Initializes a new instance of the [ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea') class from a JSON object\.
+
+```csharp
+public ClimateZoneArea(System.Text.Json.Nodes.JsonObject? jsonObject);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZoneArea(System.Text.Json.Nodes.JsonObject).jsonObject'></a>
+
+`jsonObject` [System\.Text\.Json\.Nodes\.JsonObject](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonobject 'System\.Text\.Json\.Nodes\.JsonObject')
+
+The JSON object containing the data\. This value can be null\.
+### Properties
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.ClimateZone'></a>
+
+## ClimateZoneArea\.ClimateZone Property
+
+Gets the climate zone of the area\.
+
+```csharp
+public DiGi.Analytical.Building.Regulation.Enums.ClimateZone ClimateZone { get; }
+```
+
+#### Property Value
+[DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
+
+<a name='DiGi.GIS.Classes.ClimateZoneArea.PolygonalFace2D'></a>
+
+## ClimateZoneArea\.PolygonalFace2D Property
+
+Gets a CLONE of the outline of the area in EPSG:2180, or null\.
+
+```csharp
+public DiGi.Geometry.Planar.Classes.PolygonalFace2D? PolygonalFace2D { get; }
+```
+
+#### Property Value
+[DiGi\.Geometry\.Planar\.Classes\.PolygonalFace2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.polygonalface2d 'DiGi\.Geometry\.Planar\.Classes\.PolygonalFace2D')
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap'></a>
+
+## ClimateZoneMap Class
+
+A map of the PN\-82/B\-02403 climate zones I\-V in EPSG:2180, with its source and positional accuracy \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+The Polish map is read with `Query.EmbeddedClimateZoneMap_PL`, and a point is classified with `Query.ClimateZone`.
+
+```csharp
+public class ClimateZoneMap : DiGi.Core.Classes.SerializableObject, DiGi.GIS.Interfaces.IGISSerializableObject, DiGi.GIS.Interfaces.IGISObject, DiGi.Core.Interfaces.IObject, DiGi.Core.Interfaces.ISerializableObject, DiGi.Core.Interfaces.ICloneableObject<DiGi.Core.Interfaces.ISerializableObject>, DiGi.Core.Interfaces.ICloneableObject
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [DiGi\.Core\.Classes\.Object](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.object 'DiGi\.Core\.Classes\.Object') → [DiGi\.Core\.Classes\.SerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableobject 'DiGi\.Core\.Classes\.SerializableObject') → ClimateZoneMap
+
+Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
+### Constructors
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(DiGi.GIS.Classes.ClimateZoneMap)'></a>
+
+## ClimateZoneMap\(ClimateZoneMap\) Constructor
+
+Initializes a new instance of the [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap') class by copying another instance\.
+
+```csharp
+public ClimateZoneMap(DiGi.GIS.Classes.ClimateZoneMap? climateZoneMap);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(DiGi.GIS.Classes.ClimateZoneMap).climateZoneMap'></a>
+
+`climateZoneMap` [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap')
+
+The map to copy\. This value can be null\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(string,string,double,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.ClimateZoneArea_)'></a>
+
+## ClimateZoneMap\(string, string, double, IEnumerable\<ClimateZoneArea\>\) Constructor
+
+Initializes a new instance of the [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap') class\.
+
+```csharp
+public ClimateZoneMap(string? version, string? source, double positionalAccuracy, System.Collections.Generic.IEnumerable<DiGi.GIS.Classes.ClimateZoneArea>? climateZoneAreas);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(string,string,double,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.ClimateZoneArea_).version'></a>
+
+`version` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The version of the map, raised whenever its areas change\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(string,string,double,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.ClimateZoneArea_).source'></a>
+
+`source` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The source tag: the map reproduced, where it was reproduced and how it was digitised\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(string,string,double,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.ClimateZoneArea_).positionalAccuracy'></a>
+
+`positionalAccuracy` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The positional accuracy of the zone boundaries in metres\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(string,string,double,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.ClimateZoneArea_).climateZoneAreas'></a>
+
+`climateZoneAreas` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The areas of the map\. Each one is cloned\.
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(System.Text.Json.Nodes.JsonObject)'></a>
+
+## ClimateZoneMap\(JsonObject\) Constructor
+
+Initializes a new instance of the [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap') class from a JSON object\.
+
+```csharp
+public ClimateZoneMap(System.Text.Json.Nodes.JsonObject? jsonObject);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneMap(System.Text.Json.Nodes.JsonObject).jsonObject'></a>
+
+`jsonObject` [System\.Text\.Json\.Nodes\.JsonObject](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonobject 'System\.Text\.Json\.Nodes\.JsonObject')
+
+The JSON object containing the data\. This value can be null\.
+### Properties
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.ClimateZoneAreas'></a>
+
+## ClimateZoneMap\.ClimateZoneAreas Property
+
+Gets CLONES of the areas of the map, or null\.
+
+```csharp
+public System.Collections.Generic.List<DiGi.GIS.Classes.ClimateZoneArea>? ClimateZoneAreas { get; }
+```
+
+#### Property Value
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.PositionalAccuracy'></a>
+
+## ClimateZoneMap\.PositionalAccuracy Property
+
+Gets the positional accuracy of the zone boundaries in metres\.
+
+```csharp
+public double PositionalAccuracy { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.Source'></a>
+
+## ClimateZoneMap\.Source Property
+
+Gets the source tag: the map reproduced, where it was reproduced and how it was digitised\.
+
+```csharp
+public string? Source { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='DiGi.GIS.Classes.ClimateZoneMap.Version'></a>
+
+## ClimateZoneMap\.Version Property
+
+Gets the version of the map, raised whenever its areas change\.
+
+```csharp
+public string? Version { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
 <a name='DiGi.GIS.Classes.OpeningGenerationInput'></a>
 
 ## OpeningGenerationInput Class
@@ -463,7 +703,7 @@ The location of the building's address point in the coordinate system of the mod
 
 `climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
 
-The climatic zone of the building; [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined') takes the zone I\-III window limits\.
+The climatic zone of the building\. [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined') lets `Modify.GenerateOpenings` take the zone of the footprint from the embedded zone map, and a footprint outside the map takes the zone I\-III limits \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
 
 <a name='DiGi.GIS.Classes.OpeningGenerationInput.OpeningGenerationInput(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.Geometry.Planar.Classes.Point2D,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,DiGi.GIS.Classes.OpeningGenerationOptions,System.Collections.Generic.IEnumerable_DiGi.Geometry.Planar.Classes.Polyline2D_).panelSystem'></a>
 

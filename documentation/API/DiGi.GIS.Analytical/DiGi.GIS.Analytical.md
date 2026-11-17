@@ -35,6 +35,31 @@ The surface object to be converted\.
 [DiGi\.Analytical\.Building\.Interfaces\.IComponent](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.interfaces.icomponent 'DiGi\.Analytical\.Building\.Interfaces\.IComponent')  
 An [DiGi\.Analytical\.Building\.Interfaces\.IComponent](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.interfaces.icomponent 'DiGi\.Analytical\.Building\.Interfaces\.IComponent') representing the analytical version of the surface, or `null` if the input is null, the geometry is missing, or the surface type is not supported for conversion\.
 
+<a name='DiGi.GIS.Analytical.Convert.ToDiGi_ClimateZoneMap(thisstring)'></a>
+
+## Convert\.ToDiGi\_ClimateZoneMap\(this string\) Method
+
+Converts a GeoJSON FeatureCollection of climate zones to a [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap') \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+<b>Expected layout.</b> Every feature carries a `ClimateZone` property (`"I"` to `"V"`) and a `Polygon` or `MultiPolygon` geometry. Each polygon becomes one [ClimateZoneArea](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneArea 'DiGi\.GIS\.Classes\.ClimateZoneArea'), its first ring the outline and the others holes. The coordinates are read as given, easting first. They are not reprojected, so the collection is expected in EPSG:2180, as its `crs` member states, even though RFC 7946 assumes WGS 84. The top-level members `Version`, `Source` and `PositionalAccuracy` (metres) become the map's own values.
+
+A feature with an unknown zone or an unreadable geometry is skipped, so check the number of areas after converting a new file.
+
+```csharp
+public static DiGi.GIS.Classes.ClimateZoneMap? ToDiGi_ClimateZoneMap(this string? geoJson);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Convert.ToDiGi_ClimateZoneMap(thisstring).geoJson'></a>
+
+`geoJson` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The GeoJSON text\.
+
+#### Returns
+[ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap')  
+The map, or null when the text is null, is not JSON or is not a FeatureCollection\.
+
 <a name='DiGi.GIS.Analytical.Create'></a>
 
 ## Create Class
@@ -730,7 +755,7 @@ True when every space of the model was assigned; otherwise, false\.
 
 Places windows and doors on the external walls of a building model, following the Polish rules of the building's period \(DiGi\-Organization/DiGi\.GIS\.Analytical\#2, phase A\)\.
 
-<b>Keys.</b> The regime is `Regulation.Query.BuildingRegulation(yearBuilt, DesignLag)`. The building type is [BuildingType\(this Building2D, bool\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool) 'DiGi\.GIS\.Analytical\.Query\.BuildingType\(this DiGi\.GIS\.Classes\.Building2D, bool\)'), terraced when any wall carries [DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.enums.componentparameter.partywall 'DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall'); a non-residential building takes the multi-family sets. The sizes come from the opening-size set of the year built, type and panel system, and the thermal values from the construction set of the chosen flavour, a role it lacks falling back to TypicalAsBuilt. With no year built, the latest sets are used.
+<b>Keys.</b> The regime is `Regulation.Query.BuildingRegulation(yearBuilt, DesignLag)`. The building type is [BuildingType\(this Building2D, bool\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.BuildingType(thisDiGi.GIS.Classes.Building2D,bool) 'DiGi\.GIS\.Analytical\.Query\.BuildingType\(this DiGi\.GIS\.Classes\.Building2D, bool\)'), terraced when any wall carries [DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.enums.componentparameter.partywall 'DiGi\.Analytical\.Building\.Enums\.ComponentParameter\.PartyWall'); a non-residential building takes the multi-family sets. The sizes come from the opening-size set of the year built, type and panel system, and the thermal values from the construction set of the chosen flavour, a role it lacks falling back to TypicalAsBuilt. With no year built, the latest sets are used. The climate zone is the input's. When that is [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined'), it is the zone of the footprint, [ClimateZone\(this Building2D, ClimateZoneMap, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.ClimateZoneMap,double) 'DiGi\.GIS\.Analytical\.Query\.ClimateZone\(this DiGi\.GIS\.Classes\.Building2D, DiGi\.GIS\.Classes\.ClimateZoneMap, double\)') on the embedded map (DiGi-Organization/DiGi.GIS.Analytical#7). A footprint outside the map keeps [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined'), which takes the zone I-III limits. A batch caller sets the zone on the input from a map read once, so the map is not read for every building.
 
 <b>Storeys.</b> Openings are placed per storey band ([StoreyBands\(this BuildingModel, ushort, double, StoreySource, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.StoreyBands(thisDiGi.Analytical.Building.Classes.BuildingModel,ushort,double,DiGi.GIS.Analytical.Enums.StoreySource,double) 'DiGi\.GIS\.Analytical\.Query\.StoreyBands\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, ushort, double, DiGi\.GIS\.Analytical\.Enums\.StoreySource, double\)')), never assuming that one space is one storey, so an unsplit 3D model and a building with no storey count get windows on every storey. Every band uses the same positions along a wall where its allowed walls are the same, so windows stack.
 
@@ -849,6 +874,19 @@ public const ushort ApartmentBlockStoreys = 5;
 
 #### Field Value
 [System\.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16 'System\.UInt16')
+
+<a name='DiGi.GIS.Analytical.Query.EmbeddedClimateZoneMap_PL_ResourceName'></a>
+
+## Query\.EmbeddedClimateZoneMap\_PL\_ResourceName Field
+
+The manifest name of the Polish climate zone map read by [EmbeddedClimateZoneMap\_PL\(\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.EmbeddedClimateZoneMap_PL() 'DiGi\.GIS\.Analytical\.Query\.EmbeddedClimateZoneMap\_PL\(\)')\.
+
+```csharp
+public const string EmbeddedClimateZoneMap_PL_ResourceName = "DiGi.GIS.Analytical.Resources.ClimateZoneMap_PL.geojson";
+```
+
+#### Field Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 ### Methods
 
 <a name='DiGi.GIS.Analytical.Query.Building(thisDiGi.GIS.Classes.Building2D,System.Collections.Generic.IEnumerable_DiGi.CityGML.Classes.CityModel_)'></a>
@@ -962,6 +1000,80 @@ True when the building has party walls with a neighbour\.
 [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType')  
 The building type\.
 
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double)'></a>
+
+## Query\.ClimateZone\(this Point2D, ClimateZoneMap, double\) Method
+
+Gets the PN\-82/B\-02403 climate zone of a point in EPSG:2180 \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+<b>Boundaries.</b> A point inside an area, or within [tolerance](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double).tolerance 'DiGi\.GIS\.Analytical\.Query\.ClimateZone\(this DiGi\.Geometry\.Planar\.Classes\.Point2D, DiGi\.GIS\.Classes\.ClimateZoneMap, double\)\.tolerance') of its boundary, lies in that area's zone. A point on the boundary between two zones gets the colder one (the higher zone number), because that is the safer side of a design limit.
+
+<b>Outside the map.</b> A point outside every area gets [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined'). The embedded Polish map covers the country's outline buffered by 250 m, so a point within that distance outside the border still gets a zone.
+
+The zone boundaries are accurate only to the map's [PositionalAccuracy](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap.PositionalAccuracy 'DiGi\.GIS\.Classes\.ClimateZoneMap\.PositionalAccuracy') (about 10 km for the embedded map). Near a boundary the answer is the map's answer, not the climate's.
+
+```csharp
+public static DiGi.Analytical.Building.Regulation.Enums.ClimateZone ClimateZone(this DiGi.Geometry.Planar.Classes.Point2D? point2D, DiGi.GIS.Classes.ClimateZoneMap? climateZoneMap=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double).point2D'></a>
+
+`point2D` [DiGi\.Geometry\.Planar\.Classes\.Point2D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.planar.classes.point2d 'DiGi\.Geometry\.Planar\.Classes\.Point2D')
+
+The point in EPSG:2180, easting first\.
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double).climateZoneMap'></a>
+
+`climateZoneMap` [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap')
+
+The map, or null for [EmbeddedClimateZoneMap\_PL\(\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.EmbeddedClimateZoneMap_PL() 'DiGi\.GIS\.Analytical\.Query\.EmbeddedClimateZoneMap\_PL\(\)')\. A caller classifying many points passes it, so the map is read only once\.
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance in metres\.
+
+#### Returns
+[DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')  
+The climate zone of the point, or [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined') when the point is null, lies outside every area, or no map can be read\.
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.ClimateZoneMap,double)'></a>
+
+## Query\.ClimateZone\(this Building2D, ClimateZoneMap, double\) Method
+
+Gets the PN\-82/B\-02403 climate zone of a building from an internal point of its footprint \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+An internal point is used rather than the centroid, because the centroid of an L-shaped or courtyard footprint can lie outside the building. At the scale of the zone map the two give the same answer.
+
+```csharp
+public static DiGi.Analytical.Building.Regulation.Enums.ClimateZone ClimateZone(this DiGi.GIS.Classes.Building2D? building2D, DiGi.GIS.Classes.ClimateZoneMap? climateZoneMap=null, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.ClimateZoneMap,double).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The building, with its footprint in EPSG:2180\.
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.ClimateZoneMap,double).climateZoneMap'></a>
+
+`climateZoneMap` [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap')
+
+The map, or null for [EmbeddedClimateZoneMap\_PL\(\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.EmbeddedClimateZoneMap_PL() 'DiGi\.GIS\.Analytical\.Query\.EmbeddedClimateZoneMap\_PL\(\)')\. A caller classifying many buildings passes it, so the map is read only once\.
+
+<a name='DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.GIS.Classes.Building2D,DiGi.GIS.Classes.ClimateZoneMap,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance in metres\.
+
+#### Returns
+[DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')  
+The climate zone of the building, or [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone.undefined 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone\.Undefined') when the building or its footprint is null, or the footprint lies outside every area\.
+
 <a name='DiGi.GIS.Analytical.Query.Elevation(thisDiGi.Geometry.Spatial.Classes.Point3D)'></a>
 
 ## Query\.Elevation\(this Point3D\) Method
@@ -984,6 +1096,24 @@ The point returned by the terrain service\.
 #### Returns
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')  
 The elevation of the point, or zero when it carries none\.
+
+<a name='DiGi.GIS.Analytical.Query.EmbeddedClimateZoneMap_PL()'></a>
+
+## Query\.EmbeddedClimateZoneMap\_PL\(\) Method
+
+Reads the map of the Polish climate zones I\-V embedded in this assembly \(DiGi\-Organization/DiGi\.GIS\.Analytical\#7\)\.
+
+The embedded file is a GeoJSON FeatureCollection in EPSG:2180. It is the PN-82/B-02403 zone map as reproduced in the Purmo guide to PN-EN 12831 (Strzeszewski, Wereszczyński), digitised from the vector figure and cut against the national outline. Its [Source](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap.Source 'DiGi\.GIS\.Classes\.ClimateZoneMap\.Source') holds the full citation and the digitising method, and its [PositionalAccuracy](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap.PositionalAccuracy 'DiGi\.GIS\.Classes\.ClimateZoneMap\.PositionalAccuracy') holds the accuracy of the boundaries. The method is described on the wiki page Climate Zones.
+
+Each call reads and converts the file, so a caller classifying many points reads the map once and passes it to [ClimateZone\(this Point2D, ClimateZoneMap, double\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.ClimateZone(thisDiGi.Geometry.Planar.Classes.Point2D,DiGi.GIS.Classes.ClimateZoneMap,double) 'DiGi\.GIS\.Analytical\.Query\.ClimateZone\(this DiGi\.Geometry\.Planar\.Classes\.Point2D, DiGi\.GIS\.Classes\.ClimateZoneMap, double\)').
+
+```csharp
+public static DiGi.GIS.Classes.ClimateZoneMap? EmbeddedClimateZoneMap_PL();
+```
+
+#### Returns
+[ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap')  
+A new [ClimateZoneMap](DiGi.GIS.Classes.md#DiGi.GIS.Classes.ClimateZoneMap 'DiGi\.GIS\.Classes\.ClimateZoneMap') read from the embedded file, or null when the file is missing or cannot be read\.
 
 <a name='DiGi.GIS.Analytical.Query.FireClass(thisSystem.Nullable_DiGi.GIS.Enums.BuildingGeneralFunction_)'></a>
 

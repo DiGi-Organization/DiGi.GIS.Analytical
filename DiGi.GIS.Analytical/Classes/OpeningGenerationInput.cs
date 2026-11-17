@@ -41,7 +41,7 @@ namespace DiGi.GIS.Classes
         /// <param name="yearBuilt">The year the building was completed, or null when unknown.</param>
         /// <param name="yearBuiltSource">Where <paramref name="yearBuilt"/> comes from, or null when no year is known.</param>
         /// <param name="addressPoint">The location of the building's address point in the coordinate system of the model, or null; the entrance goes on the external wall nearest it.</param>
-        /// <param name="climateZone">The climatic zone of the building; <see cref="ClimateZone.Undefined"/> takes the zone I-III window limits.</param>
+        /// <param name="climateZone">The climatic zone of the building. <see cref="ClimateZone.Undefined"/> lets <c>Modify.GenerateOpenings</c> take the zone of the footprint from the embedded zone map, and a footprint outside the map takes the zone I-III limits (DiGi-Organization/DiGi.GIS.Analytical#7).</param>
         /// <param name="panelSystem">The large-panel system of a 1967-1985 apartment block ("W-70", "OWT-67", ...), or null for the default W-70.</param>
         /// <param name="openingGenerationOptions">The rules to apply, or null for those of the building's regime.</param>
         /// <param name="roads">The road polylines near the building (BDOT10k OT_SKJZ_L, OT_SKDR_L, OT_SKRP_L), or null for no road context; a wall whose facing strip up to <c>OpeningGenerationOptions.RoadFrontageDistance</c> reaches one is reported as road frontage (DiGi-Organization/DiGi.GIS.Analytical#10).</param>
