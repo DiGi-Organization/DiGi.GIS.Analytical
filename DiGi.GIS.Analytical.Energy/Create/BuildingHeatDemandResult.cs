@@ -50,7 +50,7 @@ namespace DiGi.GIS.Analytical.Energy
                 return null;
             }
 
-            // The copy constructor, not Core.Query.Clone: a model from Core.Query.Clone shares its relations with the original, so the split below would also split the stored model.
+            // An isolated copy, so the split below leaves the stored model untouched.
             BuildingModel buildingModel_Temp = new(buildingModel);
 
             List<BuildingModel?> buildingModels_Neighbour_Temp = buildingModels_Neighbour is null ? [] : [.. buildingModels_Neighbour];
