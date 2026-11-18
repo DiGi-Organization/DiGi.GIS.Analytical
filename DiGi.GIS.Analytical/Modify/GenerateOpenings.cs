@@ -206,7 +206,7 @@ namespace DiGi.GIS.Analytical
             Dictionary<Guid, ConstructionRole>? missingConstructionRoles = null;
             if (constructionLibrary is not null && openingGenerationOptions.AssignEnvelopeConstructions && (constructionSet is not null || constructionSet_TypicalAsBuilt is not null))
             {
-                missingConstructionRoles = AssignEnvelopeConstructions(buildingModel, constructionLibrary, constructionSet, constructionSet_TypicalAsBuilt, walls, faces);
+                missingConstructionRoles = buildingModel.AssignEnvelopeConstructions(constructionLibrary, constructionSet, constructionSet_TypicalAsBuilt, tolerance);
             }
 
             Vector3D vector3D_Up = new(0, 0, 1);
@@ -955,7 +955,8 @@ namespace DiGi.GIS.Analytical
                 doorsBelowMinimumCount,
                 droppedOpeningCount,
                 frontageLines,
-                missingConstructionRoles);
+                missingConstructionRoles,
+                constructionSet_TypicalAsBuilt?.TypologyData);
         }
     }
 }

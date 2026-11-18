@@ -299,6 +299,90 @@ The distance tolerance used by the triangulation\.
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The number of triangles, or 0 when the model is null or has no shading\-only element\.
 
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,DiGi.GIS.Classes.SurfaceSolarRadiation)'></a>
+
+## Query\.MonthlyIrradiations\(this SolarHourSeries, SurfaceSolarRadiation\) Method
+
+Gets the monthly solar irradiation of a stored receiving surface from its stored shading factors, normal and visibilities \(DiGi\-Organization/DiGi\.GIS\.Analytical\#14\)\.
+
+The factors are decoded from their stored bytes (`GIS.Convert.ToSystem_Doubles`), so the months add up to the `Irradiation` a rebuild from the stored factors gives ([SurfaceSolarRadiations\(this BuildingSolarRadiationResult, BuildingInformation, Weather\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.Weather.Classes.Weather) 'DiGi\.GIS\.Analytical\.Solar\.Create\.SurfaceSolarRadiations\(this DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.Weather\.Classes\.Weather\)')), and to the stored `Irradiation` within the quantization of the factors (at most 0.5/255 per hour). A surface without stored factors is unshaded.
+
+```csharp
+public static double[]? MonthlyIrradiations(this DiGi.GIS.Analytical.Solar.Classes.SolarHourSeries? solarHourSeries, DiGi.GIS.Classes.SurfaceSolarRadiation? surfaceSolarRadiation);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,DiGi.GIS.Classes.SurfaceSolarRadiation).solarHourSeries'></a>
+
+`solarHourSeries` [SolarHourSeries](DiGi.GIS.Analytical.Solar.Classes.md#DiGi.GIS.Analytical.Solar.Classes.SolarHourSeries 'DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries')
+
+The hourly weather and sun of the site, for the weather the result is wanted for\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,DiGi.GIS.Classes.SurfaceSolarRadiation).surfaceSolarRadiation'></a>
+
+`surfaceSolarRadiation` [DiGi\.GIS\.Classes\.SurfaceSolarRadiation](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.surfacesolarradiation 'DiGi\.GIS\.Classes\.SurfaceSolarRadiation')
+
+The stored surface\. This value can be null\.
+
+#### Returns
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')  
+The 12 monthly irradiations, January first \[kWh/m²\], or null when an input is missing or the surface has no normal or area\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_)'></a>
+
+## Query\.MonthlyIrradiations\(this SolarHourSeries, double, Vector3D, double, double, IList\<double\>\) Method
+
+Gets the monthly solar irradiation of one receiving surface, the I\_m of the monthly heat balance \(DiGi\-Organization/DiGi\.GIS\.Analytical\#14, for DiGi\-Organization/DiGi\.Analytical\#10\)\.
+
+The hourly math is that of [SurfaceSolarRadiation\(this SolarHourSeries, string, double, Vector3D, double, double, IList&lt;double&gt;\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiation(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,string,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_) 'DiGi\.GIS\.Analytical\.Solar\.Create\.SurfaceSolarRadiation\(this DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries, string, double, DiGi\.Geometry\.Spatial\.Classes\.Vector3D, double, double, System\.Collections\.Generic\.IList\<double\>\)') - the beam on the unshaded area, the diffuse and ground-reflected components on the unblocked share of the sky and ground, a sun-up hour without a factor skipped - summed per calendar month instead of over the series, so the 12 values add up to the surface's `Irradiation` for the same weather and factors. A null [shadingFactors](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).shadingFactors 'DiGi\.GIS\.Analytical\.Solar\.Query\.MonthlyIrradiations\(this DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries, double, DiGi\.Geometry\.Spatial\.Classes\.Vector3D, double, double, System\.Collections\.Generic\.IList\<double\>\)\.shadingFactors') means unshaded (every factor 0); with visibilities of 1 the months then add up to `IrradiationUnshaded`.
+
+The month of an hour is the month of its [DateTimes](DiGi.GIS.Analytical.Solar.Classes.md#DiGi.GIS.Analytical.Solar.Classes.SolarHourSeries.DateTimes 'DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries\.DateTimes'), the mid-hour instant of [SolarReferenceDateTime\(this DateTime\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Query.SolarReferenceDateTime(thisSystem.DateTime) 'DiGi\.GIS\.Analytical\.Solar\.Query\.SolarReferenceDateTime\(this System\.DateTime\)'): the last hour of a month, stamped 00:00 of the next one in an EPW file, stays in its month, as in `DiGi.Weather.Query.MonthlyMeanDryBulbTemperatures`. A 29 February hour is not in the series.
+
+```csharp
+public static double[]? MonthlyIrradiations(this DiGi.GIS.Analytical.Solar.Classes.SolarHourSeries? solarHourSeries, double area, DiGi.Geometry.Spatial.Classes.Vector3D? normal, double skyVisibility, double groundVisibility, System.Collections.Generic.IList<double>? shadingFactors);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).solarHourSeries'></a>
+
+`solarHourSeries` [SolarHourSeries](DiGi.GIS.Analytical.Solar.Classes.md#DiGi.GIS.Analytical.Solar.Classes.SolarHourSeries 'DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries')
+
+The hourly weather and sun of the site\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).area'></a>
+
+`area` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The area of the surface, in m²\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).normal'></a>
+
+`normal` [DiGi\.Geometry\.Spatial\.Classes\.Vector3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.classes.vector3d 'DiGi\.Geometry\.Spatial\.Classes\.Vector3D')
+
+The outward unit normal of the surface\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).skyVisibility'></a>
+
+`skyVisibility` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The unblocked share of the sky, 0\.\.1\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).groundVisibility'></a>
+
+`groundVisibility` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The unblocked share of the ground, 0\.\.1\.
+
+<a name='DiGi.GIS.Analytical.Solar.Query.MonthlyIrradiations(thisDiGi.GIS.Analytical.Solar.Classes.SolarHourSeries,double,DiGi.Geometry.Spatial.Classes.Vector3D,double,double,System.Collections.Generic.IList_double_).shadingFactors'></a>
+
+`shadingFactors` [System\.Collections\.Generic\.IList&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1 'System\.Collections\.Generic\.IList\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1 'System\.Collections\.Generic\.IList\`1')
+
+The shading factor of every hour of the solar reference year \([SolarReferenceHourCount](DiGi.GIS.Analytical.Solar.Constants.md#DiGi.GIS.Analytical.Solar.Constants.Default.SolarReferenceHourCount 'DiGi\.GIS\.Analytical\.Solar\.Constants\.Default\.SolarReferenceHourCount') values\), 0 unshaded to 1 shaded, or null for an unshaded surface\.
+
+#### Returns
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')  
+The 12 monthly irradiations, January first \[kWh/m²\], or null when an input is missing, the area is not a positive number or the factors do not cover the reference year\.
+
 <a name='DiGi.GIS.Analytical.Solar.Query.SolarBuildingModelId(thisDiGi.Analytical.Building.Classes.BuildingModel)'></a>
 
 ## Query\.SolarBuildingModelId\(this BuildingModel\) Method

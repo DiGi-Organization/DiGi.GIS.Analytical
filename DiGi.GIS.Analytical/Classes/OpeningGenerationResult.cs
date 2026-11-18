@@ -1,3 +1,4 @@
+using DiGi.Analytical.Building.Regulation.Classes;
 using DiGi.Analytical.Building.Regulation.Enums;
 using DiGi.Core.Classes;
 using DiGi.GIS.Analytical.Enums;
@@ -64,6 +65,9 @@ namespace DiGi.GIS.Classes
         [JsonInclude, JsonPropertyName(nameof(Storeys))]
         private readonly List<OpeningGenerationStorey>? storeys;
 
+        [JsonInclude, JsonPropertyName(nameof(TypologyData))]
+        private readonly TypologyData? typologyData;
+
         [JsonInclude, JsonPropertyName(nameof(WallOpeningRestrictions))]
         private readonly Dictionary<string, WallOpeningRestriction>? wallOpeningRestrictions;
 
@@ -95,6 +99,7 @@ namespace DiGi.GIS.Classes
         /// <param name="droppedOpeningCount">The number of windows and doors not placed because their outline did not lie inside the host wall.</param>
         /// <param name="frontageLines">The frontage-line key of each wall reported as part of a frontage line (pierzeja), keyed by its identifier, or null when none was reported (DiGi-Organization/DiGi.GIS.Analytical#10).</param>
         /// <param name="missingConstructionRoles">The envelope components whose role has no construction in the construction set, keyed by the component's identifier with the role, or null when the envelope step did not run (DiGi-Organization/DiGi.GIS.Analytical#11).</param>
+        /// <param name="typologyData">The TABULA typology data of the TypicalAsBuilt construction set of the year built, or null when none was found; the heat-demand calculation takes it from here (DiGi-Organization/DiGi.GIS.Analytical#14). This value can be null.</param>
         public OpeningGenerationResult(
             string? reference,
             BuildingRegulation buildingRegulation,
@@ -114,7 +119,8 @@ namespace DiGi.GIS.Classes
             int doorsBelowMinimumCount,
             int droppedOpeningCount,
             Dictionary<Guid, string>? frontageLines = null,
-            Dictionary<Guid, ConstructionRole>? missingConstructionRoles = null)
+            Dictionary<Guid, ConstructionRole>? missingConstructionRoles = null,
+            TypologyData? typologyData = null)
         {
             this.reference = reference;
             this.buildingRegulation = buildingRegulation;
@@ -159,6 +165,7 @@ namespace DiGi.GIS.Classes
                     this.missingConstructionRoles[keyValuePair.Key.ToString("D")] = keyValuePair.Value;
                 }
             }
+            this.typologyData = Core.Query.Clone(typologyData);
         }
 
         /// <summary>
@@ -189,6 +196,7 @@ namespace DiGi.GIS.Classes
                 doorCount = openingGenerationResult.doorCount;
                 doorsBelowMinimumCount = openingGenerationResult.doorsBelowMinimumCount;
                 droppedOpeningCount = openingGenerationResult.droppedOpeningCount;
+                typologyData = Core.Query.Clone(openingGenerationResult.typologyData);
             }
         }
 
@@ -371,6 +379,19 @@ namespace DiGi.GIS.Classes
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// Gets a clone of the TABULA typology data of the TypicalAsBuilt construction set of the year built - also when the constructions came from a Regulation set, which has none - or null when no such set was found (DiGi-Organization/DiGi.GIS.Analytical#14).
+        /// <para>The heat-demand calculation reads F_w, ΔU_tb, F_f, the floor boundary, R_add and b from it, so it uses exactly the set the openings and the envelope were resolved with.</para>
+        /// </summary>
+        [JsonIgnore]
+        public TypologyData? TypologyData
+        {
+            get
+            {
+                return Core.Query.Clone(typologyData);
             }
         }
 

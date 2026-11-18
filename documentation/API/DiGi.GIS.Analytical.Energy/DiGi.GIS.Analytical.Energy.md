@@ -1,0 +1,179 @@
+#### [DiGi\.GIS\.Analytical\.Energy](DiGi.GIS.Analytical.Energy.Overview.md 'DiGi\.GIS\.Analytical\.Energy\.Overview')
+
+## DiGi\.GIS\.Analytical\.Energy Namespace
+### Classes
+
+<a name='DiGi.GIS.Analytical.Energy.Create'></a>
+
+## Create Class
+
+```csharp
+public static class Create
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Create
+### Methods
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double)'></a>
+
+## Create\.BuildingHeatDemandResult\(this BuildingModel, Building2D, BuildingInformation, HeatDemandInput, IEnumerable\<BuildingModel\>, BuildingSolarRadiationResult, Weather, HeatDemandContext, double\) Method
+
+Calculates the monthly heat demand of a stored GIS building with the provenance of its inputs \(DiGi\-Organization/DiGi\.GIS\.Analytical\#14, for DiGi\-Organization/DiGi\.Analytical\#10\)\.
+
+On a clone of [buildingModel](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingModel 'DiGi\.GIS\.Analytical\.Energy\.Create\.BuildingHeatDemandResult\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandContext, double\)\.buildingModel'), in order:
+
+1. the party walls against [buildingModels\_Neighbour](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingModels_Neighbour 'DiGi\.GIS\.Analytical\.Energy\.Create\.BuildingHeatDemandResult\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandContext, double\)\.buildingModels\_Neighbour') (`DiGi.Analytical.Building.Query.PartyWalls`) are split off (`Modify.SplitPartyWalls`), so they are adiabatic;
+
+2. [DiGi\.GIS\.Analytical\.Modify\.GenerateOpenings\(DiGi\.Analytical\.Building\.Classes\.BuildingModel,DiGi\.GIS\.Classes\.Building2D,DiGi\.GIS\.Classes\.OpeningGenerationInput,System\.Collections\.Generic\.IEnumerable\{DiGi\.Analytical\.Building\.Classes\.BuildingModel\},DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary,DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary,System\.Double\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.analytical.modify.generateopenings#digi-gis-analytical-modify-generateopenings(digi-analytical-building-classes-buildingmodel-digi-gis-classes-building2d-digi-gis-classes-openinggenerationinput-system-collections-generic-ienumerable{digi-analytical-building-classes-buildingmodel}-digi-analytical-building-regulation-classes-constructionlibrary-digi-analytical-building-regulation-classes-openingsizelibrary-system-double) 'DiGi\.GIS\.Analytical\.Modify\.GenerateOpenings\(DiGi\.Analytical\.Building\.Classes\.BuildingModel,DiGi\.GIS\.Classes\.Building2D,DiGi\.GIS\.Classes\.OpeningGenerationInput,System\.Collections\.Generic\.IEnumerable\{DiGi\.Analytical\.Building\.Classes\.BuildingModel\},DiGi\.Analytical\.Building\.Regulation\.Classes\.ConstructionLibrary,DiGi\.Analytical\.Building\.Regulation\.Classes\.OpeningSizeLibrary,System\.Double\)') places the openings and gives the envelope its constructions, from [OpeningGenerationInput](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput.OpeningGenerationInput 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput\.OpeningGenerationInput') and the libraries of [heatDemandContext](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).heatDemandContext 'DiGi\.GIS\.Analytical\.Energy\.Create\.BuildingHeatDemandResult\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandContext, double\)\.heatDemandContext');
+
+3. [DiGi\.GIS\.Analytical\.Modify\.AssignInternalConditions\(DiGi\.Analytical\.Building\.Classes\.BuildingModel,DiGi\.GIS\.Classes\.Building2D,DiGi\.GIS\.Classes\.OccupancyData,System\.Nullable\{System\.Int16\},System\.String\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.analytical.modify.assigninternalconditions#digi-gis-analytical-modify-assigninternalconditions(digi-analytical-building-classes-buildingmodel-digi-gis-classes-building2d-digi-gis-classes-occupancydata-system-nullable{system-int16}-system-string) 'DiGi\.GIS\.Analytical\.Modify\.AssignInternalConditions\(DiGi\.Analytical\.Building\.Classes\.BuildingModel,DiGi\.GIS\.Classes\.Building2D,DiGi\.GIS\.Classes\.OccupancyData,System\.Nullable\{System\.Int16\},System\.String\)') gives every space the standard-use condition of the building, scaled to [OccupancyData](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput.OccupancyData 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput\.OccupancyData');
+
+4. [MonthlyClimate\(this BuildingModel, BuildingModel, BuildingInformation, BuildingSolarRadiationResult, Weather, ClimateZone, int, int, double\)](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double) 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)') builds the climate from [weather](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).weather 'DiGi\.GIS\.Analytical\.Energy\.Create\.BuildingHeatDemandResult\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.GIS\.Classes\.Building2D, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput, System\.Collections\.Generic\.IEnumerable\<DiGi\.Analytical\.Building\.Classes\.BuildingModel\>, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandContext, double\)\.weather'), the stored solar result and the building's climate zone - the input's when it names one, else the zone of the footprint;
+
+5. `DiGi.Analytical.Building.Energy.Create.HeatDemandResult` calculates the demand with the [DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult.typologydata 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData') of the TypicalAsBuilt set of the year built.
+
+The construction library is read once here when the context gives none, so the generator and the recorded [ConstructionLibraryVersion](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.ConstructionLibraryVersion 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult\.ConstructionLibraryVersion') use the same one. [CreatedAt](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.CreatedAt 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult\.CreatedAt') is left null for the writer to stamp, as for a solar result.
+
+```csharp
+public static DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult? BuildingHeatDemandResult(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.Building2D? building2D, DiGi.Analytical.Building.Classes.BuildingInformation? buildingInformation, DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput? heatDemandInput, System.Collections.Generic.IEnumerable<DiGi.Analytical.Building.Classes.BuildingModel?>? buildingModels_Neighbour, DiGi.GIS.Classes.BuildingSolarRadiationResult? buildingSolarRadiationResult, DiGi.Weather.Classes.Weather? weather, DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext? heatDemandContext, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The stored building model\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).building2D'></a>
+
+`building2D` [DiGi\.GIS\.Classes\.Building2D](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.building2d 'DiGi\.GIS\.Classes\.Building2D')
+
+The 2D building of the model, giving its function, storeys, footprint and reference\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingInformation'></a>
+
+`buildingInformation` [DiGi\.Analytical\.Building\.Classes\.BuildingInformation](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildinginformation 'DiGi\.Analytical\.Building\.Classes\.BuildingInformation')
+
+The building's information after `GIS.Analytical.Modify.UpdateBuildingInformation`: its coordinates and UTC offset\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).heatDemandInput'></a>
+
+`heatDemandInput` [HeatDemandInput](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandInput')
+
+The per\-building inputs\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingModels_Neighbour'></a>
+
+`buildingModels_Neighbour` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+
+The building models of the adjacent buildings, for the party walls and the opening rules\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).buildingSolarRadiationResult'></a>
+
+`buildingSolarRadiationResult` [DiGi\.GIS\.Classes\.BuildingSolarRadiationResult](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.buildingsolarradiationresult 'DiGi\.GIS\.Classes\.BuildingSolarRadiationResult')
+
+The stored solar result of the building, read with its shading factors, or null when it has none\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).weather'></a>
+
+`weather` [DiGi\.Weather\.Classes\.Weather](https://learn.microsoft.com/en-us/dotnet/api/digi.weather.classes.weather 'DiGi\.Weather\.Classes\.Weather')
+
+The weather of the solar result, or of the building's site when it has none\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).heatDemandContext'></a>
+
+`heatDemandContext` [HeatDemandContext](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandContext')
+
+The libraries, the climate\-zone map and the options shared by the batch\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.BuildingHeatDemandResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance\.
+
+#### Returns
+[BuildingHeatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult')  
+The result, or null when the model, the 2D building or the weather is null, no opening\-size set matches the building, or the heat demand cannot be calculated \(no heated space, no heat\-loss element, a month without a valid temperature\)\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double)'></a>
+
+## Create\.MonthlyClimate\(this BuildingModel, BuildingModel, BuildingInformation, BuildingSolarRadiationResult, Weather, ClimateZone, int, int, double\) Method
+
+Builds the monthly climate of a building for its heat demand \(DiGi\-Organization/DiGi\.GIS\.Analytical\#14, for DiGi\-Organization/DiGi\.Analytical\#10\): the monthly mean external temperatures, the design and mean annual temperatures of its climate zone, and the monthly irradiation of each external wall and roof\.
+
+<b>Temperatures.</b>`Weather.Query.MonthlyMeanDryBulbTemperatures` of [weather](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).weather 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.weather') - the weather the solar result was calculated from, so temperature and irradiation describe the same year. The design and mean annual temperatures are `Regulation.Query.DesignOutdoorTemperature` and `AnnualMeanOutdoorTemperature` of [climateZone](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).climateZone 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.climateZone').
+
+<b>Irradiation.</b> Every wall and roof of the external shell of [buildingModel](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingModel 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.buildingModel') (outward normals), party walls excepted, gets 12 monthly values keyed by its identifier in the "D" format:
+
+- the stored surface of the same component - the same identifier, whatever type its reference names - in [buildingSolarRadiationResult](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingSolarRadiationResult 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.buildingSolarRadiationResult') ([DiGi\.GIS\.Analytical\.Solar\.Query\.MonthlyIrradiations\(DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries,DiGi\.GIS\.Classes\.SurfaceSolarRadiation\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.analytical.solar.query.monthlyirradiations#digi-gis-analytical-solar-query-monthlyirradiations(digi-gis-analytical-solar-classes-solarhourseries-digi-gis-classes-surfacesolarradiation) 'DiGi\.GIS\.Analytical\.Solar\.Query\.MonthlyIrradiations\(DiGi\.GIS\.Analytical\.Solar\.Classes\.SolarHourSeries,DiGi\.GIS\.Classes\.SurfaceSolarRadiation\)'));
+
+- for a wall the party-wall split created (`DiGi.Analytical.Building.Modify.SplitPartyWalls` gives a new identifier to every external piece after the first), the stored surface of the wall of [buildingModel\_Solar](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingModel_Solar 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.buildingModel\_Solar') it was split from: a wall whose face contains the piece's internal point within [DiGi\.Core\.Constants\.Tolerance\.MacroDistance](https://learn.microsoft.com/en-us/dotnet/api/digi.core.constants.tolerance.macrodistance 'DiGi\.Core\.Constants\.Tolerance\.MacroDistance') and whose plane is parallel within [DiGi\.Core\.Constants\.Tolerance\.Angle](https://learn.microsoft.com/en-us/dotnet/api/digi.core.constants.tolerance.angle 'DiGi\.Core\.Constants\.Tolerance\.Angle'). The piece takes that wall's mean irradiation per m², which includes the part its neighbour now covers, so it slightly underestimates the piece; it is counted in [matchedSurfaceCount](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).matchedSurfaceCount 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.matchedSurfaceCount');
+
+- otherwise, or with no solar result, the irradiation of its orientation and tilt under an open sky from the same weather (no shading, visibilities 1), counted in [unshadedSurfaceCount](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).unshadedSurfaceCount 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.unshadedSurfaceCount').
+
+Without [buildingInformation](DiGi.GIS.Analytical.Energy.md#DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingInformation 'DiGi\.GIS\.Analytical\.Energy\.Create\.MonthlyClimate\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingModel, DiGi\.Analytical\.Building\.Classes\.BuildingInformation, DiGi\.GIS\.Classes\.BuildingSolarRadiationResult, DiGi\.Weather\.Classes\.Weather, DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone, int, int, double\)\.buildingInformation') the sun cannot be positioned, so no surface gets irradiation; the heat-demand calculation then counts every surface as missing.
+
+```csharp
+public static DiGi.Analytical.Building.Energy.Classes.MonthlyClimate? MonthlyClimate(this DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.Analytical.Building.Classes.BuildingModel? buildingModel_Solar, DiGi.Analytical.Building.Classes.BuildingInformation? buildingInformation, DiGi.GIS.Classes.BuildingSolarRadiationResult? buildingSolarRadiationResult, DiGi.Weather.Classes.Weather? weather, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, out int matchedSurfaceCount, out int unshadedSurfaceCount, double tolerance=1E-06);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The building model the heat demand is calculated for, after its party walls were split\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingModel_Solar'></a>
+
+`buildingModel_Solar` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The stored building model the solar result was calculated for, before the split\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingInformation'></a>
+
+`buildingInformation` [DiGi\.Analytical\.Building\.Classes\.BuildingInformation](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildinginformation 'DiGi\.Analytical\.Building\.Classes\.BuildingInformation')
+
+The building's information after `GIS.Analytical.Modify.UpdateBuildingInformation`: its coordinates and UTC offset\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).buildingSolarRadiationResult'></a>
+
+`buildingSolarRadiationResult` [DiGi\.GIS\.Classes\.BuildingSolarRadiationResult](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.buildingsolarradiationresult 'DiGi\.GIS\.Classes\.BuildingSolarRadiationResult')
+
+The stored solar result of the building, read with its shading factors, or null when it has none\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).weather'></a>
+
+`weather` [DiGi\.Weather\.Classes\.Weather](https://learn.microsoft.com/en-us/dotnet/api/digi.weather.classes.weather 'DiGi\.Weather\.Classes\.Weather')
+
+The weather of the solar result, or of the building's site when it has none\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).climateZone'></a>
+
+`climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
+
+The climate zone of the building\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).matchedSurfaceCount'></a>
+
+`matchedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number of split pieces matched to the stored surface of their wall\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).unshadedSurfaceCount'></a>
+
+`unshadedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number of surfaces that took the unshaded irradiation\.
+
+<a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double).tolerance'></a>
+
+`tolerance` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The distance tolerance of the external shell\.
+
+#### Returns
+[DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.monthlyclimate 'DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate')  
+The monthly climate, or null when the model or the weather is null or the weather holds no record\.
