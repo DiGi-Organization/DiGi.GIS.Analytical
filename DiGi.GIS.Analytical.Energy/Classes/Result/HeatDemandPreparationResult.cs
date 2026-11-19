@@ -62,10 +62,8 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             string? usageSource)
             : base()
         {
-            // The copy constructor, not Core.Query.Clone: ParametrizedObject.Clone is a
-            // MemberwiseClone, so a cloned model shares its relations with the original
-            // (DiGi-Organization/DiGi.Core#14), and what this result hands out must stay isolated
-            // from it - the same rule the preparation follows for its working copy.
+            // An isolated copy, so what this result hands out stays separated from the model it
+            // was built from - the same rule the preparation follows for its working copy.
             this.buildingModel = buildingModel is null ? null : new BuildingModel(buildingModel);
             this.openingGenerationResult = Core.Query.Clone(openingGenerationResult);
             this.monthlyClimate = Core.Query.Clone(monthlyClimate);
