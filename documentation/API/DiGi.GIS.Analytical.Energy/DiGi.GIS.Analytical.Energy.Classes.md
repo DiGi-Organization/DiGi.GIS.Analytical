@@ -710,3 +710,220 @@ public DiGi.GIS.Enums.WeatherSourceType WeatherSourceType { get; }
 
 #### Property Value
 [DiGi\.GIS\.Enums\.WeatherSourceType](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.weathersourcetype 'DiGi\.GIS\.Enums\.WeatherSourceType')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult'></a>
+
+## HeatDemandPreparationResult Class
+
+Represents what the heat\-demand engine is calculated on, exactly as it was prepared \(DiGi\-Organization/DiGi\.GIS\.Analytical\#15, for DiGi\-Organization/DiGi\.Analytical\#10\): the model with its party walls split, its openings and envelope constructions placed and its internal conditions assigned, the [OpeningGenerationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.OpeningGenerationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult\.OpeningGenerationResult') carrying [DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult.typologydata 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData'), the [MonthlyClimate](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MonthlyClimate 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult\.MonthlyClimate') the engine was given, and their provenance\.
+
+Created by `Create.HeatDemandPreparationResult`; stored by nothing - the EnergyPlus cross-check (DiGi-Organization/DiGi.EnergyPlus#1) exports this model rather than rebuilding the preparation, so it cannot drift from the engine. `Create.BuildingHeatDemandResult` is this preparation plus `DiGi.Analytical.Building.Energy.Create.HeatDemandResult`. The constructor only assigns and clones, and every property hands out a copy.
+
+```csharp
+public class HeatDemandPreparationResult : DiGi.Core.Classes.SerializableResult, DiGi.GIS.Interfaces.IGISSerializableObject, DiGi.GIS.Interfaces.IGISObject, DiGi.Core.Interfaces.IObject, DiGi.Core.Interfaces.ISerializableObject, DiGi.Core.Interfaces.ICloneableObject<DiGi.Core.Interfaces.ISerializableObject>, DiGi.Core.Interfaces.ICloneableObject
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [DiGi\.Core\.Classes\.Object](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.object 'DiGi\.Core\.Classes\.Object') → [DiGi\.Core\.Classes\.SerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableobject 'DiGi\.Core\.Classes\.SerializableObject') → [DiGi\.Core\.Classes\.SerializableResult](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableresult 'DiGi\.Core\.Classes\.SerializableResult') → HeatDemandPreparationResult
+
+Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
+### Constructors
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string)'></a>
+
+## HeatDemandPreparationResult\(BuildingModel, OpeningGenerationResult, MonthlyClimate, ClimateZone, string, int, int, string\) Constructor
+
+Initializes a new instance of the [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult') class\.
+
+The model and the nested results are cloned; `Create.HeatDemandPreparationResult` computes the values.
+
+```csharp
+public HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.OpeningGenerationResult? openingGenerationResult, DiGi.Analytical.Building.Energy.Classes.MonthlyClimate? monthlyClimate, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, string? constructionLibraryVersion, int matchedSurfaceCount, int unshadedSurfaceCount, string? usageSource);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).buildingModel'></a>
+
+`buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+The prepared building model: party walls split against the neighbours, openings and envelope constructions placed, internal conditions assigned\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).openingGenerationResult'></a>
+
+`openingGenerationResult` [DiGi\.GIS\.Classes\.OpeningGenerationResult](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult 'DiGi\.GIS\.Classes\.OpeningGenerationResult')
+
+What `Modify.GenerateOpenings` did and could not do, [DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult.typologydata 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData') included \- the set the engine takes its F\_w, ΔU\_tb, F\_f, floor boundary, R\_add and b from\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).monthlyClimate'></a>
+
+`monthlyClimate` [DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.monthlyclimate 'DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate')
+
+The monthly climate the engine was calculated with, or null when the weather holds no record \(DiGi\-Organization/DiGi\.GIS\.Analytical\#15\)\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).climateZone'></a>
+
+`climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
+
+The climate zone the monthly climate was built for: the input's when it names one, else the zone of the footprint\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).constructionLibraryVersion'></a>
+
+`constructionLibraryVersion` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The version of the construction library the openings and the envelope constructions were taken from \- the context's library, or the embedded one\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).matchedSurfaceCount'></a>
+
+`matchedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number of external surfaces created by the party\-wall split and matched to the stored solar surface of the wall they were split from\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).unshadedSurfaceCount'></a>
+
+`unshadedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The number of external surfaces that took the unshaded irradiation of their orientation and tilt, having no stored solar surface\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).usageSource'></a>
+
+`usageSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The source of the usage profile of the internal conditions, a fallback rule included\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult)'></a>
+
+## HeatDemandPreparationResult\(HeatDemandPreparationResult\) Constructor
+
+Initializes a new instance of the [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult') class by copying an existing instance\.
+
+```csharp
+public HeatDemandPreparationResult(DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult? heatDemandPreparationResult);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult).heatDemandPreparationResult'></a>
+
+`heatDemandPreparationResult` [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult')
+
+The [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult') to copy\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(System.Text.Json.Nodes.JsonObject)'></a>
+
+## HeatDemandPreparationResult\(JsonObject\) Constructor
+
+Initializes a new instance of the [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult') class from a JSON object\.
+
+```csharp
+public HeatDemandPreparationResult(System.Text.Json.Nodes.JsonObject? jsonObject);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(System.Text.Json.Nodes.JsonObject).jsonObject'></a>
+
+`jsonObject` [System\.Text\.Json\.Nodes\.JsonObject](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonobject 'System\.Text\.Json\.Nodes\.JsonObject')
+
+The JSON object containing the data\. This value can be null\.
+### Properties
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.BuildingModel'></a>
+
+## HeatDemandPreparationResult\.BuildingModel Property
+
+Gets a copy of the prepared building model: party walls split against the neighbours, openings and envelope constructions placed, internal conditions assigned\.
+
+```csharp
+public DiGi.Analytical.Building.Classes.BuildingModel? BuildingModel { get; }
+```
+
+#### Property Value
+[DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.ClimateZone'></a>
+
+## HeatDemandPreparationResult\.ClimateZone Property
+
+Gets the climate zone the monthly climate was built for: the input's when it names one, else the zone of the footprint\.
+
+```csharp
+public DiGi.Analytical.Building.Regulation.Enums.ClimateZone ClimateZone { get; }
+```
+
+#### Property Value
+[DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.ConstructionLibraryVersion'></a>
+
+## HeatDemandPreparationResult\.ConstructionLibraryVersion Property
+
+Gets the version of the construction library the openings and the envelope constructions were taken from\.
+
+```csharp
+public string? ConstructionLibraryVersion { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MatchedSurfaceCount'></a>
+
+## HeatDemandPreparationResult\.MatchedSurfaceCount Property
+
+Gets the number of external surfaces created by the party\-wall split and matched to the stored solar surface of the wall they were split from\.
+
+```csharp
+public int MatchedSurfaceCount { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MonthlyClimate'></a>
+
+## HeatDemandPreparationResult\.MonthlyClimate Property
+
+Gets a clone of the monthly climate the engine was calculated with, or null when the weather holds no record \(DiGi\-Organization/DiGi\.GIS\.Analytical\#15\)\.
+
+```csharp
+public DiGi.Analytical.Building.Energy.Classes.MonthlyClimate? MonthlyClimate { get; }
+```
+
+#### Property Value
+[DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.monthlyclimate 'DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.OpeningGenerationResult'></a>
+
+## HeatDemandPreparationResult\.OpeningGenerationResult Property
+
+Gets a clone of what `Modify.GenerateOpenings` did and could not do: the keys it looked the sizes and constructions up by, the placed openings, the envelope roles, and [DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult.typologydata 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData') of the set the engine reads\. This value can be null\.
+
+```csharp
+public DiGi.GIS.Classes.OpeningGenerationResult? OpeningGenerationResult { get; }
+```
+
+#### Property Value
+[DiGi\.GIS\.Classes\.OpeningGenerationResult](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult 'DiGi\.GIS\.Classes\.OpeningGenerationResult')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.UnshadedSurfaceCount'></a>
+
+## HeatDemandPreparationResult\.UnshadedSurfaceCount Property
+
+Gets the number of external surfaces that took the unshaded irradiation of their orientation and tilt, having no stored solar surface\.
+
+```csharp
+public int UnshadedSurfaceCount { get; }
+```
+
+#### Property Value
+[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.UsageSource'></a>
+
+## HeatDemandPreparationResult\.UsageSource Property
+
+Gets the source of the usage profile of the internal conditions, a fallback rule included\.
+
+```csharp
+public string? UsageSource { get; }
+```
+
+#### Property Value
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
