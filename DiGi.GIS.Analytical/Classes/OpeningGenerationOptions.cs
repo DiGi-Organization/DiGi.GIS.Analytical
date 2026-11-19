@@ -65,6 +65,7 @@ namespace DiGi.GIS.Classes
                 ObstructionInnerCityFactor = openingGenerationOptions.ObstructionInnerCityFactor;
                 StaircaseSpacing = openingGenerationOptions.StaircaseSpacing;
                 DesignLag = openingGenerationOptions.DesignLag;
+                FallbackYearBuilt = openingGenerationOptions.FallbackYearBuilt;
                 AssignEnvelopeConstructions = openingGenerationOptions.AssignEnvelopeConstructions;
                 ConstructionFlavour = openingGenerationOptions.ConstructionFlavour;
                 MinimumStoreyHeight = openingGenerationOptions.MinimumStoreyHeight;
@@ -127,6 +128,13 @@ namespace DiGi.GIS.Classes
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(DoorMinimumWidth))]
         public double DoorMinimumWidth { get; set; } = 0.9;
+
+        /// <summary>
+        /// Gets or sets the year built a building is modelled as when its predicted year built only bounds the year: a prediction of <c>GIS.Constants.YearBuiltPrediction.FirstYear</c> means "built in that year or earlier" (DiGi-Organization/DiGi.GIS.Analytical#16). <see cref="Analytical.Query.CalculationYearBuilt"/> substitutes it, reported as <c>YearBuiltSource.Fallback</c>.
+        /// <para>A decided default to be replaced by the census period of the building's area: 1976 lies in the TABULA period 1967-1985, the large-panel period, and selects the regime, construction set and opening-size set of that year. The predictor's first year, 2008, would select the 2003-2008 sets for the whole pre-2008 stock, which made 124 of 170 sampled buildings of the four study counties the newest period (DiGi-Organization/DiGi.EnergyPlus#1).</para>
+        /// </summary>
+        [JsonInclude, JsonPropertyName(nameof(FallbackYearBuilt))]
+        public short FallbackYearBuilt { get; set; } = 1976;
 
         /// <summary>
         /// Gets or sets the fire-separation distance per kind of building when the fuel-load density Q of both fire compartments is at most 1000 MJ/m2 [m]; a kind missing from the dictionary falls back to the largest value present, an empty dictionary switches § 271 off (DiGi-Organization/DiGi.GIS.Analytical#9).

@@ -989,6 +989,21 @@ public double DoorMinimumWidth { get; set; }
 #### Property Value
 [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
 
+<a name='DiGi.GIS.Classes.OpeningGenerationOptions.FallbackYearBuilt'></a>
+
+## OpeningGenerationOptions\.FallbackYearBuilt Property
+
+Gets or sets the year built a building is modelled as when its predicted year built only bounds the year: a prediction of `GIS.Constants.YearBuiltPrediction.FirstYear` means "built in that year or earlier" \(DiGi\-Organization/DiGi\.GIS\.Analytical\#16\)\. [CalculationYearBuilt\(Nullable&lt;short&gt;, Nullable&lt;YearBuiltSource&gt;, OpeningGenerationOptions\)](DiGi.GIS.Analytical.md#DiGi.GIS.Analytical.Query.CalculationYearBuilt(System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,DiGi.GIS.Classes.OpeningGenerationOptions) 'DiGi\.GIS\.Analytical\.Query\.CalculationYearBuilt\(System\.Nullable\<short\>, System\.Nullable\<DiGi\.GIS\.Enums\.YearBuiltSource\>, DiGi\.GIS\.Classes\.OpeningGenerationOptions\)') substitutes it, reported as `YearBuiltSource.Fallback`\.
+
+A decided default to be replaced by the census period of the building's area: 1976 lies in the TABULA period 1967-1985, the large-panel period, and selects the regime, construction set and opening-size set of that year. The predictor's first year, 2008, would select the 2003-2008 sets for the whole pre-2008 stock, which made 124 of 170 sampled buildings of the four study counties the newest period (DiGi-Organization/DiGi.EnergyPlus#1).
+
+```csharp
+public short FallbackYearBuilt { get; set; }
+```
+
+#### Property Value
+[System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')
+
 <a name='DiGi.GIS.Classes.OpeningGenerationOptions.FireSeparationDistancePMHigh'></a>
 
 ## OpeningGenerationOptions\.FireSeparationDistancePMHigh Property
