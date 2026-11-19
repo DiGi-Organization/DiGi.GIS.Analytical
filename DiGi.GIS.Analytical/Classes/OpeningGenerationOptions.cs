@@ -130,8 +130,8 @@ namespace DiGi.GIS.Classes
         public double DoorMinimumWidth { get; set; } = 0.9;
 
         /// <summary>
-        /// Gets or sets the year built a building is modelled as when its predicted year built only bounds the year: a prediction of <c>GIS.Constants.YearBuiltPrediction.FirstYear</c> means "built in that year or earlier" (DiGi-Organization/DiGi.GIS.Analytical#16). <see cref="Analytical.Query.CalculationYearBuilt"/> substitutes it, reported as <c>YearBuiltSource.Fallback</c>.
-        /// <para>A decided default to be replaced by the census period of the building's area: 1976 lies in the TABULA period 1967-1985, the large-panel period, and selects the regime, construction set and opening-size set of that year. The predictor's first year, 2008, would select the 2003-2008 sets for the whole pre-2008 stock, which made 124 of 170 sampled buildings of the four study counties the newest period (DiGi-Organization/DiGi.EnergyPlus#1).</para>
+        /// Gets or sets the year built a building is modelled as when its predicted year built only bounds the year: a prediction of <c>GIS.Constants.YearBuiltPrediction.FirstYear</c> means "built in that year or earlier" (DiGi-Organization/DiGi.GIS.Analytical#16). <see cref="Analytical.Query.CalculationYearBuilt(short?, GIS.Enums.YearBuiltSource?, short?, OpeningGenerationOptions?)"/> substitutes it, reported as <c>YearBuiltSource.Fallback</c>, when the building's area has no census year built; with one, the census year is taken instead (<c>YearBuiltSource.Census</c>, DiGi-Organization/DiGi.GIS.Analytical#17).
+        /// <para>A decided default for an area without census data: 1976 lies in the TABULA period 1967-1985, the large-panel period, and selects the regime, construction set and opening-size set of that year. The predictor's first year, 2008, would select the 2003-2008 sets for the whole pre-2008 stock, which made 124 of 170 sampled buildings of the four study counties the newest period (DiGi-Organization/DiGi.EnergyPlus#1).</para>
         /// </summary>
         [JsonInclude, JsonPropertyName(nameof(FallbackYearBuilt))]
         public short FallbackYearBuilt { get; set; } = 1976;
