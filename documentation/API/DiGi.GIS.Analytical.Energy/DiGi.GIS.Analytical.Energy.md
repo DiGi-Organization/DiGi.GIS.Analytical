@@ -87,7 +87,7 @@ The distance tolerance\.
 
 #### Returns
 [BuildingHeatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult')  
-The result, or null when the model, the 2D building or the weather is null, no opening\-size set matches the building, or the heat demand cannot be calculated \(no heated space, no heat\-loss element, a month without a valid temperature\)\.
+The result, of the preparation's input variant \([Generated](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant.Generated 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant\.Generated')\) and the engine's method and version, or null when the model, the 2D building or the weather is null, no opening\-size set matches the building, or the heat demand cannot be calculated \(no heated space, no heat\-loss element, a month without a valid temperature\)\.
 
 <a name='DiGi.GIS.Analytical.Energy.Create.HeatDemandPreparationResult(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.Building2D,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Analytical.Energy.Classes.HeatDemandInput,System.Collections.Generic.IEnumerable_DiGi.Analytical.Building.Classes.BuildingModel_,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.GIS.Analytical.Energy.Classes.HeatDemandContext,double)'></a>
 
@@ -170,7 +170,7 @@ The distance tolerance\.
 
 #### Returns
 [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult')  
-The preparation, or null when the model, the 2D building or the weather is null, or no opening\-size set matches the building\. [MonthlyClimate](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MonthlyClimate 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult\.MonthlyClimate') is null when the weather holds no record \- the model, the openings and the internal conditions are still prepared, so the exporter still gets them\.
+The preparation, of input variant [Generated](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant.Generated 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant\.Generated'), or null when the model, the 2D building or the weather is null, or no opening\-size set matches the building\. [MonthlyClimate](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MonthlyClimate 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult\.MonthlyClimate') is null when the weather holds no record \- the model, the openings and the internal conditions are still prepared, so the exporter still gets them\.
 
 <a name='DiGi.GIS.Analytical.Energy.Create.MonthlyClimate(thisDiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingModel,DiGi.Analytical.Building.Classes.BuildingInformation,DiGi.GIS.Classes.BuildingSolarRadiationResult,DiGi.Weather.Classes.Weather,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,int,int,double)'></a>
 

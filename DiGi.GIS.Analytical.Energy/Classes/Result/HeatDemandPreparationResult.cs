@@ -2,6 +2,7 @@ using DiGi.Analytical.Building.Classes;
 using DiGi.Analytical.Building.Energy.Classes;
 using DiGi.Analytical.Building.Regulation.Enums;
 using DiGi.Core.Classes;
+using DiGi.GIS.Analytical.Energy.Enums;
 using DiGi.GIS.Classes;
 using DiGi.GIS.Interfaces;
 using System.Text.Json.Nodes;
@@ -23,6 +24,10 @@ namespace DiGi.GIS.Analytical.Energy.Classes
 
         [JsonInclude, JsonPropertyName(nameof(ConstructionLibraryVersion))]
         private readonly string? constructionLibraryVersion;
+
+        // A preparation serialized before the input variant was recorded reads as Generated, the only variant there was (DiGi-Organization/DiGi.GIS.Analytical#20).
+        [JsonInclude, JsonPropertyName(nameof(HeatDemandInputVariant))]
+        private readonly HeatDemandInputVariant heatDemandInputVariant = HeatDemandInputVariant.Generated;
 
         [JsonInclude, JsonPropertyName(nameof(MatchedSurfaceCount))]
         private readonly int matchedSurfaceCount;
@@ -51,6 +56,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
         /// <param name="matchedSurfaceCount">The number of external surfaces created by the party-wall split and matched to the stored solar surface of the wall they were split from.</param>
         /// <param name="unshadedSurfaceCount">The number of external surfaces that took the unshaded irradiation of their orientation and tilt, having no stored solar surface.</param>
         /// <param name="usageSource">The source of the usage profile of the internal conditions, a fallback rule included. This value can be null.</param>
+        /// <param name="heatDemandInputVariant">How the model and its inputs were assembled.</param>
         public HeatDemandPreparationResult(
             BuildingModel? buildingModel,
             OpeningGenerationResult? openingGenerationResult,
@@ -59,7 +65,8 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             string? constructionLibraryVersion,
             int matchedSurfaceCount,
             int unshadedSurfaceCount,
-            string? usageSource)
+            string? usageSource,
+            HeatDemandInputVariant heatDemandInputVariant)
             : base()
         {
             // An isolated copy, so what this result hands out stays separated from the model it
@@ -72,6 +79,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             this.matchedSurfaceCount = matchedSurfaceCount;
             this.unshadedSurfaceCount = unshadedSurfaceCount;
             this.usageSource = usageSource;
+            this.heatDemandInputVariant = heatDemandInputVariant;
         }
 
         /// <summary>
@@ -91,6 +99,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
                 matchedSurfaceCount = heatDemandPreparationResult.matchedSurfaceCount;
                 unshadedSurfaceCount = heatDemandPreparationResult.unshadedSurfaceCount;
                 usageSource = heatDemandPreparationResult.usageSource;
+                heatDemandInputVariant = heatDemandPreparationResult.heatDemandInputVariant;
             }
         }
 
@@ -101,6 +110,18 @@ namespace DiGi.GIS.Analytical.Energy.Classes
         public HeatDemandPreparationResult(JsonObject? jsonObject)
             : base(jsonObject)
         {
+        }
+
+        /// <summary>
+        /// Gets how the model and its inputs were assembled - with the method and its version, the identity of a heat demand calculated on this preparation (DiGi-Organization/DiGi.GIS.Analytical#20).
+        /// </summary>
+        [JsonIgnore]
+        public HeatDemandInputVariant HeatDemandInputVariant
+        {
+            get
+            {
+                return heatDemandInputVariant;
+            }
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace DiGi.GIS.Analytical.Energy
         /// <param name="weather">The weather of the solar result, or of the building's site when it has none. This value can be null.</param>
         /// <param name="heatDemandContext">The libraries, the climate-zone map and the options shared by the batch. This value can be null.</param>
         /// <param name="tolerance">The distance tolerance.</param>
-        /// <returns>The preparation, or null when the model, the 2D building or the weather is null, or no opening-size set matches the building. <see cref="HeatDemandPreparationResult.MonthlyClimate"/> is null when the weather holds no record - the model, the openings and the internal conditions are still prepared, so the exporter still gets them.</returns>
+        /// <returns>The preparation, of input variant <see cref="Enums.HeatDemandInputVariant.Generated"/>, or null when the model, the 2D building or the weather is null, or no opening-size set matches the building. <see cref="HeatDemandPreparationResult.MonthlyClimate"/> is null when the weather holds no record - the model, the openings and the internal conditions are still prepared, so the exporter still gets them.</returns>
         public static HeatDemandPreparationResult? HeatDemandPreparationResult(
             this BuildingModel? buildingModel,
             Building2D? building2D,
@@ -113,7 +113,8 @@ namespace DiGi.GIS.Analytical.Energy
                 constructionLibrary?.Version,
                 matchedSurfaceCount,
                 unshadedSurfaceCount,
-                usageSource);
+                usageSource,
+                Enums.HeatDemandInputVariant.Generated);
         }
     }
 }

@@ -37,128 +37,134 @@ public BuildingHeatDemandResult(DiGi.GIS.Analytical.Energy.Classes.BuildingHeatD
 
 The [BuildingHeatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult') to copy\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult)'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult)'></a>
 
-## BuildingHeatDemandResult\(string, int, long, WeatherSourceType, string, HeatDemandSolarSource, Nullable\<int\>, Nullable\<double\>, int, int, ConstructionFlavour, string, string, BuildingType, Nullable\<short\>, Nullable\<YearBuiltSource\>, string, Nullable\<DateTimeOffset\>, HeatDemandResult\) Constructor
+## BuildingHeatDemandResult\(string, int, long, WeatherSourceType, string, HeatDemandSolarSource, Nullable\<int\>, Nullable\<double\>, int, int, ConstructionFlavour, string, string, BuildingType, Nullable\<short\>, Nullable\<YearBuiltSource\>, string, HeatDemandInputVariant, Nullable\<DateTimeOffset\>, HeatDemandResult\) Constructor
 
 Initializes a new instance of the [BuildingHeatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult') class\.
 
 The values are assigned and the heat-demand result cloned; `Create.BuildingHeatDemandResult` computes them.
 
 ```csharp
-public BuildingHeatDemandResult(string? reference, int countyId, long buildingModelId, DiGi.GIS.Enums.WeatherSourceType weatherSourceType, string? weatherSourceId, DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource solarSource, System.Nullable<int> solarSolverVersion, System.Nullable<double> solarRadius, int matchedSurfaceCount, int unshadedSurfaceCount, DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour constructionFlavour, string? constructionLibraryVersion, string? constructionSetSource, DiGi.Analytical.Building.Regulation.Enums.BuildingType buildingType, System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, string? usageSource, System.Nullable<System.DateTimeOffset> createdAt, DiGi.Analytical.Building.Energy.Classes.HeatDemandResult? heatDemandResult);
+public BuildingHeatDemandResult(string? reference, int countyId, long buildingModelId, DiGi.GIS.Enums.WeatherSourceType weatherSourceType, string? weatherSourceId, DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource solarSource, System.Nullable<int> solarSolverVersion, System.Nullable<double> solarRadius, int matchedSurfaceCount, int unshadedSurfaceCount, DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour constructionFlavour, string? constructionLibraryVersion, string? constructionSetSource, DiGi.Analytical.Building.Regulation.Enums.BuildingType buildingType, System.Nullable<short> yearBuilt, System.Nullable<DiGi.GIS.Enums.YearBuiltSource> yearBuiltSource, string? usageSource, DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant heatDemandInputVariant, System.Nullable<System.DateTimeOffset> createdAt, DiGi.Analytical.Building.Energy.Classes.HeatDemandResult? heatDemandResult);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).reference'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).reference'></a>
 
 `reference` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The `building_2d` reference of the building\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).countyId'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).countyId'></a>
 
 `countyId` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The id of the county part the building is filed under\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).buildingModelId'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).buildingModelId'></a>
 
 `buildingModelId` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
 
 The id of the stored building model the result was calculated from\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).weatherSourceType'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).weatherSourceType'></a>
 
 `weatherSourceType` [DiGi\.GIS\.Enums\.WeatherSourceType](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.weathersourcetype 'DiGi\.GIS\.Enums\.WeatherSourceType')
 
 The kind of the weather source of the temperatures and irradiation\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).weatherSourceId'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).weatherSourceId'></a>
 
 `weatherSourceId` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The id of the weather source \(the `epw_file` id of an EPW source\)\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarSource'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarSource'></a>
 
 `solarSource` [HeatDemandSolarSource](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandSolarSource')
 
 Where the irradiation of the external surfaces comes from\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarSolverVersion'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarSolverVersion'></a>
 
 `solarSolverVersion` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The solver version of the stored solar result, or null when none was used\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarRadius'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).solarRadius'></a>
 
 `solarRadius` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The neighbour radius of the stored solar result \[m\], or null when none was used\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).matchedSurfaceCount'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).matchedSurfaceCount'></a>
 
 `matchedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of external surfaces created by the party\-wall split and matched to the stored solar surface of the wall they were split from\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).unshadedSurfaceCount'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).unshadedSurfaceCount'></a>
 
 `unshadedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of external surfaces that took the unshaded irradiation of their orientation and tilt, having no stored solar surface\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionFlavour'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionFlavour'></a>
 
 `constructionFlavour` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ConstructionFlavour](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.constructionflavour 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ConstructionFlavour')
 
 The construction flavour of the envelope and the openings\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionLibraryVersion'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionLibraryVersion'></a>
 
 `constructionLibraryVersion` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The version of the construction library\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionSetSource'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).constructionSetSource'></a>
 
 `constructionSetSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source text of the construction set used\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).buildingType'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).buildingType'></a>
 
 `buildingType` [DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.buildingtype 'DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType')
 
 The building type the constructions and openings were looked up for\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).yearBuilt'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).yearBuilt'></a>
 
 `yearBuilt` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16 'System\.Int16')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 The year built, or null when unknown\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).yearBuiltSource'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).yearBuiltSource'></a>
 
 `yearBuiltSource` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.YearBuiltSource](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.yearbuiltsource 'DiGi\.GIS\.Enums\.YearBuiltSource')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 Where the year built comes from, or null when unknown\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).usageSource'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).usageSource'></a>
 
 `usageSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source of the usage profile of the internal conditions, a fallback rule included\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).createdAt'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).heatDemandInputVariant'></a>
+
+`heatDemandInputVariant` [HeatDemandInputVariant](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant')
+
+How the model and its inputs were assembled; with the method and version of [heatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).heatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult\.BuildingHeatDemandResult\(string, int, long, DiGi\.GIS\.Enums\.WeatherSourceType, string, DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandSolarSource, System\.Nullable\<int\>, System\.Nullable\<double\>, int, int, DiGi\.Analytical\.Building\.Regulation\.Enums\.ConstructionFlavour, string, string, DiGi\.Analytical\.Building\.Regulation\.Enums\.BuildingType, System\.Nullable\<short\>, System\.Nullable\<DiGi\.GIS\.Enums\.YearBuiltSource\>, string, DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant, System\.Nullable\<System\.DateTimeOffset\>, DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult\)\.heatDemandResult'), the identity of the result\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).createdAt'></a>
 
 `createdAt` [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.DateTimeOffset](https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset 'System\.DateTimeOffset')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
 
 When the result was calculated\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).heatDemandResult'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.BuildingHeatDemandResult(string,int,long,DiGi.GIS.Enums.WeatherSourceType,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandSolarSource,System.Nullable_int_,System.Nullable_double_,int,int,DiGi.Analytical.Building.Regulation.Enums.ConstructionFlavour,string,string,DiGi.Analytical.Building.Regulation.Enums.BuildingType,System.Nullable_short_,System.Nullable_DiGi.GIS.Enums.YearBuiltSource_,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant,System.Nullable_System.DateTimeOffset_,DiGi.Analytical.Building.Energy.Classes.HeatDemandResult).heatDemandResult'></a>
 
 `heatDemandResult` [DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.heatdemandresult 'DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult')
 
@@ -272,6 +278,19 @@ public System.Nullable<System.DateTimeOffset> CreatedAt { get; }
 
 #### Property Value
 [System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[System\.DateTimeOffset](https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset 'System\.DateTimeOffset')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.HeatDemandInputVariant'></a>
+
+## BuildingHeatDemandResult\.HeatDemandInputVariant Property
+
+Gets how the model and its inputs were assembled \(DiGi\-Organization/DiGi\.GIS\.Analytical\#20\)\. With [DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult\.HeatDemandMethod](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.heatdemandresult.heatdemandmethod 'DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult\.HeatDemandMethod') and [DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult\.MethodVersion](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.heatdemandresult.methodversion 'DiGi\.Analytical\.Building\.Energy\.Classes\.HeatDemandResult\.MethodVersion') of [HeatDemandResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.HeatDemandResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.BuildingHeatDemandResult\.HeatDemandResult') it identifies the result: results differing in any of the three are stored side by side and compared, never mixed\.
+
+```csharp
+public DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant HeatDemandInputVariant { get; }
+```
+
+#### Property Value
+[HeatDemandInputVariant](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant')
 
 <a name='DiGi.GIS.Analytical.Energy.Classes.BuildingHeatDemandResult.HeatDemandResult'></a>
 
@@ -728,66 +747,72 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
 ### Constructors
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string)'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant)'></a>
 
-## HeatDemandPreparationResult\(BuildingModel, OpeningGenerationResult, MonthlyClimate, ClimateZone, string, int, int, string\) Constructor
+## HeatDemandPreparationResult\(BuildingModel, OpeningGenerationResult, MonthlyClimate, ClimateZone, string, int, int, string, HeatDemandInputVariant\) Constructor
 
 Initializes a new instance of the [HeatDemandPreparationResult](DiGi.GIS.Analytical.Energy.Classes.md#DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult 'DiGi\.GIS\.Analytical\.Energy\.Classes\.HeatDemandPreparationResult') class\.
 
 The model and the nested results are cloned; `Create.HeatDemandPreparationResult` computes the values.
 
 ```csharp
-public HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.OpeningGenerationResult? openingGenerationResult, DiGi.Analytical.Building.Energy.Classes.MonthlyClimate? monthlyClimate, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, string? constructionLibraryVersion, int matchedSurfaceCount, int unshadedSurfaceCount, string? usageSource);
+public HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel? buildingModel, DiGi.GIS.Classes.OpeningGenerationResult? openingGenerationResult, DiGi.Analytical.Building.Energy.Classes.MonthlyClimate? monthlyClimate, DiGi.Analytical.Building.Regulation.Enums.ClimateZone climateZone, string? constructionLibraryVersion, int matchedSurfaceCount, int unshadedSurfaceCount, string? usageSource, DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant heatDemandInputVariant);
 ```
 #### Parameters
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).buildingModel'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).buildingModel'></a>
 
 `buildingModel` [DiGi\.Analytical\.Building\.Classes\.BuildingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.classes.buildingmodel 'DiGi\.Analytical\.Building\.Classes\.BuildingModel')
 
 The prepared building model: party walls split against the neighbours, openings and envelope constructions placed, internal conditions assigned\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).openingGenerationResult'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).openingGenerationResult'></a>
 
 `openingGenerationResult` [DiGi\.GIS\.Classes\.OpeningGenerationResult](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult 'DiGi\.GIS\.Classes\.OpeningGenerationResult')
 
 What `Modify.GenerateOpenings` did and could not do, [DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.openinggenerationresult.typologydata 'DiGi\.GIS\.Classes\.OpeningGenerationResult\.TypologyData') included \- the set the engine takes its F\_w, ΔU\_tb, F\_f, floor boundary, R\_add and b from\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).monthlyClimate'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).monthlyClimate'></a>
 
 `monthlyClimate` [DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.energy.classes.monthlyclimate 'DiGi\.Analytical\.Building\.Energy\.Classes\.MonthlyClimate')
 
 The monthly climate the engine was calculated with, or null when the weather holds no record \(DiGi\-Organization/DiGi\.GIS\.Analytical\#15\)\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).climateZone'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).climateZone'></a>
 
 `climateZone` [DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone](https://learn.microsoft.com/en-us/dotnet/api/digi.analytical.building.regulation.enums.climatezone 'DiGi\.Analytical\.Building\.Regulation\.Enums\.ClimateZone')
 
 The climate zone the monthly climate was built for: the input's when it names one, else the zone of the footprint\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).constructionLibraryVersion'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).constructionLibraryVersion'></a>
 
 `constructionLibraryVersion` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The version of the construction library the openings and the envelope constructions were taken from \- the context's library, or the embedded one\. This value can be null\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).matchedSurfaceCount'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).matchedSurfaceCount'></a>
 
 `matchedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of external surfaces created by the party\-wall split and matched to the stored solar surface of the wall they were split from\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).unshadedSurfaceCount'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).unshadedSurfaceCount'></a>
 
 `unshadedSurfaceCount` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The number of external surfaces that took the unshaded irradiation of their orientation and tilt, having no stored solar surface\.
 
-<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string).usageSource'></a>
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).usageSource'></a>
 
 `usageSource` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source of the usage profile of the internal conditions, a fallback rule included\. This value can be null\.
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.Analytical.Building.Classes.BuildingModel,DiGi.GIS.Classes.OpeningGenerationResult,DiGi.Analytical.Building.Energy.Classes.MonthlyClimate,DiGi.Analytical.Building.Regulation.Enums.ClimateZone,string,int,int,string,DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant).heatDemandInputVariant'></a>
+
+`heatDemandInputVariant` [HeatDemandInputVariant](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant')
+
+How the model and its inputs were assembled\.
 
 <a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandPreparationResult(DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult)'></a>
 
@@ -862,6 +887,19 @@ public string? ConstructionLibraryVersion { get; }
 
 #### Property Value
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+<a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.HeatDemandInputVariant'></a>
+
+## HeatDemandPreparationResult\.HeatDemandInputVariant Property
+
+Gets how the model and its inputs were assembled \- with the method and its version, the identity of a heat demand calculated on this preparation \(DiGi\-Organization/DiGi\.GIS\.Analytical\#20\)\.
+
+```csharp
+public DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant HeatDemandInputVariant { get; }
+```
+
+#### Property Value
+[HeatDemandInputVariant](DiGi.GIS.Analytical.Energy.Enums.md#DiGi.GIS.Analytical.Energy.Enums.HeatDemandInputVariant 'DiGi\.GIS\.Analytical\.Energy\.Enums\.HeatDemandInputVariant')
 
 <a name='DiGi.GIS.Analytical.Energy.Classes.HeatDemandPreparationResult.MatchedSurfaceCount'></a>
 

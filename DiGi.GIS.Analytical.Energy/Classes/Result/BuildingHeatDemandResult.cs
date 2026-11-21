@@ -37,6 +37,10 @@ namespace DiGi.GIS.Analytical.Energy.Classes
         [JsonInclude, JsonPropertyName(nameof(CreatedAt))]
         private readonly DateTimeOffset? createdAt;
 
+        // A result serialized before the input variant was recorded reads as Generated, the only variant there was (DiGi-Organization/DiGi.GIS.Analytical#20).
+        [JsonInclude, JsonPropertyName(nameof(HeatDemandInputVariant))]
+        private readonly HeatDemandInputVariant heatDemandInputVariant = HeatDemandInputVariant.Generated;
+
         [JsonInclude, JsonPropertyName(nameof(HeatDemandResult))]
         private readonly HeatDemandResult? heatDemandResult;
 
@@ -94,6 +98,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
         /// <param name="yearBuilt">The year built, or null when unknown.</param>
         /// <param name="yearBuiltSource">Where the year built comes from, or null when unknown.</param>
         /// <param name="usageSource">The source of the usage profile of the internal conditions, a fallback rule included. This value can be null.</param>
+        /// <param name="heatDemandInputVariant">How the model and its inputs were assembled; with the method and version of <paramref name="heatDemandResult"/>, the identity of the result.</param>
         /// <param name="createdAt">When the result was calculated.</param>
         /// <param name="heatDemandResult">The monthly heat demand of the building. This value can be null.</param>
         public BuildingHeatDemandResult(
@@ -114,6 +119,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             short? yearBuilt,
             YearBuiltSource? yearBuiltSource,
             string? usageSource,
+            HeatDemandInputVariant heatDemandInputVariant,
             DateTimeOffset? createdAt,
             HeatDemandResult? heatDemandResult)
             : base()
@@ -135,6 +141,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             this.yearBuilt = yearBuilt;
             this.yearBuiltSource = yearBuiltSource;
             this.usageSource = usageSource;
+            this.heatDemandInputVariant = heatDemandInputVariant;
             this.createdAt = createdAt;
             this.heatDemandResult = Core.Query.Clone(heatDemandResult);
         }
@@ -165,6 +172,7 @@ namespace DiGi.GIS.Analytical.Energy.Classes
                 yearBuilt = buildingHeatDemandResult.yearBuilt;
                 yearBuiltSource = buildingHeatDemandResult.yearBuiltSource;
                 usageSource = buildingHeatDemandResult.usageSource;
+                heatDemandInputVariant = buildingHeatDemandResult.heatDemandInputVariant;
                 createdAt = buildingHeatDemandResult.createdAt;
                 heatDemandResult = Core.Query.Clone(buildingHeatDemandResult.heatDemandResult);
             }
@@ -260,6 +268,18 @@ namespace DiGi.GIS.Analytical.Energy.Classes
             get
             {
                 return createdAt;
+            }
+        }
+
+        /// <summary>
+        /// Gets how the model and its inputs were assembled (DiGi-Organization/DiGi.GIS.Analytical#20). With <see cref="DiGi.Analytical.Building.Energy.Classes.HeatDemandResult.HeatDemandMethod"/> and <see cref="DiGi.Analytical.Building.Energy.Classes.HeatDemandResult.MethodVersion"/> of <see cref="HeatDemandResult"/> it identifies the result: results differing in any of the three are stored side by side and compared, never mixed.
+        /// </summary>
+        [JsonIgnore]
+        public HeatDemandInputVariant HeatDemandInputVariant
+        {
+            get
+            {
+                return heatDemandInputVariant;
             }
         }
 
