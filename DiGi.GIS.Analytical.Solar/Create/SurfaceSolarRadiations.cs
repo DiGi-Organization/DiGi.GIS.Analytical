@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace DiGi.GIS.Analytical.Solar
 {
@@ -28,6 +29,22 @@ namespace DiGi.GIS.Analytical.Solar
         /// <returns>One surface per receiving surface the model holds, or null when an input is missing, the model is unstamped, the weather holds no usable hour or the solve fails.</returns>
         public static List<GIS.Classes.SurfaceSolarRadiation>? SurfaceSolarRadiations(this ShadingModel? shadingModel, IDictionary<string, Vector3D>? normals, Weather.Classes.Weather? weather, ShadingSolverOptions? shadingSolverOptions, Action<string>? log = null)
         {
+            return SurfaceSolarRadiations(shadingModel, normals, weather, shadingSolverOptions, log, null);
+        }
+
+        /// <summary>
+        /// Solves the solar radiation of every receiving surface of a shading model over a weather series, in the stored form, running the shading solver's and the view factors' loops over the receivers with the given parallel options - see <see cref="SurfaceSolarRadiations(ShadingModel?, IDictionary{string, Vector3D}?, Weather.Classes.Weather?, ShadingSolverOptions?, Action{string}?)"/> for the method.
+        /// <para>A caller that solves several models at once passes them all one <see cref="ParallelOptions"/> with a shared, concurrency-limited <see cref="ParallelOptions.TaskScheduler"/>, so their loops share the cores instead of each claiming them (DiGi-Organization/DiGi.GIS.PostgreSQL#167). The result does not depend on the options.</para>
+        /// </summary>
+        /// <param name="shadingModel">The shading model, stamped with its coordinates and UTC offset.</param>
+        /// <param name="normals">The outward unit normal of each receiving surface, by the <c>GuidReference</c> string of its component (<see cref="Query.SolarReceiverNormals(BuildingModel?)"/>).</param>
+        /// <param name="weather">The weather series; an EPW file is passed as is.</param>
+        /// <param name="shadingSolverOptions">The solver options (<see cref="SolarShadingSolverOptions"/>); their time series is replaced by the reference hours.</param>
+        /// <param name="log">Receives one line of timings, or null.</param>
+        /// <param name="parallelOptions">The options of the loops over the receivers - degree, task scheduler, cancellation token; null uses <c>Core.Create.ParallelOptions()</c>.</param>
+        /// <returns>One surface per receiving surface the model holds, or null when an input is missing, the model is unstamped, the weather holds no usable hour or the solve fails.</returns>
+        public static List<GIS.Classes.SurfaceSolarRadiation>? SurfaceSolarRadiations(this ShadingModel? shadingModel, IDictionary<string, Vector3D>? normals, Weather.Classes.Weather? weather, ShadingSolverOptions? shadingSolverOptions, Action<string>? log, ParallelOptions? parallelOptions)
+        {
             if (shadingModel is null || normals is null)
             {
                 return null;
@@ -46,7 +63,7 @@ namespace DiGi.GIS.Analytical.Solar
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            ShadingSolver shadingSolver = new(shadingModel, shadingSolverOptions_Temp);
+            ShadingSolver shadingSolver = new(shadingModel, shadingSolverOptions_Temp) { ParallelOptions = parallelOptions };
             if (!shadingSolver.Solve())
             {
                 return null;
@@ -57,7 +74,7 @@ namespace DiGi.GIS.Analytical.Solar
 
             // Unblocked share of each receiver's sky and ground; a receiver without one keeps the open view.
             Dictionary<string, ViewFactorResult> viewFactorResults = [];
-            List<ViewFactorResult>? viewFactorResults_List = DiGi.Solar.Create.ViewFactorResults(shadingModel, normals, shadingSolverOptions_Temp.Tolerance);
+            List<ViewFactorResult>? viewFactorResults_List = DiGi.Solar.Create.ViewFactorResults(shadingModel, normals, shadingSolverOptions_Temp.Tolerance, 6, 24, parallelOptions);
             if (viewFactorResults_List is not null)
             {
                 foreach (ViewFactorResult viewFactorResult in viewFactorResults_List)

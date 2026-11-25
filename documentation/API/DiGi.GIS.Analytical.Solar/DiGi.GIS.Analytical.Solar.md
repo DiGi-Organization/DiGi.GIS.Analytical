@@ -259,6 +259,59 @@ Receives one line of timings, or null\.
 [System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[DiGi\.GIS\.Classes\.SurfaceSolarRadiation](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.surfacesolarradiation 'DiGi\.GIS\.Classes\.SurfaceSolarRadiation')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
 One surface per receiving surface the model holds, or null when an input is missing, the model is unstamped, the weather holds no usable hour or the solve fails\.
 
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions)'></a>
+
+## Create\.SurfaceSolarRadiations\(this ShadingModel, IDictionary\<string,Vector3D\>, Weather, ShadingSolverOptions, Action\<string\>, ParallelOptions\) Method
+
+Solves the solar radiation of every receiving surface of a shading model over a weather series, in the stored form, running the shading solver's and the view factors' loops over the receivers with the given parallel options \- see [SurfaceSolarRadiations\(this ShadingModel, IDictionary&lt;string,Vector3D&gt;, Weather, ShadingSolverOptions, Action&lt;string&gt;\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_) 'DiGi\.GIS\.Analytical\.Solar\.Create\.SurfaceSolarRadiations\(this DiGi\.Solar\.Classes\.ShadingModel, System\.Collections\.Generic\.IDictionary\<string,DiGi\.Geometry\.Spatial\.Classes\.Vector3D\>, DiGi\.Weather\.Classes\.Weather, DiGi\.Solar\.Classes\.ShadingSolverOptions, System\.Action\<string\>\)') for the method\.
+
+A caller that solves several models at once passes them all one [System\.Threading\.Tasks\.ParallelOptions](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.paralleloptions 'System\.Threading\.Tasks\.ParallelOptions') with a shared, concurrency-limited [System\.Threading\.Tasks\.ParallelOptions\.TaskScheduler](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.paralleloptions.taskscheduler 'System\.Threading\.Tasks\.ParallelOptions\.TaskScheduler'), so their loops share the cores instead of each claiming them (DiGi-Organization/DiGi.GIS.PostgreSQL#167). The result does not depend on the options.
+
+```csharp
+public static System.Collections.Generic.List<DiGi.GIS.Classes.SurfaceSolarRadiation>? SurfaceSolarRadiations(this DiGi.Solar.Classes.ShadingModel? shadingModel, System.Collections.Generic.IDictionary<string,DiGi.Geometry.Spatial.Classes.Vector3D>? normals, DiGi.Weather.Classes.Weather? weather, DiGi.Solar.Classes.ShadingSolverOptions? shadingSolverOptions, System.Action<string>? log, System.Threading.Tasks.ParallelOptions? parallelOptions);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).shadingModel'></a>
+
+`shadingModel` [DiGi\.Solar\.Classes\.ShadingModel](https://learn.microsoft.com/en-us/dotnet/api/digi.solar.classes.shadingmodel 'DiGi\.Solar\.Classes\.ShadingModel')
+
+The shading model, stamped with its coordinates and UTC offset\.
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).normals'></a>
+
+`normals` [System\.Collections\.Generic\.IDictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2 'System\.Collections\.Generic\.IDictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2 'System\.Collections\.Generic\.IDictionary\`2')[DiGi\.Geometry\.Spatial\.Classes\.Vector3D](https://learn.microsoft.com/en-us/dotnet/api/digi.geometry.spatial.classes.vector3d 'DiGi\.Geometry\.Spatial\.Classes\.Vector3D')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2 'System\.Collections\.Generic\.IDictionary\`2')
+
+The outward unit normal of each receiving surface, by the `GuidReference` string of its component \([SolarReceiverNormals\(this BuildingModel\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Query.SolarReceiverNormals(thisDiGi.Analytical.Building.Classes.BuildingModel) 'DiGi\.GIS\.Analytical\.Solar\.Query\.SolarReceiverNormals\(this DiGi\.Analytical\.Building\.Classes\.BuildingModel\)')\)\.
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).weather'></a>
+
+`weather` [DiGi\.Weather\.Classes\.Weather](https://learn.microsoft.com/en-us/dotnet/api/digi.weather.classes.weather 'DiGi\.Weather\.Classes\.Weather')
+
+The weather series; an EPW file is passed as is\.
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).shadingSolverOptions'></a>
+
+`shadingSolverOptions` [DiGi\.Solar\.Classes\.ShadingSolverOptions](https://learn.microsoft.com/en-us/dotnet/api/digi.solar.classes.shadingsolveroptions 'DiGi\.Solar\.Classes\.ShadingSolverOptions')
+
+The solver options \([SolarShadingSolverOptions\(\)](DiGi.GIS.Analytical.Solar.md#DiGi.GIS.Analytical.Solar.Create.SolarShadingSolverOptions() 'DiGi\.GIS\.Analytical\.Solar\.Create\.SolarShadingSolverOptions\(\)')\); their time series is replaced by the reference hours\.
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).log'></a>
+
+`log` [System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+
+Receives one line of timings, or null\.
+
+<a name='DiGi.GIS.Analytical.Solar.Create.SurfaceSolarRadiations(thisDiGi.Solar.Classes.ShadingModel,System.Collections.Generic.IDictionary_string,DiGi.Geometry.Spatial.Classes.Vector3D_,DiGi.Weather.Classes.Weather,DiGi.Solar.Classes.ShadingSolverOptions,System.Action_string_,System.Threading.Tasks.ParallelOptions).parallelOptions'></a>
+
+`parallelOptions` [System\.Threading\.Tasks\.ParallelOptions](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.paralleloptions 'System\.Threading\.Tasks\.ParallelOptions')
+
+The options of the loops over the receivers \- degree, task scheduler, cancellation token; null uses `Core.Create.ParallelOptions()`\.
+
+#### Returns
+[System\.Collections\.Generic\.List&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')[DiGi\.GIS\.Classes\.SurfaceSolarRadiation](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.classes.surfacesolarradiation 'DiGi\.GIS\.Classes\.SurfaceSolarRadiation')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1 'System\.Collections\.Generic\.List\`1')  
+One surface per receiving surface the model holds, or null when an input is missing, the model is unstamped, the weather holds no usable hour or the solve fails\.
+
 <a name='DiGi.GIS.Analytical.Solar.Query'></a>
 
 ## Query Class
